@@ -6,13 +6,14 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("MvcTemplate.Web.Tests")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Template project for ASP.NET MVC")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Triggerfish Limited")]
 [assembly: AssemblyProduct("MvcTemplate.Web.Tests")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
+[assembly: AssemblyCopyright("Copyright © Triggerfish Limited 2009")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
+
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM componenets.  If you need to access a type in this assembly from 
@@ -31,5 +32,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.1.0")]
+[assembly: AssemblyFileVersion("0.1.0")]
