@@ -8,6 +8,6 @@ namespace MvcTemplate.Model
 {
 	public interface IRepositorySettings
 	{
-		TextWriter SQLlog { set; }
+		TextWriter SqlLog { set; }
 	}
 }

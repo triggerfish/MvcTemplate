@@ -9,7 +9,7 @@ namespace MvcTemplate.Database
 {
 	public class RepositorySettings : IRepositorySettings
 	{
-		public TextWriter SQLlog 
+		public TextWriter SqlLog 
 		{
 			set { SQLlogger.Log = value; }
 		}
