@@ -92,7 +92,7 @@
     <Compile Include="RepositorySettings.cs" />
     <Compile Include="SearchResults.cs" />
     <Compile Include="Session.cs" />
-    <Compile Include="Logging\SQLlogger.cs" />
+    <Compile Include="Logging\SqlLogger.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
