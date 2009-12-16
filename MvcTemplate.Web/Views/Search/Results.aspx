@@ -1,19 +1,15 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<SearchViewData>" %>
 
-<asp:Content ID="Title" ContentPlaceHolderID="PageTitle" runat="server">
-Search
-</asp:Content>
+<asp:Content ID="Title" ContentPlaceHolderID="PageTitle" runat="server">Search Results</asp:Content>
 
 <asp:Content ID="Content" ContentPlaceHolderID="PageContent" runat="server">
-<h2>Search</h2>
+<h2>Search Results</h2>
 <% Html.RenderPartial("SearchForm"); %>
 <br />
-
 <% 
     bool bHaveArtists = (Model.Results.Artists.Any());
     bool bHaveGenres = (Model.Results.Genres.Any());
 %>
-
 <% if (!bHaveArtists && !bHaveGenres) { %>
     <p>No search results</p>   
 <% } else { %>

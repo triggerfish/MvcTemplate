@@ -12,6 +12,12 @@ a:hover {
 	color: #FF6A00;
 }
 
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
 #header {
 	background-color: #444;
 	border-bottom: 2px solid #111;
@@ -19,15 +25,18 @@ a:hover {
 	padding: 0.6em;
 }
 
-#website-name {
+#header #website-name {
+	display: inline;
 	font-size: 2em;
 }
 
-#website-name a {
+#header #website-name a {
+	text-decoration: none;
 	color: white;
 }
 
-#search {
+#header #search {
+	display: inline;
 	float: right;
 }
 
@@ -49,24 +58,26 @@ a:hover {
 	margin: 0;
 }
 
+#navbar li {
+	border-bottom: 1px solid silver;
+}
+
 #navbar a {
 	display: block;
 	padding: .6em; 
 	color: black;
-	border-bottom: 1px solid silver;
-}
-
-#navbar a.selected {
-	background-color: #666; 
-	color: White; 
+	text-decoration: none;
 }
 
 #navbar a:hover { 
 	background-color: #CCC; 
 }
 
-#navbar a.selected:hover { 
+#navbar strong {
+	display: block;
+	padding: .6em; 
 	background-color: #666; 
+	color: White; 
 }
 
 #content {
@@ -125,3 +136,14 @@ a:hover {
 	color: White; 
 }
 
+.diagnostics {
+	display:block;
+	clear: both;
+	margin-top: 2em;
+	border-top: 1px solid #444;
+}
+
+.sql {
+	font-size: 1em;
+	font-family: Courier New, Courier; 
+}

@@ -12,14 +12,7 @@ namespace MvcTemplate.Web
 	{
 		public static string RouteLink(this HtmlHelper a_html, Hyperlink a_link)
 		{
-			if (a_link.IsSelected)
-			{
-				return a_html.RouteLink(a_link.Text, a_link.Route, new Dictionary<string, object> { { "class", "selected" } });
-			}
-			else
-			{
-				return a_html.RouteLink(a_link.Text, a_link.Route);
-			}
+			return a_html.RouteLink(a_link.Text, a_link.Route);
 		}
 
 		public static string ActionLink(this HtmlHelper a_html, IArtist a_artist)
