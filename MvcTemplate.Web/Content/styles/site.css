@@ -1,0 +1,127 @@
+﻿body {
+	font: 0.75em Verdana; /* 12px */
+}
+
+a, a:visited {
+	text-decoration: none;
+	color: #444;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #FF6A00;
+}
+
+#header {
+	background-color: #444;
+	border-bottom: 2px solid #111;
+	color: white;
+	padding: 0.6em;
+}
+
+#website-name {
+	font-size: 2em;
+}
+
+#website-name a {
+	color: white;
+}
+
+#search {
+	float: right;
+}
+
+#navbar {
+	float: left;
+	width: 8em;
+	padding: 0.5em;
+	border-right: 2px solid gray;
+	min-height: 40em;
+}
+
+#navbar h2 {
+	font-weight: bold;
+}
+
+#navbar ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#navbar a {
+	display: block;
+	padding: .6em; 
+	color: black;
+	border-bottom: 1px solid silver;
+}
+
+#navbar a.selected {
+	background-color: #666; 
+	color: White; 
+}
+
+#navbar a:hover { 
+	background-color: #CCC; 
+}
+
+#navbar a.selected:hover { 
+	background-color: #666; 
+}
+
+#content {
+	width: 40em;
+	margin-left: 9em;
+	padding: 1em 1em 1em 2em;
+	min-height: 40em;
+}
+
+#content h2 {
+	margin: 0 0 0.833em 0;
+	font-weight: bold;
+}
+
+.list ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.list li {
+	margin-bottom: 0.5em;
+}
+
+.table {
+	display: block;
+}
+
+.table table {
+	border: 0;
+}
+
+.table .label {
+	color: #444;
+	padding-right: 1em;
+}
+
+.page-links {
+	text-align: left;
+	margin-top: 3em;
+}
+
+.page-links a {
+	font-size: 1.1em; 
+	color: #666; 
+	text-decoration: none;
+	padding: .1em .4em .1em .4em;
+	margin: 0 .2em 0 .2em;
+}
+
+.page-links a:hover  {
+	background-color: Silver; 
+}
+
+.page-links a.selected  {
+	background-color: #353535; 
+	color: White; 
+}
+
