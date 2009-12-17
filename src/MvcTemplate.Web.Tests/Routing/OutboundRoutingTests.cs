@@ -2,8 +2,9 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Routing;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Triggerfish.Testing.Web.Mvc;
 using MvcTemplate.Model;
 using MvcTemplate.Web;
 
@@ -16,14 +17,14 @@ namespace MvcTemplate.Web.Tests
 		public void ShouldEncodeGenreUrl()
 		{
 			IGenre g = MockGenre.CreateMockGenre("Hip Hop");
-			Assert.IsTrue(MockHttp.IsValidOutboundUrl(g.Route(), "/genre/hip-hop"));
+			MvcAssert.IsOutboundRouteCorrect("/genre/hip-hop", g.Route(), MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldEncodeArtistUrl()
 		{
 			IArtist a = MockArtist.CreateMockArtist(3, "Crosby Stills And Nash");
-			Assert.IsTrue(MockHttp.IsValidOutboundUrl(a.Route(), "/artists/crosby-stills-and-nash"));
+			MvcAssert.IsOutboundRouteCorrect("/artists/crosby-stills-and-nash", a.Route(), MvcApplication.RegisterRoutes);
 		}
 	}
 }

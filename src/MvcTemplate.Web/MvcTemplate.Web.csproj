@@ -70,8 +70,9 @@
     <Compile Include="Code\Diagnostics\Diagnostics.cs" />
     <Compile Include="Code\Diagnostics\DiagnosticsFilter.cs" />
     <Compile Include="Code\Diagnostics\DiagnosticsModule.cs" />
-    <Compile Include="Code\Helpers\HtmlHelpers.cs" />
     <Compile Include="Code\Helpers\RouteHelpers.cs" />
+    <Compile Include="Code\Helpers\HtmlExtensions.cs" />
+    <Compile Include="Code\Helpers\RouteExtensions.cs" />
     <Compile Include="Code\IoC\WebDependencies.cs" />
     <Compile Include="Code\Navigation\GenreHyperlinks.cs" />
     <Compile Include="Code\Navigation\Hyperlink.cs" />
