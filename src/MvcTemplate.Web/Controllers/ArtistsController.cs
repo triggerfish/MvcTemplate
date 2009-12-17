@@ -18,7 +18,7 @@ namespace MvcTemplate.Web.Controllers
 			m_repository = a_repository;
 		}
 
-		[Route(Path = "genre/{name}")]
+		[Route(Url = "genre/{name}")]
 		public ViewResult Genre(string name)
 		{
 			IEnumerable<IArtist> artists;
@@ -47,7 +47,7 @@ namespace MvcTemplate.Web.Controllers
 			return View(new GenreViewData(displayGenreName, artists) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, name) });
 		}
 
-		[Route(Path = "artists/{name}")]
+		[Route(Url = "artists/{name}")]
 		public ViewResult Artist(string name)
 		{
 			IArtist artist = m_repository.Artists.FirstOrDefault(a => 0 == String.Compare(a.Name, name, true));

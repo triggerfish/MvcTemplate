@@ -21,14 +21,14 @@ namespace MvcTemplate.Web.Controllers
 			m_repository = a_repository;
 		}
 
-		[Route(Path = "search")]
+		[Route(Url = "search")]
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Index()
         {
 			return View(new SearchViewData { HasSearchBox = false, NavBarLinks = GenreHyperlinks.CreateLinks(m_repository) });
         }
 
-		[Route(Path = "search")]
+		[Route(Url = "search")]
 		[AcceptVerbs(HttpVerbs.Post)]
 		public ViewResult Index(string keyword)
 		{
