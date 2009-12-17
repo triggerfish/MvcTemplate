@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
-using MvcTemplate.Model;
 using Triggerfish.Web.Mvc;
+using MvcTemplate.Model;
 
 namespace MvcTemplate.Web.Controllers
 {

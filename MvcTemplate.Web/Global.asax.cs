@@ -19,6 +19,12 @@ namespace MvcTemplate.Web
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.RegisterRoutes();
+
+			// ~/controller/action
+			routes.MapFriendlyUrlRoute(
+				null,
+				"{controller}/{action}"
+			);
 		}
 
 		protected override void OnApplicationStarted()

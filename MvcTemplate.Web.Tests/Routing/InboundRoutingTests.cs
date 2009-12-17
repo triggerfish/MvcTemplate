@@ -48,6 +48,21 @@ namespace MvcTemplate.Web.Tests
 			);
 		}
 
+		[TestMethod]
+		public void SlashControllerSlashActionIsValid()
+		{
+			// the case of the url is always forced to lowercase
+			// (using Triggerfish.Web.Mvc) and so the parsed
+			// controller and action names are lowercase also
+			TestRoute("~/cont/Act",
+				new RouteValueDictionary(new
+				{
+					controller = "cont",
+					action = "act"
+				})
+			);
+		}
+
 		private void TestRoute(string a_url, RouteValueDictionary a_route)
 		{
 			// Arrange: Prepare the route collection and a mock request context

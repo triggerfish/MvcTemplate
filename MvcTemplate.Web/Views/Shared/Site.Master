@@ -22,7 +22,7 @@
 	</div>
 
 	<div id="navbar">
-		<% Html.RenderPartial("NavBar", vd.NavBarLinks); %>
+	    <% if (null != vd.NavBarLinks) { Html.RenderPartial("NavBar", vd.NavBarLinks); }%>
 	</div>
 
 	<div id="content">

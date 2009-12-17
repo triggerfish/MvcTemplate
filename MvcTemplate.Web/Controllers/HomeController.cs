@@ -19,7 +19,7 @@ namespace MvcTemplate.Web.Controllers
 			m_repository = a_repository;
 		}
 
-		[Route(Path = "")]
+		[Route(IsRoot = true)]
 		public ViewResult Index()
 		{
 			ViewData vd = new ViewData() { 

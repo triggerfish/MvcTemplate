@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Code\Navigation\GenreHyperlinksTests.cs" />
     <Compile Include="Controllers\ArtistsControllerTests.cs" />
+    <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\SearchControllerTests.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Helpers\MockHttp.cs" />
