@@ -9,17 +9,6 @@ namespace MvcTemplate.Web
 {
 	public static class RouteHelpers
 	{
-		public static RouteValueDictionary Route(this IArtist a_artist)
-		{
-			RouteValueDictionary r = new RouteValueDictionary(new { controller = "Artists", action = "Artist", name = a_artist.Name });
-			return r;
-		}
-
-		public static RouteValueDictionary Route(this IGenre a_genre)
-		{
-			return new RouteValueDictionary(new { controller = "Artists", action = "Genre", name = a_genre.Name });
-		}
-
 		public static RouteValueDictionary AllGenreRoute()
 		{
 			return new RouteValueDictionary(new { controller = "Artists", action = "Genre", name = "all" });

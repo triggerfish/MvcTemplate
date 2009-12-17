@@ -8,7 +8,7 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
 {
-	public static class HtmlHelpers
+	public static class HtmlExtensions
 	{
 		public static string RouteLink(this HtmlHelper a_html, Hyperlink a_link)
 		{
