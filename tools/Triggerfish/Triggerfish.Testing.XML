@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Triggerfish.Testing</name>
+    </assembly>
+    <members>
+        <member name="T:Triggerfish.Testing.Web.Routing.RoutingAssert">
+            <summary>
+            Assert methods for use in unit test projects
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Routing.RoutingAssert.AreDictionariesEqual(System.Web.Routing.RouteValueDictionary,System.Web.Routing.RouteValueDictionary)">
+            <summary>
+            Tests whether two RouteValueDictionary objects have equal values
+            </summary>
+            <param name="a_expected">The expected values</param>
+            <param name="a_actual">The actual values</param>
+        </member>
+        <member name="T:Triggerfish.Testing.Web.Mvc.MvcAssert">
+            <summary>
+            Asserts for use in unit testing code
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.MvcAssert.IsInboundRouteCorrect(System.Object,System.String,System.Web.Routing.Route)">
+            <summary>
+            Tests whether the MVC generated inbound route matches the expected route values
+            </summary>
+            <param name="a_expectedRouteValues">The expected route values</param>
+            <param name="a_actualUrl">The actual url from which the route values are generated</param>
+            <param name="a_actualRoute">The actual route from which the route values are generated</param>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.MvcAssert.IsInboundRouteCorrect(System.Web.Routing.RouteValueDictionary,System.String,System.Web.Routing.Route)">
+            <summary>
+            Tests whether the MVC generated inbound route matches the expected route values
+            </summary>
+            <param name="a_expectedRouteValues">The expected route values</param>
+            <param name="a_actualUrl">The actual url from which the route values are generated</param>
+            <param name="a_actualRoute">The actual route from which the route values are generated</param>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.MvcAssert.IsInboundRouteCorrect(System.Object,System.String,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Tests whether the MVC generated inbound route matches the expected route values
+            </summary>
+            <param name="a_expectedRouteValues">The expected route values</param>
+            <param name="a_actualUrl">The actual url from which the route values are generated</param>
+            <param name="a_registerRoutes">Delegate to register all possible routes</param>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.MvcAssert.IsInboundRouteCorrect(System.Web.Routing.RouteValueDictionary,System.String,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Tests whether the MVC generated inbound route matches the expected route values
+            </summary>
+            <param name="a_expectedRouteValues">The expected route values</param>
+            <param name="a_actualUrl">The actual url from which the route values are generated</param>
+            <param name="a_registerRoutes">Delegate to register all possible routes</param>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.MvcAssert.IsOutboundRouteCorrect(System.String,System.Object,System.Web.Routing.Route)">
+            <summary>
+            Tests whether the MVC generated outbound route matches the expected url
+            </summary>
+            <param name="a_expectedUrl">The expected url</param>
+            <param name="a_actualRouteValues">The actual route values from which the url is generated</param>
+            <param name="a_actualRoute">The actual route from which the url is generated</param>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.MvcAssert.IsOutboundRouteCorrect(System.String,System.Web.Routing.RouteValueDictionary,System.Web.Routing.Route)">
+            <summary>
+            Tests whether the MVC generated outbound route matches the expected url
+            </summary>
+            <param name="a_expectedUrl">The expected url</param>
+            <param name="a_actualRouteValues">The actual route values from which the url is generated</param>
+            <param name="a_actualRoute">The actual route from which the url is generated</param>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.MvcAssert.IsOutboundRouteCorrect(System.String,System.Object,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Tests whether the MVC generated outbound route matches the expected url. Requires a delegate
+            to populate a route collection with all possible routes.
+            </summary>
+            <param name="a_expectedUrl">The expected url</param>
+            <param name="a_actualRouteValues">The actual route values from which the url is generated</param>
+            <param name="a_registerRoutes">Delegate to register all possible routes</param>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.MvcAssert.IsOutboundRouteCorrect(System.String,System.Web.Routing.RouteValueDictionary,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Tests whether the MVC generated outbound route matches the expected url. Requires a delegate
+            to populate a route collection with all possible routes.
+            </summary>
+            <param name="a_expectedUrl">The expected url</param>
+            <param name="a_actualRouteValues">The actual route values from which the url is generated</param>
+            <param name="a_registerRoutes">Delegate to register all possible routes</param>
+        </member>
+        <member name="T:Triggerfish.Testing.Web.Mvc.OutboundRoutingHelpers">
+            <summary>
+            Static helper methods to create outbound urls using the MVC framework
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.OutboundRoutingHelpers.GenerateOutboundUrl(System.Object,System.Web.Routing.Route)">
+            <summary>
+            Generates an outbound url from the specified values.  
+            </summary>
+            <param name="a_routeValues">The route values from which to generate the url</param>
+            <param name="a_route">The route to use to generate the url</param>
+            <returns>The string url</returns>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.OutboundRoutingHelpers.GenerateOutboundUrl(System.Web.Routing.RouteValueDictionary,System.Web.Routing.Route)">
+            <summary>
+            Generates an outbound url from the specified values.  
+            </summary>
+            <param name="a_routeValues">The route values from which to generate the url</param>
+            <param name="a_route">The route to use to generate the url</param>
+            <returns>The string url</returns>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.OutboundRoutingHelpers.GenerateOutboundVirtualPath(System.Object,System.Web.Routing.Route)">
+            <summary>
+            Generates an outbound url from the specified values.  
+            </summary>
+            <param name="a_routeValues">The route values from which to generate the url</param>
+            <param name="a_route">The route to use to generate the url</param>
+            <returns>The virtual path data object</returns>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.OutboundRoutingHelpers.GenerateOutboundVirtualPath(System.Web.Routing.RouteValueDictionary,System.Web.Routing.Route)">
+            <summary>
+            Generates an outbound url from the specified values.  
+            </summary>
+            <param name="a_routeValues">The route values from which to generate the url</param>
+            <param name="a_route">The route to use to generate the url</param>
+            <returns>The virtual path data object</returns>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.OutboundRoutingHelpers.GenerateOutboundUrl(System.Object,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Generates an outbound url from the specified values.  Requires a delegate
+            to populate a route collection with all possible routes.
+            </summary>
+            <param name="a_routeValues">The route values from which to generate the url</param>
+            <param name="a_registerRoutes">Delegate to register all possible routes</param>
+            <returns>The string url</returns>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.OutboundRoutingHelpers.GenerateOutboundUrl(System.Web.Routing.RouteValueDictionary,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Generates an outbound url from the specified values.  Requires a delegate
+            to populate a route collection with all possible routes.
+            </summary>
+            <param name="a_routeValues">The route values from which to generate the url</param>
+            <param name="a_registerRoutes">Delegate to register all possible routes</param>
+            <returns>The string url</returns>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.OutboundRoutingHelpers.GenerateOutboundVirtualPath(System.Object,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Generates an outbound url from the specified values.  Requires a delegate
+            to populate a route collection with all possible routes.
+            </summary>
+            <param name="a_routeValues">The route values from which to generate the url</param>
+            <param name="a_registerRoutes">Delegate to register all possible routes</param>
+            <returns>The virtual path data object</returns>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.OutboundRoutingHelpers.GenerateOutboundVirtualPath(System.Web.Routing.RouteValueDictionary,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Generates an outbound url from the specified values.  Requires a delegate
+            to populate a route collection with all possible routes.
+            </summary>
+            <param name="a_routeValues">The route values from which to generate the url</param>
+            <param name="a_registerRoutes">Delegate to register all possible routes</param>
+            <returns>The virtual path data object</returns>
+        </member>
+        <member name="T:Triggerfish.Testing.Web.HttpHelpers">
+            <summary>
+            Helpers for mocking http objects
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.HttpHelpers.MockHttpContext(System.String)">
+            <summary>
+            Create a mock HttpContext object
+            </summary>
+            <param name="a_url">The url that initiated the HttpContext (can be null)</param>
+            <returns>The http context</returns>
+        </member>
+        <member name="T:Triggerfish.Testing.Web.Mvc.InboundRoutingHelpers">
+            <summary>
+            Static helper methods to create inbound urls using the MVC framework
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.InboundRoutingHelpers.GenerateInboundRoute(System.String,System.Web.Routing.Route)">
+            <summary>
+            Create inbound route values from a string url. 
+            </summary>
+            <param name="a_url">The url from which to generate the route</param>
+            <param name="a_route">The route from which to generate the route</param>
+            <returns>The route values</returns>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.InboundRoutingHelpers.GenerateInboundRoute(System.String,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Create inbound route values from a string url. Requires a delegate
+            to populate a route collection with all possible routes.
+            </summary>
+            <param name="a_url">The url from which to generate the route</param>
+            <param name="a_registerRoutes">Delegate to register all possible routes</param>
+            <returns>The route values</returns>
+        </member>
+    </members>
+</doc>

@@ -171,6 +171,13 @@
             Extension methods for url processing
             </summary>
         </member>
+        <member name="M:Triggerfish.Web.Routing.UrlExtensions.Capitalise(System.String)">
+            <summary>
+            Converts the first character of a string to uppercase
+            </summary>
+            <param name="a_string">The string to convert</param>
+            <returns>A copy of the string with the first character capitalised</returns>
+        </member>
         <member name="M:Triggerfish.Web.Routing.UrlExtensions.Encode(System.Web.Routing.RouteValueDictionary)">
             <summary>
             Encodes the individual route values to be lower-case and containing hypens
