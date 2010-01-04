@@ -67,6 +67,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code\Binders\ArtistBinder.cs" />
+    <Compile Include="Code\Binders\GenreBinder.cs" />
+    <Compile Include="Code\Binders\ModelBinder.cs" />
     <Compile Include="Code\Diagnostics\Diagnostics.cs" />
     <Compile Include="Code\Diagnostics\DiagnosticsFilter.cs" />
     <Compile Include="Code\Diagnostics\DiagnosticsModule.cs" />
@@ -76,6 +79,7 @@
     <Compile Include="Code\IoC\WebDependencies.cs" />
     <Compile Include="Code\Navigation\GenreHyperlinks.cs" />
     <Compile Include="Code\Navigation\Hyperlink.cs" />
+    <Compile Include="Code\ViewData\ArtistsViewData.cs" />
     <Compile Include="Code\ViewData\GenreViewData.cs" />
     <Compile Include="Code\ViewData\ArtistViewData.cs" />
     <Compile Include="Code\ViewData\SearchViewData.cs" />
@@ -102,6 +106,8 @@
     <Content Include="Content\scripts\xVal.jquery.validate-1.0.js" />
     <Content Include="Views\Account\Login.aspx" />
     <Content Include="Views\Artists\Artist.aspx" />
+    <Content Include="Views\Artists\Index.aspx" />
+    <Content Include="Views\Artists\ArtistList.ascx" />
     <Content Include="Views\Artists\Genre.aspx" />
     <Content Include="Views\Search\Index.aspx" />
     <Content Include="Views\Search\Results.aspx" />

@@ -6,11 +6,5 @@ Genre: <%= Html.Encode(Model.SelectedGenre) %>
 
 <asp:Content ID="Content" ContentPlaceHolderID="PageContent" runat="server">
 <h2>Genre: <%= Html.Encode(Model.SelectedGenre) %></h2>
-<div class="list">
-    <ul>
-    <% foreach (MvcTemplate.Model.IArtist a in Model.Artists) { %>
-	    <li><%= Html.ActionLink(a) %></li>
-    <% } %>
-    </ul>
-</div>
+<% Html.RenderPartial("ArtistList", Model.Artists); %>
 </asp:Content>

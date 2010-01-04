@@ -21,7 +21,7 @@ namespace MvcTemplate.Web
 			nav.Add(new Hyperlink()
 			{
 				Text = "All",
-				Route = RouteHelpers.AllGenreRoute()
+				Route = RouteHelpers.AllArtistsRoute()
 			});
 
 			if (null != a_repository)

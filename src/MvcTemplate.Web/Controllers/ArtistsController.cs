@@ -18,47 +18,39 @@ namespace MvcTemplate.Web.Controllers
 			m_repository = a_repository;
 		}
 
-		[Route(Url = "genre/{name}")]
-		public ViewResult Genre(string name)
+		[Route(Url = "artists")]
+		public ViewResult Index()
 		{
-			IEnumerable<IArtist> artists;
-			string displayGenreName = "All";
-			if (0 == String.Compare(name, "all", true))
+			return View(new ArtistsViewData(m_repository.Artists) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, "All") });
+		}
+
+		[Route(Url = "genre/{genre}")]
+		public ViewResult Genre(IGenre genre)
+		{
+			if (ModelState.IsValid) // error
 			{
-				artists = m_repository.Artists;
+				return View(new GenreViewData(genre) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, genre.Name) });
 			}
 			else
 			{
-				IGenre genreObj = m_repository.Genres.Where(g => 0 == String.Compare(g.Name, name, true)).FirstOrDefault();
-
-				if (genreObj == null) // error
+				return View("Error", new ErrorViewData(new Exception(ModelState["genre"].Errors.First().ErrorMessage)) // how to get the duff data?
 				{
-					return View("Error", new ErrorViewData(new Exception(String.Format("Unknown genre: {0}", name))) { 
-						NavBarLinks = GenreHyperlinks.CreateLinks(m_repository)
-					});
-				}
-				else
-				{
-					artists = genreObj.Artists;
-					displayGenreName = genreObj.Name;
-				}
+					NavBarLinks = GenreHyperlinks.CreateLinks(m_repository)
+				});
 			}
-
-			return View(new GenreViewData(displayGenreName, artists) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, name) });
 		}
 
-		[Route(Url = "artists/{name}")]
-		public ViewResult Artist(string name)
+		[Route(Url = "artists/{artist}")]
+		public ViewResult Artist(IArtist artist)
 		{
-			IArtist artist = m_repository.Artists.FirstOrDefault(a => 0 == String.Compare(a.Name, name, true));
-
-			if (null != artist)
+			if (ModelState.IsValid)
 			{
 				return View(new ArtistViewData(artist) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository) });
 			}
 			else
 			{
-				return View("Error", new ErrorViewData(new Exception(String.Format("Unknown artist Id: {0}", name))) {
+				return View("Error", new ErrorViewData(new Exception(ModelState["artist"].Errors.First().ErrorMessage)) // how to get the duff data?
+				{
 					NavBarLinks = GenreHyperlinks.CreateLinks(m_repository)
 				});
 			}

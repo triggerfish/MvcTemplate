@@ -14,7 +14,7 @@ namespace MvcTemplate.Web.Tests
 	public class ArtistsControllerTests
 	{
 		[TestMethod]
-		public void ShouldListAllArtistsForAllGenre()
+		public void ShouldListAllArtists()
 		{
 			// Arrange
 			List<string> artists = new List<string>
@@ -30,8 +30,18 @@ namespace MvcTemplate.Web.Tests
 
 			IRepository repos = MockRepository.CreateMockRepository(genreArtistMap);
 
-			// Act & Assert
-			ActAndValidateAction(repos, "All", artists);
+			ArtistsController controller = new ArtistsController(repos);
+
+			// Act
+			ViewResult result = controller.Index();
+
+			ArtistsViewData vd = result.ViewData.Model as ArtistsViewData;
+
+			// Assert
+			Assert.AreEqual("", result.ViewName);
+			Assert.AreNotEqual(null, vd);
+
+			ValidateArtistsList(artists, vd.Artists.ToList());
 		}
 
 		[TestMethod]
@@ -42,93 +52,49 @@ namespace MvcTemplate.Web.Tests
 				"Artist1", "Artist2"
 			};
 
-			IRepository repos = MockRepository.CreateMockRepository("Pop", artists);
+			IGenre g = MockGenre.CreateMockGenre(1, "Pop", MockArtist.CreateMockArtists(artists));
 
-			// Act & Assert
-			ActAndValidateAction(repos, "Pop", artists);
-		}
-
-		[TestMethod]
-		public void ShouldDisplayErrorWhenInvalidGenreEntered()
-		{
-			IRepository repos = MockRepository.CreateMockRepositoryGenresOnly(new List<string> { "1" });
-
-			ArtistsController controller = new ArtistsController(repos);
+			ArtistsController controller = new ArtistsController(null);
 
 			// Act
-			ViewResult result = controller.Genre("plibble"); // lower case - urls are lower-case
-
-			ErrorViewData vd = result.ViewData.Model as ErrorViewData;
-
-			// assert
-			Assert.AreEqual("Error", result.ViewName);
-			Assert.AreNotEqual(null, vd);
-			Assert.AreNotEqual(null, vd.Exception);
-		}
-
-		[TestMethod]
-		public void ShouldDisplaySpecificArtist()
-		{
-			// Arrange
-			List<string> artists = new List<string>() {
-				"Artist1", "Artist2"
-			};
-
-			IRepository repos = MockRepository.CreateMockRepository("Pop", artists);
-			ArtistsController controller = new ArtistsController(repos);
-
-			// Act
-			ViewResult result = controller.Artist("Artist2");
-
-			ArtistViewData vd = result.ViewData.Model as ArtistViewData;
-
-			// Assert
-			Assert.AreEqual("", result.ViewName);
-			Assert.AreNotEqual(null, vd);
-			Assert.AreEqual(2, vd.Artist.Id);
-			Assert.AreEqual("Artist2", vd.Artist.Name);
-		}
-
-		[TestMethod]
-		public void ShouldDisplayErrorWhenInvalidArtistEntered()
-		{
-			// Arrange
-			List<string> artists = new List<string>() {
-				"Artist1", "Artist2"
-			};
-
-			IRepository repos = MockRepository.CreateMockRepository("Pop", artists);
-			ArtistsController controller = new ArtistsController(repos);
-
-			// Act
-			ViewResult result = controller.Artist("Plibble");
-
-			// assert
-			Assert.AreEqual("Error", result.ViewName);
-			ErrorViewData vd = result.ViewData.Model as ErrorViewData;
-			Assert.AreNotEqual(null, vd);
-			Assert.AreNotEqual(null, vd.Exception);
-		}
-
-		private void ActAndValidateAction(IRepository a_repository, string a_genre, IList<string> a_expectedArtistNames)
-		{
-			ArtistsController controller = new ArtistsController(a_repository);
-
-			// Act
-			ViewResult result = controller.Genre(a_genre.ToLower()); // lower case - urls are lower-case
+			ViewResult result = controller.Genre(g); // lower case - urls are lower-case
 
 			GenreViewData vd = result.ViewData.Model as GenreViewData;
 
 			// Assert
 			Assert.AreEqual("", result.ViewName);
 			Assert.AreNotEqual(null, vd);
-			Assert.AreEqual(a_genre, vd.SelectedGenre); // camel case - this will be displayed to the user
+			Assert.AreEqual(g.Name, vd.SelectedGenre); // camel case - this will be displayed to the user
 
-			List<IArtist> actualArtists = vd.Artists.ToList();
-			Assert.AreEqual(a_expectedArtistNames.Count, actualArtists.Count);
-			for (int i = 0; i < a_expectedArtistNames.Count; i++)
+			ValidateArtistsList(artists, vd.Artists.ToList());
+		}
+
+		[TestMethod]
+		public void ShouldDisplaySingleArtist()
+		{
+			// Arrange
+			IArtist a = MockArtist.CreateMockArtist(1, "Artist");
+
+			ArtistsController controller = new ArtistsController(null);
+
+			// Act
+			ViewResult result = controller.Artist(a);
+
+			ArtistViewData vd = result.ViewData.Model as ArtistViewData;
+
+			// Assert
+			Assert.AreEqual("", result.ViewName);
+			Assert.AreNotEqual(null, vd);
+			Assert.AreEqual(1, vd.Artist.Id);
+			Assert.AreEqual("Artist", vd.Artist.Name);
+		}
+
+		private void ValidateArtistsList(IList<string> a_expected, IList<IArtist> a_actual)
+		{
+			Assert.AreEqual(a_expected.Count, a_actual.Count);
+			for (int i = 0; i < a_expected.Count; i++)
 			{
-				Assert.AreEqual(a_expectedArtistNames[i], actualArtists[i].Name);
+				Assert.AreEqual(a_expected[i], a_actual[i].Name);
 			}
 		}
 	}

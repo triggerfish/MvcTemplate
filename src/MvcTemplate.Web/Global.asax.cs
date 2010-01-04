@@ -29,11 +29,14 @@ namespace MvcTemplate.Web
 
 		protected override void OnApplicationStarted()
 		{
+			ObjectFactory.Load(new MvcTemplate.Database.SqliteModule(WebConfigurationManager.AppSettings["SQLiteDatabaseFilename"]));
+			ObjectFactory.Load(new WebDependencies());
+
 			RegisterAllControllersIn("MvcTemplate.Web");
 
 			RegisterRoutes(RouteTable.Routes);
-
-			ObjectFactory.Load(new MvcTemplate.Database.SqliteModule(WebConfigurationManager.AppSettings["SQLiteDatabaseFilename"]));
+			ModelBinders.Binders.Add(typeof(IGenre), CreateKernel().Get<GenreBinder>());
+			ModelBinders.Binders.Add(typeof(IArtist), CreateKernel().Get<ArtistBinder>());
 		}
 
 		protected override IKernel CreateKernel()

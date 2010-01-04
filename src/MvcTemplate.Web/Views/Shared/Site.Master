@@ -13,7 +13,7 @@
 
 <body>
 	<div id="header">
-	    <div id="website-name"><%= Html.ActionLink(System.Web.Configuration.WebConfigurationManager.AppSettings["WebSiteName"], "Index", "Home") %></div>
+	    <div id="website-name"><%= Html.RouteLink(System.Web.Configuration.WebConfigurationManager.AppSettings["WebSiteName"], RouteHelpers.HomeRoute()) %></div>
 	    <% if (vd.HasSearchBox) { %>
 		<div id="search">
 		    <% Html.RenderPartial("SearchForm"); %>
