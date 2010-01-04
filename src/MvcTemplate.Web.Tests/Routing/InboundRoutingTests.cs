@@ -17,41 +17,35 @@ namespace MvcTemplate.Web.Tests
 		// Triggerfish.Web.Routing.FriendlyUrlRoute
 
 		[TestMethod]
-		public void RootIsHome()
+		public void ShouldResolveHomeRoute()
 		{
-			MvcAssert.IsInboundRouteCorrect(new	{
-					controller = "Home",
-					action = "Index"
-				}, 
-				"~/", 
-				MvcApplication.RegisterRoutes
-			);
+			MvcAssert.IsInboundRouteCorrect(RouteHelpers.HomeRoute(), "~/", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
-		public void ShouldDecodeGenreUrl()
+		public void ShouldResolveSearchRoute()
+		{
+			MvcAssert.IsInboundRouteCorrect(RouteHelpers.SearchRoute(), "~/search", MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
+		public void ShouldResolveGenreRoute()
 		{
 			IGenre g = MockGenre.CreateMockGenre("hip hop"); // need to be lower-case as this is how the urls are decoded
-			MvcAssert.IsInboundRouteCorrect(g.Route(), "~/genre/hip-hop", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteCorrect(RouteHelpers.GenreRoute(g), "~/genre/hip-hop", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
-		public void ShouldDecodeArtistUrl()
+		public void ShouldResolveAllArtistsRoute()
+		{
+			MvcAssert.IsInboundRouteCorrect(RouteHelpers.AllArtistsRoute(), "~/artists", MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
+		public void ShouldResolveArtistRoute()
 		{
 			IArtist a = MockArtist.CreateMockArtist(2, "crosby stills and nash"); // need to be lower-case as this is how the urls are decoded
-			MvcAssert.IsInboundRouteCorrect(a.Route(), "~/artists/crosby-stills-and-Nash", MvcApplication.RegisterRoutes);
-		}
-
-		[TestMethod]
-		public void SlashSearchIsSearchHome()
-		{
-			MvcAssert.IsInboundRouteCorrect(new	{
-					controller = "Search",
-					action = "Index"
-				},
-				"~/search",
-				MvcApplication.RegisterRoutes
-			);
+			MvcAssert.IsInboundRouteCorrect(RouteHelpers.ArtistRoute(a), "~/artists/crosby-stills-and-Nash", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]

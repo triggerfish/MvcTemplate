@@ -11,13 +11,12 @@ namespace MvcTemplate.Web
 	{
 		public static RouteValueDictionary Route(this IArtist a_artist)
 		{
-			RouteValueDictionary r = new RouteValueDictionary(new { controller = "Artists", action = "Artist", name = a_artist.Name });
-			return r;
+			return RouteHelpers.ArtistRoute(a_artist);
 		}
 
 		public static RouteValueDictionary Route(this IGenre a_genre)
 		{
-			return new RouteValueDictionary(new { controller = "Artists", action = "Genre", name = a_genre.Name });
+			return RouteHelpers.GenreRoute(a_genre);
 		}
 	}
 }

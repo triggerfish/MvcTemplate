@@ -14,17 +14,35 @@ namespace MvcTemplate.Web.Tests
 	public class OutboundRoutingTests
 	{
 		[TestMethod]
-		public void ShouldEncodeGenreUrl()
+		public void ShouldResolveHomeRoute()
 		{
-			IGenre g = MockGenre.CreateMockGenre("Hip Hop");
-			MvcAssert.IsOutboundRouteCorrect("/genre/hip-hop", g.Route(), MvcApplication.RegisterRoutes);
+			MvcAssert.IsOutboundRouteCorrect("/", RouteHelpers.HomeRoute(), MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
-		public void ShouldEncodeArtistUrl()
+		public void ShouldResolveSearchRoute()
+		{
+			MvcAssert.IsOutboundRouteCorrect("/search", RouteHelpers.SearchRoute(), MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
+		public void ShouldResolveGenreRoute()
+		{
+			IGenre g = MockGenre.CreateMockGenre("Hip Hop");
+			MvcAssert.IsOutboundRouteCorrect("/genre/hip-hop", RouteHelpers.GenreRoute(g), MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
+		public void ShouldResolveAllArtistsRoute()
+		{
+			MvcAssert.IsOutboundRouteCorrect("/artists", RouteHelpers.AllArtistsRoute(), MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
+		public void ShouldResolveArtistRoute()
 		{
 			IArtist a = MockArtist.CreateMockArtist(3, "Crosby Stills And Nash");
-			MvcAssert.IsOutboundRouteCorrect("/artists/crosby-stills-and-nash", a.Route(), MvcApplication.RegisterRoutes);
+			MvcAssert.IsOutboundRouteCorrect("/artists/crosby-stills-and-nash", RouteHelpers.ArtistRoute(a), MvcApplication.RegisterRoutes);
 		}
 	}
 }
