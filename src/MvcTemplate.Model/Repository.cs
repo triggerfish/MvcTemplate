@@ -8,7 +8,7 @@ namespace MvcTemplate.Model
 	public interface IRepository
 	{
 		IRepositorySettings Settings { get; }
-
+		IUserRepository UserRepository { get; }
 		IEnumerable<IArtist> Artists { get; }
 		IEnumerable<IGenre> Genres { get; }
 

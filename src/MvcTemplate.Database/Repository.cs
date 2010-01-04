@@ -29,6 +29,11 @@ namespace MvcTemplate.Database
 			get { return m_settings; }
 		}
 
+		public IUserRepository UserRepository 
+		{
+			get { return null; }
+		}
+
 		public IEnumerable<IArtist> Artists
 		{
 			get 
