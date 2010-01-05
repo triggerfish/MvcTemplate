@@ -29,6 +29,24 @@ namespace MvcTemplate.Web.Tests
 		}
 
 		[TestMethod]
+		public void ShouldResolveRegisterRoute()
+		{
+			MvcAssert.IsInboundRouteCorrect(RouteHelpers.RegisterRoute(), "~/register", MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
+		public void ShouldResolveLoginRoute()
+		{
+			MvcAssert.IsInboundRouteCorrect(RouteHelpers.LoginRoute(), "~/login", MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
+		public void ShouldResolveLogoutRoute()
+		{
+			MvcAssert.IsInboundRouteCorrect(RouteHelpers.LogoutRoute(), "~/logout", MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
 		public void ShouldResolveGenreRoute()
 		{
 			IGenre g = MockGenre.CreateMockGenre("hip hop"); // need to be lower-case as this is how the urls are decoded

@@ -26,6 +26,24 @@ namespace MvcTemplate.Web.Tests
 		}
 
 		[TestMethod]
+		public void ShouldResolveRegisterRoute()
+		{
+			MvcAssert.IsOutboundRouteCorrect("/register", RouteHelpers.RegisterRoute(), MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
+		public void ShouldResolveLoginRoute()
+		{
+			MvcAssert.IsOutboundRouteCorrect("/login", RouteHelpers.LoginRoute(), MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
+		public void ShouldResolveLogoutRoute()
+		{
+			MvcAssert.IsOutboundRouteCorrect("/logout", RouteHelpers.LogoutRoute(), MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
 		public void ShouldResolveGenreRoute()
 		{
 			IGenre g = MockGenre.CreateMockGenre("Hip Hop");

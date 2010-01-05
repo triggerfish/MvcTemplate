@@ -18,30 +18,35 @@ namespace MvcTemplate.Web.Controllers
 			m_repository = a_repository;
 		}
 
+		[Route(Url = "register")]
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Register()
 		{
-			return View();
+			return View(new ViewData());
 		}
 
+		[Route(Url = "register")]
 		[AcceptVerbs(HttpVerbs.Post)]
 		public ActionResult Register(string user) // change to User object
 		{
 			return View();
 		}
 
+		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Get)]
         public ViewResult Login()
         {
             return View(new ViewData());
         }
 
+		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Post)]
 		public ActionResult Login(string user) // change to User object
 		{
 			return View();
 		}
 
+		[Route(Url = "logout")]
 		public ViewResult Logout()
 		{
 			return View();

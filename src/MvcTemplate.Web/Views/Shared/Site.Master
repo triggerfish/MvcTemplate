@@ -12,7 +12,14 @@
 </head>
 
 <body>
-	<div id="header">
+    <div id="auth">
+        <% if (vd.IsUserSignedIn) { %>
+        <%= Html.RouteLink("Logout", RouteHelpers.LogoutRoute())%>
+        <% } else { %>
+        <%= Html.RouteLink("Login", RouteHelpers.LoginRoute())%>&nbsp;|&nbsp;<%= Html.RouteLink("Register", RouteHelpers.RegisterRoute())%>
+	    <% } %>
+	</div>
+    <div id="header">
 	    <div id="website-name"><%= Html.RouteLink(System.Web.Configuration.WebConfigurationManager.AppSettings["WebSiteName"], RouteHelpers.HomeRoute()) %></div>
 	    <% if (vd.HasSearchBox) { %>
 		<div id="search">

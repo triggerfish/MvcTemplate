@@ -18,7 +18,14 @@ fieldset {
 	padding: 0;
 }
 
+#auth {
+	float: right;
+	margin-right: 11em;
+	margin-bottom: 0.3em;
+}
+
 #header {
+	clear: both;
 	background-color: #444;
 	border-bottom: 2px solid #111;
 	color: white;

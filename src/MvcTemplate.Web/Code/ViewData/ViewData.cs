@@ -10,10 +10,13 @@ namespace MvcTemplate.Web
 		public IList<Hyperlink> NavBarLinks { get; set; }
 
 		public bool HasSearchBox { get; set; }
+
+		public bool IsUserSignedIn { get; set; }
 	
 		public ViewData()
 		{
 			HasSearchBox = true;
+			IsUserSignedIn = false;
 		}
 	}
 }

@@ -19,6 +19,21 @@ namespace MvcTemplate.Web
 			return new RouteValueDictionary(new { controller = "Search", action = "Index" });
 		}
 
+		public static RouteValueDictionary RegisterRoute()
+		{
+			return new RouteValueDictionary(new { controller = "Account", action = "Register" });
+		}
+
+		public static RouteValueDictionary LoginRoute()
+		{
+			return new RouteValueDictionary(new { controller = "Account", action = "Login" });
+		}
+
+		public static RouteValueDictionary LogoutRoute()
+		{
+			return new RouteValueDictionary(new { controller = "Account", action = "Logout" });
+		}
+
 		public static RouteValueDictionary GenreRoute(IGenre a_genre)
 		{
 			return new RouteValueDictionary(new { controller = "Artists", action = "Genre", genre = a_genre.Name });

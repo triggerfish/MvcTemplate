@@ -105,6 +105,7 @@
     <Content Include="Content\scripts\jquery.validate-1.5.5.min.js" />
     <Content Include="Content\scripts\xVal.jquery.validate-1.0.js" />
     <Content Include="Views\Account\Login.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Artists\Artist.aspx" />
     <Content Include="Views\Artists\Index.aspx" />
     <Content Include="Views\Artists\ArtistList.ascx" />
