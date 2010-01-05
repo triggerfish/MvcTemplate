@@ -7,7 +7,8 @@ namespace MvcTemplate.Model
 {
 	public interface IUser
 	{
-		string Name { get; set; }
+		string Forename { get; set; }
+		string Surname { get; set; }
 		UserCredentials Credentials { get; set; }
 	}
 }

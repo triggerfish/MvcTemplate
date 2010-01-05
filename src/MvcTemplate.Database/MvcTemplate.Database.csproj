@@ -77,9 +77,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
+    <Compile Include="UserRepository.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Entities\Artist.cs" />
-    <Compile Include="Entity.cs" />
+    <Compile Include="Entities\Entity.cs" />
     <Compile Include="Helpers\SessionExtensions.cs" />
     <Compile Include="IoC\SqliteModule.cs" />
     <Compile Include="IoC\SqlServerModule.cs" />

@@ -14,6 +14,18 @@ namespace MvcTemplate.Database.Tests
 		private Repository m_repository;
 
 		[TestMethod]
+		public void ShouldReturnSettings()
+		{
+			Assert.AreNotEqual(null, m_repository.Settings);
+		}
+
+		[TestMethod]
+		public void ShouldReturnUserRepository()
+		{
+			Assert.AreNotEqual(null, m_repository.UserRepository);
+		}
+
+		[TestMethod]
 		public void ShouldReturnAllArtists()
 		{
 			ValidateArtists(m_repository.Artists, 4);

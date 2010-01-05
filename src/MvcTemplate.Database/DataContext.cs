@@ -23,5 +23,10 @@ namespace MvcTemplate.Database
 		{
 			get { return Session.Linq<Genre>(); }
 		}
+	
+		public IOrderedQueryable<User> Users
+		{
+			get { return Session.Linq<User>(); }
+		}
 	}
 }

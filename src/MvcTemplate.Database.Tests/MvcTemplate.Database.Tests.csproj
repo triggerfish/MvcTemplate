@@ -59,6 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\UserTests.cs" />
+    <Compile Include="UserRepositoryTests.cs" />
     <Compile Include="Entities\ArtistTests.cs" />
     <Compile Include="Entities\GenreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

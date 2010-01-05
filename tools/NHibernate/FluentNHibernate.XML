@@ -549,7 +549,7 @@
             this allows the user to find any columns with the matching name.
             </summary>
         </member>
-        <member name="M:FluentNHibernate.Conventions.Inspections.CollectionInspector.IsSet(System.Reflection.PropertyInfo)">
+        <member name="M:FluentNHibernate.Conventions.Inspections.CollectionInspector.IsSet(FluentNHibernate.Member)">
             <summary>
             Represents a string identifier for the model instance, used in conventions for a lazy
             shortcut.
@@ -1958,7 +1958,7 @@
             Naming strategy prefix.
             </summary>
         </member>
-        <member name="M:FluentNHibernate.Testing.PersistenceSpecificationExtensions.CheckComponentList``2(FluentNHibernate.Testing.PersistenceSpecification{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Collections.Generic.IEnumerable{``1})">
+        <member name="M:FluentNHibernate.Testing.PersistenceSpecificationExtensions.CheckComponentList``2(FluentNHibernate.Testing.PersistenceSpecification{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Collections.Generic.IEnumerable{``1},System.Collections.IEqualityComparer)">
             <summary>
             Checks a list of components for validity.
             </summary>

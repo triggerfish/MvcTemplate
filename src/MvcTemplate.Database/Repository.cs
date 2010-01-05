@@ -11,12 +11,14 @@ namespace MvcTemplate.Database
 {
 	public class Repository : IRepository
 	{
-		private RepositorySettings m_settings = new RepositorySettings();
 		private DataContext m_context;
+		private RepositorySettings m_settings = new RepositorySettings();
+		private UserRepository m_userRepository = new UserRepository();
 
 		public Repository(ISession a_session)
 		{
 			m_context = new DataContext(a_session);
+			m_userRepository.DataContext = m_context;
 		}
 
 		public Repository(IDbSession a_session)
@@ -31,7 +33,7 @@ namespace MvcTemplate.Database
 
 		public IUserRepository UserRepository 
 		{
-			get { return null; }
+			get { return m_userRepository; }
 		}
 
 		public IEnumerable<IArtist> Artists

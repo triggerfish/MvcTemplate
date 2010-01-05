@@ -7,6 +7,7 @@ using NHibernate;
 using FluentNHibernate;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
+using FluentNHibernate.Testing;
 
 namespace MvcTemplate.Database.Tests
 {
@@ -18,15 +19,16 @@ namespace MvcTemplate.Database.Tests
 		[TestInitialize]
 		public void Setup() 
 		{
-			SQLiteConfiguration config = new SQLiteConfiguration()
-				.InMemory()
-				.ProxyFactoryFactory("NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu")
-				.ShowSql();
+            FluentConfiguration configuration = Fluently.Configure()
+                .Database(SQLiteConfiguration.Standard
+					.InMemory()
+					.ProxyFactoryFactory("NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu")
+					.ShowSql());
 
 			PersistenceModel pm = new PersistenceModel();
 			pm.AddMappingsFromAssembly(typeof(Artist).Assembly);
-			
-			SessionSource = new SessionSource(config.ToProperties(), pm);
+
+			SessionSource = new SingleConnectionSessionSourceForSQLiteInMemoryTesting(configuration.BuildConfiguration().Properties, pm);
 			Session = SessionSource.CreateSession();
 			SessionSource.BuildSchema(Session);
 
