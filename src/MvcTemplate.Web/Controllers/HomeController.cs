@@ -12,9 +12,9 @@ namespace MvcTemplate.Web.Controllers
 	[HandleError]
 	public class HomeController : Controller
 	{
-		private IRepository m_repository;
+		private IArtistsRepository m_repository;
 
-		public HomeController(IRepository a_repository)
+		public HomeController(IArtistsRepository a_repository)
 		{
 			m_repository = a_repository;
 		}

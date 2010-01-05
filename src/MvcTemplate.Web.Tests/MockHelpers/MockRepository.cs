@@ -10,18 +10,18 @@ namespace MvcTemplate.Web.Tests
 {
 	internal static class MockRepository
 	{
-		public static IRepository CreateMockRepositoryGenresOnly(IEnumerable<string> a_genreNames)
+		public static IArtistsRepository CreateMockRepositoryGenresOnly(IEnumerable<string> a_genreNames)
 		{
 			IEnumerable<IGenre> genres = MockGenre.CreateMockGenres(a_genreNames);
-			Mock<IRepository> repository = new Mock<IRepository>();
+			Mock<IArtistsRepository> repository = new Mock<IArtistsRepository>();
 			repository.Setup(r => r.Genres).Returns(genres);
 			return repository.Object;
 		}
 
-		public static IRepository CreateMockRepository(string a_genre, IEnumerable<string> a_artistNames)
+		public static IArtistsRepository CreateMockRepository(string a_genre, IEnumerable<string> a_artistNames)
 		{
 			IEnumerable<IArtist> artists = MockArtist.CreateMockArtists(a_artistNames);
-			Mock<IRepository> repository = new Mock<IRepository>();
+			Mock<IArtistsRepository> repository = new Mock<IArtistsRepository>();
 
 			IGenre g = MockGenre.CreateMockGenre(0, a_genre, artists);
 
@@ -33,9 +33,9 @@ namespace MvcTemplate.Web.Tests
 			return repository.Object;
 		}
 	
-		public static IRepository CreateMockRepository(Dictionary<string, IEnumerable<string>> a_genreArtistMap)
+		public static IArtistsRepository CreateMockRepository(Dictionary<string, IEnumerable<string>> a_genreArtistMap)
 		{
-			Mock<IRepository> repository = new Mock<IRepository>();
+			Mock<IArtistsRepository> repository = new Mock<IArtistsRepository>();
 
 			Dictionary<IGenre, IEnumerable<IArtist>> map = new Dictionary<IGenre, IEnumerable<IArtist>>();
 			List<IArtist> allArtists = new List<IArtist>();

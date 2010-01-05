@@ -88,10 +88,10 @@ namespace MvcTemplate.Database.Tests
 			Session.WithinTransaction(s => s.Delete(savedGenre));
 			Session.Clear();
 
-			Repository r = new Repository(Session);
-			IEnumerable<IGenre> retrievedGenres = r.Genres;
+			ArtistsRepository r = new ArtistsRepository(Session);
+			IEnumerable<Genre> retrievedGenres = r.Genres;
 			Assert.AreEqual(0, retrievedGenres.Count());
-			IEnumerable<IArtist> retrievedArtists = r.Artists;
+			IEnumerable<Artist> retrievedArtists = r.Artists;
 			Assert.AreEqual(0, retrievedArtists.Count());
 		}
 
@@ -107,11 +107,11 @@ namespace MvcTemplate.Database.Tests
 			Session.WithinTransaction(s => s.Delete(savedArtist));
 			Session.Clear();
 
-			Repository r = new Repository(Session);
-			IEnumerable<IGenre> retrievedGenres = r.Genres;
+			ArtistsRepository r = new ArtistsRepository(Session);
+			IEnumerable<Genre> retrievedGenres = r.Genres;
 			Assert.AreEqual(1, retrievedGenres.Count());
 			Assert.AreEqual("Pop", retrievedGenres.First().Name);
-			IEnumerable<IArtist> retrievedArtists = r.Artists;
+			IEnumerable<Artist> retrievedArtists = r.Artists;
 			Assert.AreEqual(0, retrievedArtists.Count());
 		}
 	}

@@ -9,70 +9,44 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Database
 {
-	public class Repository : IRepository
+	public abstract class Repository
 	{
-		private DataContext m_context;
-		private RepositorySettings m_settings = new RepositorySettings();
-		private UserRepository m_userRepository = new UserRepository();
+		protected ISession Session { get; private set; }
 
-		public Repository(ISession a_session)
+		protected Repository(ISession a_session)
 		{
-			m_context = new DataContext(a_session);
-			m_userRepository.DataContext = m_context;
+			Session = a_session;
 		}
 
-		public Repository(IDbSession a_session)
+		protected Repository(IDbSession a_session)
 			: this(a_session.CreateSession())
 		{
 		}
 
-		public IRepositorySettings Settings
+		public T Get<T>(int a_id)
 		{
-			get { return m_settings; }
+			return Session.Get<T>(a_id);
 		}
 
-		public IUserRepository UserRepository 
+		public IOrderedQueryable<T> GetAll<T>()
 		{
-			get { return m_userRepository; }
+			return Session.Linq<T>();
 		}
 
-		public IEnumerable<IArtist> Artists
+		public void Delete<T>(T a_target)
 		{
-			get 
-			{
-				return m_context.Artists.Cast<IArtist>();
-			}
+			Session.WithinTransaction(s => s.Delete(a_target));
 		}
 
-		public IEnumerable<IGenre> Genres
+		public void Save<T>(T a_target)
 		{
-			get 
-			{
-				return m_context.Genres.Cast<IGenre>();
-			}
+			Session.WithinTransaction(s => s.SaveOrUpdate(a_target));
 		}
 
-		public IEnumerable<IArtist> GetArtistsByGenre(string a_genre)
+		public void Save<T>(IEnumerable<T> a_targets)
 		{
-			return m_context.Artists.Where(a => a.Genre.Name == a_genre).Cast<IArtist>();
-		}
-
-		public IEnumerable<IArtist> GetArtistsByGenre(int a_genreID)
-		{
-			return m_context.Genres.Where(g => g.Id == a_genreID).First().Artists.Cast<IArtist>();
-		}
-
-		public ISearchResults Search(string a_keyword)
-		{
-			SearchResults results = new SearchResults();
-
-			// no join operator in LINQ to NHibernate
-
-			string k = a_keyword.ToLower();
-			results.Artists = m_context.Artists.AsEnumerable().Where(a => a.Name.ToLower().Contains(k)).Cast<IArtist>();
-			results.Genres = m_context.Genres.AsEnumerable().Where(g => g.Name.ToLower().Contains(k)).Cast<IGenre>();
-
-			return results;
+			IEnumerable<object> objs = a_targets.Cast<object>();
+			Session.WithinTransaction(s => objs.ForEach(s.SaveOrUpdate));
 		}
 	}
 }

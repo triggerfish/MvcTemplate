@@ -11,9 +11,9 @@ namespace MvcTemplate.Web.Controllers
 {
     public class AccountController : Controller
     {
-		private IRepository m_repository;
+		private IArtistsRepository m_repository;
 
-		public AccountController(IRepository a_repository)
+		public AccountController(IArtistsRepository a_repository)
 		{
 			m_repository = a_repository;
 		}

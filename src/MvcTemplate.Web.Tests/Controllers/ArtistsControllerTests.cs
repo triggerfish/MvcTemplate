@@ -28,7 +28,7 @@ namespace MvcTemplate.Web.Tests
 				{ "Rock", artists.Skip(2).Take(2) }
 			};
 
-			IRepository repos = MockRepository.CreateMockRepository(genreArtistMap);
+			IArtistsRepository repos = MockRepository.CreateMockRepository(genreArtistMap);
 
 			ArtistsController controller = new ArtistsController(repos);
 

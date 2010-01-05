@@ -9,9 +9,9 @@ namespace MvcTemplate.Web
 {
 	public abstract class ModelBinder : DefaultModelBinder
 	{
-		protected IRepository Repository { get;	private set; }
+		protected IArtistsRepository Repository { get;	private set; }
 
-		protected ModelBinder(IRepository a_repository)
+		protected ModelBinder(IArtistsRepository a_repository)
 		{
 			Repository = a_repository;
 		}

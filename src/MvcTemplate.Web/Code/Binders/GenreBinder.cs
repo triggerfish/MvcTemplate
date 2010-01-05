@@ -9,7 +9,7 @@ namespace MvcTemplate.Web
 {
 	public class GenreBinder : ModelBinder
 	{
-		public GenreBinder(IRepository a_repository)
+		public GenreBinder(IArtistsRepository a_repository)
 			: base(a_repository)
 		{
 		}

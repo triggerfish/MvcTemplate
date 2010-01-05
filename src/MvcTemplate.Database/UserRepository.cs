@@ -9,9 +9,17 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Database
 {
-	public class UserRepository : IUserRepository
+	public class UserRepository : Repository, IUserRepository
 	{
-		public DataContext DataContext { get; set; }
+		public UserRepository(ISession a_session)
+			: base(a_session)
+		{
+		}
+
+		public UserRepository(IDbSession a_session)
+			: base(a_session)
+		{
+		}
 
 		public bool UserExists(string a_email)
 		{
@@ -28,15 +36,18 @@ namespace MvcTemplate.Database
 			return null;
 		}
 
-		public void Save(IUser a_user)
+		public void Register(IUser a_user)
 		{
-			DataContext.Session.WithinTransaction(s => s.SaveOrUpdate(a_user));
+			if (!UserExists(a_user.Credentials.Email))
+			{
+				Save(a_user as User);
+			}
 		}
 
 		protected User Get(string a_email)
 		{
 			return
-				(from u in DataContext.Users
+				(from u in GetAll<User>()
 				 where a_email == u.Credentials.Email
 				 select u).FirstOrDefault();
 		}

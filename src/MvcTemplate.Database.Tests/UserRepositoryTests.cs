@@ -70,7 +70,7 @@ namespace MvcTemplate.Database.Tests
 				Credentials = uc
 			};
 			
-			m_repository.Save(expected);
+			m_repository.Register(expected);
 			
 			IUser actual = m_repository.Get(uc);
 
@@ -81,7 +81,7 @@ namespace MvcTemplate.Database.Tests
 
 		protected override void SetupContext(ISession a_session)
 		{
-			m_repository = new Repository(a_session).UserRepository;
+			m_repository = new UserRepository(a_session);
 
 			for (int i = 1; i <= 4; i++)
 			{

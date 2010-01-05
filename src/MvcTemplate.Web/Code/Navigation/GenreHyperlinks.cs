@@ -10,12 +10,12 @@ namespace MvcTemplate.Web
 {
 	public class GenreHyperlinks
 	{
-		public static IList<Hyperlink> CreateLinks(IRepository a_repository)
+		public static IList<Hyperlink> CreateLinks(IArtistsRepository a_repository)
 		{
 			return CreateLinks(a_repository, null);
 		}
 
-		public static IList<Hyperlink> CreateLinks(IRepository a_repository, string a_toSelect)
+		public static IList<Hyperlink> CreateLinks(IArtistsRepository a_repository, string a_toSelect)
 		{
 			List<Hyperlink> nav = new List<Hyperlink>();
 			nav.Add(new Hyperlink()

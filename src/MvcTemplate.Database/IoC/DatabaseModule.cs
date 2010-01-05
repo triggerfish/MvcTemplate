@@ -21,8 +21,14 @@ namespace MvcTemplate.Database
 				.InRequestScope()
 				.WithConstructorArgument("a_config", cfg);
 
-			Bind<IRepository>()
-				.To<Repository>()
+			Bind<IRepositorySettings>()
+				.To<RepositorySettings>()
+				.InRequestScope();
+			Bind<IArtistsRepository>()
+				.To<ArtistsRepository>()
+				.InRequestScope();
+			Bind<IUserRepository>()
+				.To<UserRepository>()
 				.InRequestScope();
 		}
 

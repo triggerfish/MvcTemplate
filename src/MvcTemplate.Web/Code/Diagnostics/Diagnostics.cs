@@ -16,7 +16,7 @@ namespace MvcTemplate.Web
 
 		public void Start()
 		{
-			ObjectFactory.Get<IRepository>().Settings.SqlLog = m_sqlLog;
+			ObjectFactory.Get<IRepositorySettings>().SqlLog = m_sqlLog;
 			m_timer.Reset();
 			m_timer.Start();
 		}
@@ -24,7 +24,7 @@ namespace MvcTemplate.Web
 		public void Stop()
 		{
 			m_timer.Stop();
-			ObjectFactory.Get<IRepository>().Settings.SqlLog = null;
+			ObjectFactory.Get<IRepositorySettings>().SqlLog = null;
 		}
 
 		public override string ToString()

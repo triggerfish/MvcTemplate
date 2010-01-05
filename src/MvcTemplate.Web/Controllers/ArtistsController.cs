@@ -11,9 +11,9 @@ namespace MvcTemplate.Web.Controllers
 {
     public class ArtistsController : Controller
     {
-		private IRepository m_repository;
+		private IArtistsRepository m_repository;
 
-		public ArtistsController(IRepository a_repository)
+		public ArtistsController(IArtistsRepository a_repository)
 		{
 			m_repository = a_repository;
 		}

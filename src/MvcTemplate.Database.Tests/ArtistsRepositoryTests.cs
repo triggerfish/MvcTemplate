@@ -9,21 +9,9 @@ using MvcTemplate.Model;
 namespace MvcTemplate.Database.Tests
 {
 	[TestClass]
-	public class RepositoryTests : DatabaseTest
+	public class ArtistsRepositoryTests : DatabaseTest
 	{
-		private Repository m_repository;
-
-		[TestMethod]
-		public void ShouldReturnSettings()
-		{
-			Assert.AreNotEqual(null, m_repository.Settings);
-		}
-
-		[TestMethod]
-		public void ShouldReturnUserRepository()
-		{
-			Assert.AreNotEqual(null, m_repository.UserRepository);
-		}
+		private ArtistsRepository m_repository;
 
 		[TestMethod]
 		public void ShouldReturnAllArtists()
@@ -34,7 +22,7 @@ namespace MvcTemplate.Database.Tests
 		[TestMethod]
 		public void ShouldReturnAllGenres()
 		{
-			IEnumerable<IGenre> genres = m_repository.Genres;
+			IEnumerable<Genre> genres = m_repository.Genres;
 
 			Assert.AreNotEqual(null, genres);
 			Assert.AreEqual(2, genres.Count());
@@ -86,7 +74,7 @@ namespace MvcTemplate.Database.Tests
 
 		protected override void SetupContext(ISession a_session)
 		{
-			m_repository = new Repository(a_session);
+			m_repository = new ArtistsRepository(a_session);
 
 			SortedDictionary<int, Artist> artists = new SortedDictionary<int, Artist>();
 			for (int i = 1; i <= 4; i++)
@@ -104,7 +92,7 @@ namespace MvcTemplate.Database.Tests
 			a_session.Save(rock);
 		}
 
-		private void ValidateArtists(IEnumerable<IArtist> a_artists, int a_iExpectedCount)
+		private void ValidateArtists(IEnumerable<Artist> a_artists, int a_iExpectedCount)
 		{
 			Assert.AreNotEqual(null, a_artists);
 			Assert.AreEqual(a_iExpectedCount, a_artists.Count());

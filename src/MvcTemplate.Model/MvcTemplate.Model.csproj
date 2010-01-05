@@ -52,7 +52,7 @@
     <Compile Include="IoC\ObjectFactory.cs" />
     <Compile Include="Genre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="ArtistsRepository.cs" />
     <Compile Include="RepositorySettings.cs" />
     <Compile Include="SearchResults.cs" />
     <Compile Include="User.cs" />

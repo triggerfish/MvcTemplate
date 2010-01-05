@@ -5,10 +5,8 @@ using System.Text;
 
 namespace MvcTemplate.Model
 {
-	public interface IRepository
+	public interface IArtistsRepository
 	{
-		IRepositorySettings Settings { get; }
-		IUserRepository UserRepository { get; }
 		IEnumerable<IArtist> Artists { get; }
 		IEnumerable<IGenre> Genres { get; }
 

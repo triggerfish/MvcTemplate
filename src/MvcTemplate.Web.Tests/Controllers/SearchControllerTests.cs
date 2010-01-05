@@ -39,7 +39,7 @@ namespace MvcTemplate.Web.Tests
 			results.Setup(r => r.Artists).Returns(MockArtist.CreateMockArtists(new List<string> { "Poppy" }));
 			results.Setup(r => r.Genres).Returns(MockGenre.CreateMockGenres(new List<string> { "Pop" }));
 
-			Mock<IRepository> repository = new Mock<IRepository>();
+			Mock<IArtistsRepository> repository = new Mock<IArtistsRepository>();
 			repository.Setup(r => r.Search(keywords)).Returns(results.Object);
 
 			SearchController controller = new SearchController(repository.Object);

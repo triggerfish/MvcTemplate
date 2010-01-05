@@ -9,7 +9,7 @@ namespace MvcTemplate.Web
 {
 	public class ArtistBinder : ModelBinder
 	{
-		public ArtistBinder(IRepository a_repository)
+		public ArtistBinder(IArtistsRepository a_repository)
 			: base(a_repository)
 		{
 		}

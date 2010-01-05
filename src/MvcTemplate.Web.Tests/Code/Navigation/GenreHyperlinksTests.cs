@@ -31,7 +31,7 @@ namespace MvcTemplate.Web.Tests
 				"Genre1", "Genre2"
 			};
 
-			IRepository repos = MockRepository.CreateMockRepositoryGenresOnly(genres);
+			IArtistsRepository repos = MockRepository.CreateMockRepositoryGenresOnly(genres);
 
 			// Act
 			IList<Hyperlink> links = GenreHyperlinks.CreateLinks(repos);
@@ -57,7 +57,7 @@ namespace MvcTemplate.Web.Tests
 				"Genre1", "Genre2"
 			};
 
-			IRepository repos = MockRepository.CreateMockRepositoryGenresOnly(genres);
+			IArtistsRepository repos = MockRepository.CreateMockRepositoryGenresOnly(genres);
 
 			// Act
 			IList<Hyperlink> links = GenreHyperlinks.CreateLinks(repos, "genre2");

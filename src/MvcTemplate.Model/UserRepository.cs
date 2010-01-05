@@ -11,6 +11,6 @@ namespace MvcTemplate.Model
 
 		IUser Get(UserCredentials a_credentials);
 
-		void Save(IUser a_user);
+		void Register(IUser a_user);
 	}
 }

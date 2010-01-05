@@ -14,9 +14,9 @@ namespace MvcTemplate.Web.Controllers
 {
     public class SearchController : Controller
     {
-		private IRepository m_repository;
+		private IArtistsRepository m_repository;
 
-		public SearchController(IRepository a_repository)
+		public SearchController(IArtistsRepository a_repository)
 		{
 			m_repository = a_repository;
 		}
