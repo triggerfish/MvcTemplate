@@ -1,10 +1,10 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<ArtistViewData>" %>
 
-<asp:Content ID="Title" ContentPlaceHolderID="PageTitle" runat="server">
+<asp:Content ID="Title" ContentPlaceHolderID="MainTitle" runat="server">
 <%= Model.Artist.Name %>
 </asp:Content>
 
-<asp:Content ID="Content" ContentPlaceHolderID="PageContent" runat="server">
+<asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
 <h2><%= Model.Artist.Name %></h2>
 <div class="table">
     <table>
