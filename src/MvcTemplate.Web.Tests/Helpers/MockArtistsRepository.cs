@@ -8,7 +8,7 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Web.Tests
 {
-	internal static class MockRepository
+	internal static class MockArtistsRepository
 	{
 		public static IArtistsRepository CreateMockRepositoryGenresOnly(IEnumerable<string> a_genreNames)
 		{

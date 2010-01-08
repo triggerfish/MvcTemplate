@@ -70,16 +70,19 @@
   <ItemGroup>
     <Compile Include="Code\Binders\ArtistBinderTests.cs" />
     <Compile Include="Code\Binders\BinderHelpers.cs" />
+    <Compile Include="Code\Binders\UserBinderTests.cs" />
     <Compile Include="Code\Binders\GenreBinderTests.cs" />
     <Compile Include="Code\Navigation\GenreHyperlinksTests.cs" />
     <Compile Include="Controllers\ArtistsControllerTests.cs" />
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\SearchControllerTests.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
-    <Compile Include="MockHelpers\MockHttp.cs" />
-    <Compile Include="MockHelpers\MockRepository.cs" />
-    <Compile Include="MockHelpers\MockArtist.cs" />
-    <Compile Include="MockHelpers\MockGenre.cs" />
+    <Compile Include="Helpers\MockHelpers.cs" />
+    <Compile Include="Helpers\MockUser.cs" />
+    <Compile Include="Helpers\MockHttp.cs" />
+    <Compile Include="Helpers\MockArtistsRepository.cs" />
+    <Compile Include="Helpers\MockArtist.cs" />
+    <Compile Include="Helpers\MockGenre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\OutboundRoutingTests.cs" />
     <Compile Include="Routing\InboundRoutingTests.cs" />

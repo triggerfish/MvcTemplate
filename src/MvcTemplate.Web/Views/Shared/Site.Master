@@ -12,16 +12,23 @@
 </head>
 
 <body>
-    <div id="auth">
-        <% if (vd.IsUserSignedIn) { %>
-        <%= Html.RouteLink("Logout", RouteHelpers.LogoutRoute())%>
+    <span id="auth-user">
+    <% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
+    Hello, <%= Html.Encode(HttpContext.Current.User.Identity.Name) %>
+    <% } else { %>
+    &nbsp;
+    <% } %>
+    </span>
+    <span id="auth-links">
+        <% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
+        <%= Html.RouteLink("Logout", RouteHelpers.LogoutRoute().AddReturnUrl(Request.Url))%>
         <% } else { %>
-        <%= Html.RouteLink("Login", RouteHelpers.LoginRoute())%>&nbsp;|&nbsp;<%= Html.RouteLink("Register", RouteHelpers.RegisterRoute())%>
+        <%= Html.RouteLink("Login", RouteHelpers.LoginRoute().AddReturnUrl(Request.Url))%>&nbsp;|&nbsp;<%= Html.RouteLink("Register", RouteHelpers.RegisterRoute().AddReturnUrl(Request.Url))%>
 	    <% } %>
-	</div>
+	</span>
     <div id="header">
 	    <div id="website-name"><%= Html.RouteLink(System.Web.Configuration.WebConfigurationManager.AppSettings["WebSiteName"], RouteHelpers.HomeRoute()) %></div>
-	    <% if (vd.HasSearchBox) { %>
+	    <% if (vd.DisplaySearch) { %>
 		<div id="search">
 		    <% Html.RenderPartial("SearchForm"); %>
 		</div>

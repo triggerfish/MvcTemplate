@@ -21,14 +21,27 @@ namespace MvcTemplate.Database
 		{
 		}
 
+		IUser IUserRepository.CreateNew(string a_forename, string a_surname, UserCredentials a_credentials)
+		{
+			return new User { Forename = a_forename ?? "", Surname = a_surname ?? "", Credentials = a_credentials } as IUser;
+		}
+
 		public bool UserExists(string a_email)
 		{
 			return (null != Get(a_email));
 		}
 
+		public IUser Get(string a_email)
+		{
+			return
+				(from u in GetAll<User>()
+				 where a_email == u.Credentials.Email
+				 select u).FirstOrDefault();
+		}
+
 		public IUser Get(UserCredentials a_credentials)
 		{
-			User u = Get(a_credentials.Email);
+			IUser u = Get(a_credentials.Email);
 
 			if (null != u && u.Credentials.Password == a_credentials.Password)
 				return u as IUser;
@@ -42,14 +55,6 @@ namespace MvcTemplate.Database
 			{
 				Save(a_user as User);
 			}
-		}
-
-		protected User Get(string a_email)
-		{
-			return
-				(from u in GetAll<User>()
-				 where a_email == u.Credentials.Email
-				 select u).FirstOrDefault();
 		}
 	}
 }

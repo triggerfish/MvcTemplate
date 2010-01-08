@@ -22,7 +22,7 @@ namespace MvcTemplate.Web.Tests
 				"Artist1", "Artist2"
 			};
 
-			IArtistsRepository repos = MockRepository.CreateMockRepository("Pop", artists);
+			IArtistsRepository repos = MockArtistsRepository.CreateMockRepository("Pop", artists);
 			ArtistBinder binder = new ArtistBinder(repos);
 
 			ModelBindingContext ctx = BinderHelpers.CreateModelBindingContext("artist", "artist2");
@@ -45,7 +45,7 @@ namespace MvcTemplate.Web.Tests
 				"Artist1", "Artist2"
 			};
 
-			IArtistsRepository repos = MockRepository.CreateMockRepository("Pop", artists);
+			IArtistsRepository repos = MockArtistsRepository.CreateMockRepository("Pop", artists);
 			ArtistBinder binder = new ArtistBinder(repos);
 
 			ModelBindingContext ctx = BinderHelpers.CreateModelBindingContext("artist", "plibble");

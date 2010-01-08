@@ -57,7 +57,7 @@ namespace MvcTemplate.Database.Tests
 		}
 
 		[TestMethod]
-		public void ShouldSaveUser()
+		public void ShouldRegisterUser()
 		{
 			UserCredentials uc = new UserCredentials {
 				Email = "userone@test.com",

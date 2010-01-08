@@ -31,13 +31,7 @@ namespace MvcTemplate.Web.Tests
 
 		public static IEnumerable<IGenre> CreateMockGenres(IEnumerable<string> a_names)
 		{
-			List<IGenre> genres = new List<IGenre>();
-			int i = 1;
-			a_names.ForEach(n => {
-				genres.Add(CreateMockGenre(i++, n));
-			});
-
-			return genres;
+			return MockHelpers.CreateMockObjects<IGenre, string>(a_names, CreateMockGenre);
 		}
 	}
 }

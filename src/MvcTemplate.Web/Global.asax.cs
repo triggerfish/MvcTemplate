@@ -37,6 +37,7 @@ namespace MvcTemplate.Web
 			RegisterRoutes(RouteTable.Routes);
 			ModelBinders.Binders.Add(typeof(IGenre), CreateKernel().Get<GenreBinder>());
 			ModelBinders.Binders.Add(typeof(IArtist), CreateKernel().Get<ArtistBinder>());
+			ModelBinders.Binders.Add(typeof(IUser), CreateKernel().Get<UserBinder>());
 		}
 
 		protected override IKernel CreateKernel()

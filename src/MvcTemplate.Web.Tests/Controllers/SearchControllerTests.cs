@@ -26,7 +26,7 @@ namespace MvcTemplate.Web.Tests
 			Assert.AreEqual("", result.ViewName);
 			SearchViewData vd = result.ViewData.Model as SearchViewData;
 			Assert.AreNotEqual(null, vd);
-			Assert.AreEqual(false, vd.HasSearchBox);
+			Assert.AreEqual(false, vd.DisplaySearch);
 		}
 
 		[TestMethod]
@@ -51,7 +51,7 @@ namespace MvcTemplate.Web.Tests
 			Assert.AreEqual("Results", result.ViewName);
 			SearchViewData vd = result.ViewData.Model as SearchViewData;
 			Assert.AreNotEqual(null, vd);
-			Assert.AreEqual(false, vd.HasSearchBox);
+			Assert.AreEqual(false, vd.DisplaySearch);
 			Assert.AreEqual(1, vd.Results.Artists.Count());
 			Assert.AreEqual(1, vd.Results.Genres.Count());
 

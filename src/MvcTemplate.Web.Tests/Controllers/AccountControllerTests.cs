@@ -17,7 +17,7 @@ namespace MvcTemplate.Web.Tests
 		public void ShouldDisplayLogin()
 		{
 			// Arrange
-			AccountController controller = new AccountController(null);
+			AccountController controller = new AccountController(null, null);
 
 			// Act
 			ViewResult result = controller.Login();

@@ -25,7 +25,7 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Index()
         {
-			return View(new SearchViewData { HasSearchBox = false, NavBarLinks = GenreHyperlinks.CreateLinks(m_repository) });
+			return View(new SearchViewData { DisplaySearch = false, NavBarLinks = GenreHyperlinks.CreateLinks(m_repository) });
         }
 
 		[Route(Url = "search")]
@@ -35,7 +35,7 @@ namespace MvcTemplate.Web.Controllers
 			SearchViewData vd = new SearchViewData
 			{
 				Results = m_repository.Search(keyword),
-				HasSearchBox = false,
+				DisplaySearch = false,
 				NavBarLinks = GenreHyperlinks.CreateLinks(m_repository)
 			};
 

@@ -7,40 +7,94 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
 {
+	public class ModelBinderException : Exception
+	{
+		public string Key { get; private set; } 
+
+		public ModelBinderException() : base() { }
+
+		public ModelBinderException(string a_key)
+			: base()
+		{
+			Key = a_key;
+		}
+
+		public ModelBinderException(string a_key, string a_message)
+			: base(a_message)
+		{
+			Key = a_key;
+		}
+	
+		public ModelBinderException(string a_key, string a_message, Exception a_inner)
+			: base(a_message, a_inner)
+		{
+			Key = a_key;
+		}
+	}
+
 	public abstract class ModelBinder : DefaultModelBinder
 	{
-		protected IArtistsRepository Repository { get;	private set; }
+		// data
+		//
 
-		protected ModelBinder(IArtistsRepository a_repository)
+		private ModelBindingContext m_context;
+
+		// properties
+		//
+
+		protected string ModelName { get { return m_context.ModelName; } }
+
+		// constructors
+		//
+
+		protected ModelBinder()
 		{
-			Repository = a_repository;
 		}
+
+		// public methods
+		//
 
 		public override object BindModel(ControllerContext a_controllerContext, ModelBindingContext a_bindingContext)
 		{
 			// The action method argument
-			string key = a_bindingContext.ModelName;
+			m_context = a_bindingContext;
 
-			ValueProviderResult value = a_bindingContext.ValueProvider[key];
-
-			if ((value != null) && !string.IsNullOrEmpty(value.AttemptedValue))
+			try
 			{
-				// Follow convention by stashing attempted value in ModelState
-				a_bindingContext.ModelState.SetModelValue(key, value);
-
-				try
-				{
-					return BindValue(value.AttemptedValue);
-				}
-				catch (Exception ex)
-				{
-					a_bindingContext.ModelState.AddModelError(key, ex);
-				}
+				return Bind();
+			}
+			catch (ModelBinderException ex)
+			{
+				a_bindingContext.ModelState.AddModelError(ex.Key, ex.Message);
 			}
 
 			return null;
 		}
 
-		protected abstract object BindValue(string a_value);
+		// protected methods
+		//
+
+		protected abstract object Bind();
+
+		protected string GetValue(string a_key, bool a_valueMustExist)
+		{
+			ValueProviderResult v;
+			if (m_context.ValueProvider.TryGetValue(a_key, out v))
+			{
+				m_context.ModelState.SetModelValue(a_key, v);
+
+				if (!a_valueMustExist || !String.IsNullOrEmpty(v.AttemptedValue))
+				{
+					return v.AttemptedValue;
+				}
+			}
+
+			if (a_valueMustExist)
+			{
+				throw new ModelBinderException(a_key, String.Format("{0} must be specified", a_key));
+			}
+
+			return null;
+		}
 	}
 }

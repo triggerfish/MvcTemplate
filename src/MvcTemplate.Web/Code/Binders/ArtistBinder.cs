@@ -9,18 +9,21 @@ namespace MvcTemplate.Web
 {
 	public class ArtistBinder : ModelBinder
 	{
+		protected IArtistsRepository Repository { get; private set; }
+
 		public ArtistBinder(IArtistsRepository a_repository)
-			: base(a_repository)
 		{
+			Repository = a_repository;
 		}
 		
-		protected override object BindValue(string a_value)
+		protected override object Bind()
 		{
-			IArtist artist = Repository.Artists.FirstOrDefault(a => 0 == String.Compare(a.Name, a_value, true));
+			string artistName = GetValue(ModelName, true);
+			IArtist artist = Repository.Artists.FirstOrDefault(a => 0 == String.Compare(a.Name, artistName, true));
 
 			if (null == artist)
 			{
-				throw new InvalidOperationException(String.Format("Unknown artist: {0}", a_value));
+				throw new ModelBinderException(ModelName, String.Format("Unknown artist: {0}", artistName));
 			}
 
 			return artist;

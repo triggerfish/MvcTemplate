@@ -9,18 +9,22 @@ namespace MvcTemplate.Web
 {
 	public class GenreBinder : ModelBinder
 	{
+		protected IArtistsRepository Repository { get; private set; }
+
 		public GenreBinder(IArtistsRepository a_repository)
-			: base(a_repository)
 		{
+			Repository = a_repository;
 		}
 		
-		protected override object BindValue(string a_value)
+		protected override object Bind()
 		{
-			IGenre genre = Repository.Genres.FirstOrDefault(g => 0 == String.Compare(g.Name, a_value, true));
+			string genreName = GetValue(ModelName, true);
+
+			IGenre genre = Repository.Genres.FirstOrDefault(g => 0 == String.Compare(g.Name, genreName, true));
 
 			if (null == genre)
 			{
-				throw new InvalidOperationException(String.Format("Unknown genre: {0}", a_value));
+				throw new ModelBinderException(ModelName, String.Format("Unknown genre: {0}", genreName));
 			}
 
 			return genre;

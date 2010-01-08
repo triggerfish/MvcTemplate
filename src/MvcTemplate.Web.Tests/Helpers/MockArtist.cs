@@ -27,13 +27,7 @@ namespace MvcTemplate.Web.Tests
 
 		public static IEnumerable<IArtist> CreateMockArtists(IEnumerable<string> a_names)
 		{
-			List<IArtist> artists = new List<IArtist>();
-			int i = 1;
-			a_names.ForEach(n => {
-				artists.Add(CreateMockArtist(i++, n));
-			});
-
-			return artists;
+			return MockHelpers.CreateMockObjects<IArtist, string>(a_names, CreateMockArtist);
 		}
 	}
 }
