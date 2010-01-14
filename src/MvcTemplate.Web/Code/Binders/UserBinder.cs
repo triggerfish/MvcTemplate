@@ -7,7 +7,7 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
 {
-	public class UserBinder : ModelBinder
+	public class UserBinder : ModelBinder<IUser>
 	{
 		private IUserRepository m_repository;
 		private IEncryptor m_encryptor;

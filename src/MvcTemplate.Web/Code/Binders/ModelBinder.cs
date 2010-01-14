@@ -32,7 +32,7 @@ namespace MvcTemplate.Web
 		}
 	}
 
-	public abstract class ModelBinder : DefaultModelBinder
+	public abstract class ModelBinder<T> : IModelBinder where T : class
 	{
 		// data
 		//
@@ -54,7 +54,7 @@ namespace MvcTemplate.Web
 		// public methods
 		//
 
-		public override object BindModel(ControllerContext a_controllerContext, ModelBindingContext a_bindingContext)
+		public object BindModel(ControllerContext a_controllerContext, ModelBindingContext a_bindingContext)
 		{
 			// The action method argument
 			m_context = a_bindingContext;

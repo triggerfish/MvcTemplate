@@ -1,5 +1,6 @@
 ﻿using Ninject.Modules;
 using System.Security.Cryptography;
+using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
 {
@@ -16,13 +17,13 @@ namespace MvcTemplate.Web
 			Bind<IMembershipProvider>()
 				.To<DefaultMembershipProvider>()
 				.InRequestScope();
-			Bind<GenreBinder>()
+			Bind<ModelBinder<IGenre>>()
 				.To<GenreBinder>()
 				.InRequestScope();
-			Bind<ArtistBinder>()
+			Bind<ModelBinder<IArtist>>()
 				.To<ArtistBinder>()
 				.InRequestScope();
-			Bind<UserBinder>()
+			Bind<ModelBinder<IUser>>()
 				.To<UserBinder>()
 				.InRequestScope();
 		}

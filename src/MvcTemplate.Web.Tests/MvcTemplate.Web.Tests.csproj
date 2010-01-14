@@ -71,6 +71,7 @@
     <Compile Include="Code\Authentication\BCryptEncryptorTests.cs" />
     <Compile Include="Code\Binders\ArtistBinderTests.cs" />
     <Compile Include="Code\Binders\BinderHelpers.cs" />
+    <Compile Include="Code\Binders\BinderResolverTests.cs" />
     <Compile Include="Code\Binders\UserBinderTests.cs" />
     <Compile Include="Code\Binders\GenreBinderTests.cs" />
     <Compile Include="Code\Navigation\GenreHyperlinksTests.cs" />

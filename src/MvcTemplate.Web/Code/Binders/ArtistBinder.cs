@@ -7,7 +7,7 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
 {
-	public class ArtistBinder : ModelBinder
+	public class ArtistBinder : ModelBinder<IArtist>
 	{
 		protected IArtistsRepository Repository { get; private set; }
 
