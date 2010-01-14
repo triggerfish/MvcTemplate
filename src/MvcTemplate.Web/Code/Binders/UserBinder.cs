@@ -9,11 +9,13 @@ namespace MvcTemplate.Web
 {
 	public class UserBinder : ModelBinder
 	{
-		protected IUserRepository Repository { get; private set; }
+		private IUserRepository m_repository;
+		private IEncryptor m_encryptor;
 
-		public UserBinder(IUserRepository a_repository)
+		public UserBinder(IUserRepository a_repository, IEncryptor a_encryptor)
 		{
-			Repository = a_repository;
+			m_repository = a_repository;
+			m_encryptor = a_encryptor;
 		}
 		
 		protected override object Bind()
@@ -21,9 +23,9 @@ namespace MvcTemplate.Web
 			string forename = GetValue("Forename", false);
 			string surname = GetValue("Surname", false);
 			string email = GetValue("Email", false);
-			string password = GetValue("Password", false);
+			string password = m_encryptor.Encrypt(GetValue("Password", false));
 
-			return Repository.CreateNew(forename, surname, new UserCredentials { Email = email, Password = password });
+			return m_repository.CreateNew(forename, surname, new UserCredentials { Email = email, Password = password });
 		}
 	}
 }

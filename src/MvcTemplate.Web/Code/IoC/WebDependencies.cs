@@ -1,4 +1,5 @@
 ﻿using Ninject.Modules;
+using System.Security.Cryptography;
 
 namespace MvcTemplate.Web
 {
@@ -6,8 +7,14 @@ namespace MvcTemplate.Web
     {
         public override void Load()
         {
+			Bind<IEncryptor>()
+				.To<BCryptEncryptor>()
+				.InRequestScope();
 			Bind<IAuthenticationProvider>()
 				.To<FormsAuthenticationProvider>()
+				.InRequestScope();
+			Bind<IMembershipProvider>()
+				.To<DefaultMembershipProvider>()
 				.InRequestScope();
 			Bind<GenreBinder>()
 				.To<GenreBinder>()

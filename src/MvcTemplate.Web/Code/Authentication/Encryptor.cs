@@ -5,12 +5,13 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web;
 using System.Security.Principal;
+using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
 {
-	public interface IAuthenticationProvider
+	public interface IEncryptor
 	{
-		void Login(string a_name, bool a_createPersistentCookie);
-		void Logout();
+		string Encrypt(string a_plainText);
+		bool IsMatch(string a_plainText, string a_encryptedText);
 	}
 }

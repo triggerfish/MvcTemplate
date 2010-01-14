@@ -68,6 +68,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Authentication\AuthenticationProvider.cs" />
+    <Compile Include="Code\Authentication\BCrypt.cs" />
+    <Compile Include="Code\Authentication\BCryptEncryptor.cs" />
+    <Compile Include="Code\Authentication\Encryptor.cs" />
+    <Compile Include="Code\Authentication\DefaultMembershipProvider.cs" />
+    <Compile Include="Code\Authentication\MembershipProvider.cs" />
     <Compile Include="Code\Authentication\FormsAuthenticationProvider.cs" />
     <Compile Include="Code\Binders\ArtistBinder.cs" />
     <Compile Include="Code\Binders\UserBinder.cs" />

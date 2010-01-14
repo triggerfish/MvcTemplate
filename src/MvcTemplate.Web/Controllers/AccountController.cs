@@ -12,13 +12,13 @@ namespace MvcTemplate.Web.Controllers
 {
     public class AccountController : Controller
     {
-		private IUserRepository m_repository;
 		private IAuthenticationProvider m_authentication;
+		private IMembershipProvider m_membership;
 
-		public AccountController(IUserRepository a_repository, IAuthenticationProvider a_authentication)
+		public AccountController(IAuthenticationProvider a_authentication, IMembershipProvider a_membership)
 		{
-			m_repository = a_repository;
 			m_authentication = a_authentication;
+			m_membership = a_membership;
 		}
 
 		[Route(Url = "register")]
@@ -37,43 +37,40 @@ namespace MvcTemplate.Web.Controllers
 				return View(new ViewData { DisplaySearch = false });
 			}
 
-			// validation!
+			m_membership.Register(user);
+			m_authentication.Login(user.Forename, false);
 
-			m_repository.Register(user);
-			m_authentication.SetAuthCookie(user.Forename, false);
-
-			return Redirect(returnUrl);
+			return DoRedirect(returnUrl);
 		}
 
 		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Get)]
         public ViewResult Login()
         {
-			return View(new ViewData { DisplaySearch = false, DisplayRegister = false });
+			return View(new ViewData { DisplaySearch = false });
         }
 
 		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Post)]
-		public ActionResult Login(IUser user, string returnUrl)
+		public ActionResult Login(UserCredentials a_credentials, string returnUrl)
 		{
 			if (!ModelState.IsValid)
 			{
 				return View(new ViewData { DisplaySearch = false });
 			}
 
-			// validation!
-			// password encryption!
-
-			user = m_repository.Get(user.Credentials);
-			if (null == user)
+			try
 			{
-				ModelState.AddModelError("Email", "Invalid email/password specified");
-				return View(new ViewData { DisplaySearch = false, DisplayRegister = false });
+				IUser user = m_membership.Validate(a_credentials);
+				m_authentication.Login(user.Forename, false);
+
+				return DoRedirect(returnUrl);
 			}
-
-			m_authentication.SetAuthCookie(user.Forename, false);
-
-			return Redirect(returnUrl);
+			catch (Exception ex)
+			{
+				ModelState.AddModelError("Email", ex.Message);
+				return View(new ViewData { DisplaySearch = false });
+			}
 		}
 
 		[Route(Url = "logout")]
@@ -81,7 +78,19 @@ namespace MvcTemplate.Web.Controllers
 		{
 			m_authentication.Logout();
 
-			return Redirect(returnUrl);
+			return DoRedirect(returnUrl);
+		}
+
+		private ActionResult DoRedirect(string returnUrl)
+		{
+			if (!String.IsNullOrEmpty(returnUrl))
+			{
+				return Redirect(returnUrl);
+			}
+			else
+			{
+				return RedirectToRoute(RouteHelpers.HomeRoute());
+			}
 		}
     }
 }

@@ -21,11 +21,14 @@ namespace MvcTemplate.Web.Tests
 			string email = "test@test.com";
 			string password = "password";
 
+			Mock<IEncryptor> encryptor = new Mock<IEncryptor>();
+			encryptor.Setup(x => x.Encrypt(It.IsAny<string>())).Returns<string>(s => s);
+
 			IUser user = MockUsers.CreateMockUser(new UserCredentials { Email = email, Password = password });
 			Mock<IUserRepository> repository = new Mock<IUserRepository>();
 			repository.Setup(r => r.CreateNew(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<UserCredentials>())).Returns(user);
 
-			UserBinder binder = new UserBinder(repository.Object);
+			UserBinder binder = new UserBinder(repository.Object, encryptor.Object);
 
 			ModelBindingContext ctx = BinderHelpers.CreateModelBindingContext("user", new Dictionary<string, string> {
 				{ "Email", email },
@@ -40,6 +43,8 @@ namespace MvcTemplate.Web.Tests
 			Assert.AreEqual(true, ctx.ModelState.IsValid);
 			Assert.AreEqual(email, u.Credentials.Email);
 			Assert.AreEqual(password, u.Credentials.Password);
+
+			encryptor.Verify(x => x.Encrypt(password));
 		}
 	}
 }

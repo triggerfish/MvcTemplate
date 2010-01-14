@@ -29,7 +29,7 @@ namespace MvcTemplate.Database.Tests
 		public void ShouldGetUser()
 		{
 			string s = "2";
-			IUser u = m_repository.Get(new UserCredentials { Email = s, Password = s });
+			IUser u = m_repository.Get(s);
 
 			Assert.AreNotEqual(null, u);
 			Assert.AreEqual(s, u.Forename);
@@ -41,17 +41,7 @@ namespace MvcTemplate.Database.Tests
 		[TestMethod]
 		public void ShouldNotGetUserWithInvalidEmail()
 		{
-			string s = "2";
-			IUser u = m_repository.Get(new UserCredentials { Email = "user@text.com", Password = s });
-
-			Assert.AreEqual(null, u);
-		}
-
-		[TestMethod]
-		public void ShouldNotGetUserWithInvalidPassword()
-		{
-			string s = "2";
-			IUser u = m_repository.Get(new UserCredentials { Email = s, Password = "password" });
+			IUser u = m_repository.Get("user@text.com");
 
 			Assert.AreEqual(null, u);
 		}
@@ -72,7 +62,7 @@ namespace MvcTemplate.Database.Tests
 			
 			m_repository.Register(expected);
 			
-			IUser actual = m_repository.Get(uc);
+			IUser actual = m_repository.Get(uc.Email);
 
 			Assert.AreNotEqual(null, actual);
 			Assert.AreEqual(expected.Forename, actual.Forename);

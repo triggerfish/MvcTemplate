@@ -12,7 +12,6 @@ namespace MvcTemplate.Model
 		bool UserExists(string a_email);
 
 		IUser Get(string a_email);
-		IUser Get(UserCredentials a_credentials);
 
 		void Register(IUser a_user);
 	}

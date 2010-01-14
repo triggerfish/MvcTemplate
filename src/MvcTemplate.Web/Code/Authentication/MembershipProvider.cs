@@ -5,12 +5,13 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web;
 using System.Security.Principal;
+using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
 {
-	public interface IAuthenticationProvider
+	public interface IMembershipProvider
 	{
-		void Login(string a_name, bool a_createPersistentCookie);
-		void Logout();
+		IUser Validate(UserCredentials a_credentials);
+		void Register(IUser a_user);
 	}
 }

@@ -8,9 +8,9 @@ namespace MvcTemplate.Web
 {
 	public class FormsAuthenticationProvider : IAuthenticationProvider
 	{
-		public void SetAuthCookie(string a_email, bool a_createPersistentCookie)
+		public void Login(string a_name, bool a_createPersistentCookie)
 		{
-			FormsAuthentication.SetAuthCookie(a_email, a_createPersistentCookie);
+			FormsAuthentication.SetAuthCookie(a_name, a_createPersistentCookie);
 		}
 
 		public void Logout()
