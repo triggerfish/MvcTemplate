@@ -70,9 +70,21 @@ namespace MvcTemplate.Web
 		protected string GetValue(string a_key, bool a_mustHaveValue)
 		{
 			ValueProviderResult v;
-			if (m_context.ValueProvider.TryGetValue(a_key, out v))
+
+			// first try with the prefix
+			string key = m_context.ModelName + "." + a_key;
+			bool gotIt = m_context.ValueProvider.TryGetValue(key, out v);
+
+			// if that failed, try with the raw name (unless the model has the Bind(Prefix = XXX) attribute specified)
+			if (!gotIt && m_context.FallbackToEmptyPrefix)
 			{
-				m_context.ModelState.SetModelValue(a_key, v);
+				key = a_key;
+				gotIt = m_context.ValueProvider.TryGetValue(key, out v);
+			}
+
+			if (gotIt)
+			{
+				m_context.ModelState.SetModelValue(key, v);
 
 				if (!a_mustHaveValue || !String.IsNullOrEmpty(v.AttemptedValue))
 				{
@@ -82,7 +94,7 @@ namespace MvcTemplate.Web
 
 			if (a_mustHaveValue)
 			{
-				throw new ValidationException(a_key, String.Format("{0} must be specified", a_key));
+				throw new ValidationException(key, String.Format("{0} must be specified", a_key));
 			}
 
 			return null;
