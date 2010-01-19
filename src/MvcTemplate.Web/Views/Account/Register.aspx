@@ -6,11 +6,18 @@
     <h2>Register</h2>
     <% using (Html.BeginForm()) { %>
     <fieldset>
-        <label for="Forename">Forename:</label><%= Html.TextBox("Forename")%>&nbsp;<%= Html.ValidationMessage("Forename") %><br />
-        <label for="Surname">Surname:</label><%= Html.TextBox("Surname")%>&nbsp;<%= Html.ValidationMessage("Surname")%><br />
-        <label for="Email">Email:</label><%= Html.TextBox("Email")%>&nbsp;<%= Html.ValidationMessage("Email")%><br />
-        <label for="Password">Password:</label><%= Html.Password("Password")%>&nbsp;<%= Html.ValidationMessage("Password")%><br />
-        <input type="submit" value="Register" />
+        <legend>Required Details</legend>
+        <div class="row"><label for="Email">Email:</label><%= Html.TextBox("Email")%>&nbsp;<%= Html.ValidationMessage("Email") %></div>
+        <div class="row"><label for="Forename">Forename:</label><%= Html.TextBox("Forename")%>&nbsp;<%= Html.ValidationMessage("Forename") %></div>
+        <div class="row"><label for="Password">Password:</label><%= Html.Password("Password")%>&nbsp;<%= Html.ValidationMessage("Password") %></div>
+    </fieldset>
+    <fieldset>
+        <legend>Optional Details</legend>
+        <div class="row"><label for="Surname">Surname:</label><%= Html.TextBox("Surname")%>&nbsp;<%= Html.ValidationMessage("Surname") %></div>
+    </fieldset>
+    <fieldset>
+        <div id="submit-row"><input type="submit" value="Register" /><a href="<%= ViewData["returnUrl"]%>">Cancel</a></div>
     </fieldset>
     <% } %>
+    <br />
 </asp:Content>

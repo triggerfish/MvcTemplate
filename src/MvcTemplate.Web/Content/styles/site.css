@@ -18,6 +18,41 @@ fieldset {
 	padding: 0;
 }
 
+fieldset legend {
+	color: #FF6A00;
+	font-size: 1.2em;
+	padding: 1em 0 0 0;
+}
+
+fieldset .row {
+	padding-top: 1em;
+}
+
+fieldset label {
+	display: block;
+	float: left;
+	width: 8em;
+	margin-top: 0.25em;
+	padding-left: 2em;
+	text-align: right;
+}
+
+fieldset input {
+	margin: 0 0 0 1em;
+}
+
+fieldset #Email {
+	width: 17em;
+}
+
+fieldset #submit-row {
+	margin: 2em 0 0 10em;
+}
+
+fieldset #submit-row a {
+	margin-left: 1em;
+}
+
 #auth-user {
 	display: inline;
 	float: left;
@@ -96,7 +131,7 @@ fieldset {
 }
 
 #content {
-	width: 40em;
+	width: 50em;
 	margin-left: 9em;
 	padding: 1em 1em 1em 2em;
 	min-height: 40em;
@@ -161,4 +196,17 @@ fieldset {
 .sql {
 	font-size: 1em;
 	font-family: Courier New, Courier; 
+}
+
+.field-validation-error {
+	color: red; 
+}
+
+.input-validation-error {
+	border: 2px solid red; 
+	background-color: #ffeeee; 
+}
+
+.validation-summary-errors {
+	color: red; 
 }

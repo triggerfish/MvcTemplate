@@ -7,9 +7,11 @@
     <p><%= Html.ValidationSummary() %></p>
     <% using (Html.BeginForm()) { %>
     <fieldset>
-        <label for="Email">Email:</label><%= Html.TextBox("Email")%><br />
-        <label for="Password">Password:</label><%= Html.Password("Password")%><br />
-        <input type="submit" value="Login" />
+        <div class="row"><label for="Email">Email:</label><%= Html.TextBox("Email")%></div>
+        <div class="row"><label for="Password">Password:</label><%= Html.Password("Password")%></div>
+    </fieldset>
+    <fieldset>
+        <div id="submit-row"><input type="submit" value="Login" /><a href="<%= ViewData["returnUrl"]%>">Cancel</a></div>
     </fieldset>
     <% } %>    
 </asp:Content>
