@@ -39,14 +39,16 @@ namespace MvcTemplate.Web
 
 			// sql queries
 			html.WriteLine(String.Format("  <p>Executed {0} SQL {1}:</p>", queries.Length, queries.Length == 1 ? "query" : "queries"));
-			html.WriteLine("    <ol>");
 
-			foreach (string query in queries)
+			if (queries.Length > 0)
 			{
-				html.WriteLine(String.Format("      <li><span class=\"sql\">{0}</span></li>", Regex.Replace(query, "(FROM|WHERE|ORDER BY|--)", "<br/>$1")));
+				html.WriteLine("    <ol>");
+				foreach (string query in queries)
+				{
+					html.WriteLine(String.Format("      <li><span class=\"sql\">{0}</span></li>", Regex.Replace(query, "(FROM|WHERE|ORDER BY|--)", "<br/>$1")));
+				}
+				html.WriteLine("    </ol>");
 			}
-
-			html.WriteLine("    </ol>");
 			html.WriteLine("</div>");
 
 			return html.ToString();

@@ -19,12 +19,14 @@ fieldset {
 }
 
 #auth-user {
+	display: inline;
 	float: left;
 	margin-left: 25em;
 	margin-bottom: 0.3em;
 }
 
 #auth-links {
+	display: inline;
 	float: right;
 	width: 19.1em;
 	margin-bottom: 0.3em;
