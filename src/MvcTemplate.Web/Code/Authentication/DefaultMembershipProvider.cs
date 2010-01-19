@@ -19,13 +19,13 @@ namespace MvcTemplate.Web
 			m_encryptor = a_encryptor;
 		}
 
-		public IUser Validate(UserCredentials a_credentials)
+		public IUser Validate(IUserCredentials a_credentials)
 		{
 			IUser user = m_repository.Get(a_credentials.Email);
 
 			if (null == user || !m_encryptor.IsMatch(a_credentials.Password, user.Credentials.Password))
 			{
-				throw new InvalidOperationException("Invalid email/password specified");
+				throw new AuthenticationException();
 			}
 
 			Debug.Assert(null != user);

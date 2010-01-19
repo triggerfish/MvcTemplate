@@ -9,6 +9,6 @@ namespace MvcTemplate.Model
 	{
 		string Forename { get; set; }
 		string Surname { get; set; }
-		UserCredentials Credentials { get; set; }
+		IUserCredentials Credentials { get; set; }
 	}
 }

@@ -23,7 +23,7 @@ namespace MvcTemplate.Web
 
 			if (null == artist)
 			{
-				throw new ModelBinderException(ModelName, String.Format("Unknown artist: {0}", artistName));
+				throw new ValidationException(ModelName, String.Format("Unknown artist: {0}", artistName));
 			}
 
 			return artist;

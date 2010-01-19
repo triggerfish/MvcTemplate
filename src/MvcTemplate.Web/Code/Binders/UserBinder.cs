@@ -23,9 +23,13 @@ namespace MvcTemplate.Web
 			string forename = GetValue("Forename", false);
 			string surname = GetValue("Surname", false);
 			string email = GetValue("Email", false);
-			string password = m_encryptor.Encrypt(GetValue("Password", false));
+			string password = GetValue("Password", false);
+			if (!String.IsNullOrEmpty(password))
+			{
+				password = m_encryptor.Encrypt(password);
+			}
 
-			return m_repository.CreateNew(forename, surname, new UserCredentials { Email = email, Password = password });
+			return m_repository.CreateUser(forename, surname, m_repository.CreateUserCredentials(email, password));
 		}
 	}
 }

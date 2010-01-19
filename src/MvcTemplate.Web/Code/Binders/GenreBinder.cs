@@ -24,7 +24,7 @@ namespace MvcTemplate.Web
 
 			if (null == genre)
 			{
-				throw new ModelBinderException(ModelName, String.Format("Unknown genre: {0}", genreName));
+				throw new ValidationException(ModelName, String.Format("Unknown genre: {0}", genreName));
 			}
 
 			return genre;

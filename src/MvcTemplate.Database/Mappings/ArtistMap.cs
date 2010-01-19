@@ -14,6 +14,7 @@ namespace MvcTemplate.Database
 			Id(x => x.Id).GeneratedBy.Native();
 			Map(x => x.Name)
 				.Length(50)
+				.Unique()
 				.Not.Nullable();
 			Map(x => x.Formed)
 				.Not.Nullable();

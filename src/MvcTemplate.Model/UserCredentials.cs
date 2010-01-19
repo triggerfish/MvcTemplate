@@ -5,9 +5,9 @@ using System.Text;
 
 namespace MvcTemplate.Model
 {
-	public sealed class UserCredentials
+	public interface IUserCredentials
 	{
-		public string Email { get; set; }
-		public string Password { get; set; }
+		string Email { get; set; }
+		string Password { get; set; }
 	}
 }

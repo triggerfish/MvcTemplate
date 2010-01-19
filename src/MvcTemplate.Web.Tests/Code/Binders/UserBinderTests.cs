@@ -24,9 +24,9 @@ namespace MvcTemplate.Web.Tests
 			Mock<IEncryptor> encryptor = new Mock<IEncryptor>();
 			encryptor.Setup(x => x.Encrypt(It.IsAny<string>())).Returns<string>(s => s);
 
-			IUser user = MockUsers.CreateMockUser(new UserCredentials { Email = email, Password = password });
+			IUser user = MockUsers.CreateMockUser(MockUsers.CreateMockUserCredentials(email, password));
 			Mock<IUserRepository> repository = new Mock<IUserRepository>();
-			repository.Setup(r => r.CreateNew(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<UserCredentials>())).Returns(user);
+			repository.Setup(r => r.CreateUser(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<IUserCredentials>())).Returns(user);
 
 			UserBinder binder = new UserBinder(repository.Object, encryptor.Object);
 

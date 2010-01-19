@@ -21,9 +21,16 @@ namespace MvcTemplate.Database
 		{
 		}
 
-		IUser IUserRepository.CreateNew(string a_forename, string a_surname, UserCredentials a_credentials)
+		IUserCredentials IUserRepository.CreateUserCredentials(string a_email, string a_password)
 		{
-			return new User { Forename = a_forename ?? "", Surname = a_surname ?? "", Credentials = a_credentials } as IUser;
+			return new UserCredentials { Email = a_email, Password = a_password } as IUserCredentials;
+		}
+
+		IUser IUserRepository.CreateUser(string a_forename, string a_surname, IUserCredentials a_credentials)
+		{
+			IUser user = new User { Forename = a_forename ?? "", Surname = a_surname ?? "" };
+			user.Credentials = a_credentials;
+			return user;
 		}
 
 		public bool UserExists(string a_email)
@@ -41,10 +48,12 @@ namespace MvcTemplate.Database
 
 		public void Register(IUser a_user)
 		{
-			if (!UserExists(a_user.Credentials.Email))
+			if (UserExists(a_user.Credentials.Email))
 			{
-				Save(a_user as User);
+				throw new ValidationException("Email", "The email is already registered");
 			}
+
+			Save(a_user as User);
 		}
 	}
 }

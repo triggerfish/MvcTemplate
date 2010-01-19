@@ -25,6 +25,7 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Register()
 		{
+			ViewData["returnUrl"] = Request.QueryString["returnUrl"];
 			return View(new ViewData { DisplaySearch = false });
 		}
 
@@ -32,13 +33,22 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Post)]
 		public ActionResult Register(IUser user, string returnUrl)
 		{
+			// problem with the binding of user
 			if (!ModelState.IsValid)
 			{
 				return View(new ViewData { DisplaySearch = false });
+			} 
+			
+			try
+			{
+				m_membership.Register(user);
+				m_authentication.Login(user.Forename, false);
 			}
-
-			m_membership.Register(user);
-			m_authentication.Login(user.Forename, false);
+			catch (ValidationException ex)
+			{
+				ex.ToModelErrors(ModelState, "");
+				return View(new ViewData { DisplaySearch = false });
+			}
 
 			return DoRedirect(returnUrl);
 		}
@@ -52,8 +62,9 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Post)]
-		public ActionResult Login(UserCredentials a_credentials, string returnUrl)
+		public ActionResult Login(IUserCredentials credentials, string returnUrl)
 		{
+			// problem with the binding of credentials
 			if (!ModelState.IsValid)
 			{
 				return View(new ViewData { DisplaySearch = false });
@@ -61,16 +72,16 @@ namespace MvcTemplate.Web.Controllers
 
 			try
 			{
-				IUser user = m_membership.Validate(a_credentials);
+				IUser user = m_membership.Validate(credentials);
 				m_authentication.Login(user.Forename, false);
-
-				return DoRedirect(returnUrl);
 			}
-			catch (Exception ex)
+			catch (ValidationException ex)
 			{
-				ModelState.AddModelError("Email", ex.Message);
+				ex.ToModelErrors(ModelState, "");
 				return View(new ViewData { DisplaySearch = false });
 			}
+
+			return DoRedirect(returnUrl);
 		}
 
 		[Route(Url = "logout")]

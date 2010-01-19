@@ -23,6 +23,9 @@ namespace MvcTemplate.Web
 			Bind<ModelBinder<IArtist>>()
 				.To<ArtistBinder>()
 				.InRequestScope();
+			Bind<ModelBinder<IUserCredentials>>()
+				.To<UserCredentialsBinder>()
+				.InRequestScope();
 			Bind<ModelBinder<IUser>>()
 				.To<UserBinder>()
 				.InRequestScope();

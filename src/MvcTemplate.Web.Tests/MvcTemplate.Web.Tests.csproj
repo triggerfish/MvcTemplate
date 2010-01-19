@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Authentication\BCryptEncryptorTests.cs" />
+    <Compile Include="Code\Authentication\DefaultMembershipProviderTests.cs" />
     <Compile Include="Code\Binders\ArtistBinderTests.cs" />
     <Compile Include="Code\Binders\BinderHelpers.cs" />
     <Compile Include="Code\Binders\BinderResolverTests.cs" />
@@ -98,6 +99,9 @@
       <Project>{F589B0C5-A59A-4409-8DA4-3B0A9A6394E9}</Project>
       <Name>MvcTemplate.Web</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Code\Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

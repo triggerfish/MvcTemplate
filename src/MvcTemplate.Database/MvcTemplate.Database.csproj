@@ -55,6 +55,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\NHibernate\NHibernate.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate.Validator, Version=1.2.0.3001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\NHibernate\NHibernate.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Validator.Specific, Version=1.2.0.3001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\NHibernate\NHibernate.Validator.Specific.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Ninject\Ninject.dll</HintPath>
@@ -77,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\UserCredentials.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Mappings\UserMap.cs" />
@@ -96,6 +105,7 @@
     <Compile Include="SearchResults.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="Logging\SqlLogger.cs" />
+    <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

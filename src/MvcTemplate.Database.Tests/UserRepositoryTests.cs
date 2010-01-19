@@ -69,6 +69,27 @@ namespace MvcTemplate.Database.Tests
 			Assert.AreEqual(expected.Surname, actual.Surname);
 		}
 
+		[TestMethod]
+		public void ShouldThrowWhenRegisteringExistingUser()
+		{
+			string s = "1";
+			User u = new User { Forename = s, Surname = s, Credentials = new UserCredentials { Email = s, Password = s } };
+
+			try
+			{
+				m_repository.Register(u);
+				Assert.Fail("Register should throw ValidationException");
+			}
+			catch (ValidationException)
+			{
+				// expected - do nothing
+			}
+			catch (Exception)
+			{
+				Assert.Fail("Register should throw ValidationException");
+			}
+		}
+
 		protected override void SetupContext(ISession a_session)
 		{
 			m_repository = new UserRepository(a_session);

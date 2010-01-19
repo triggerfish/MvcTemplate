@@ -55,7 +55,7 @@ namespace MvcTemplate.Web.Tests
 		{
 			// Arrange
 			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
-			UserCredentials uc = new UserCredentials { Email = "test", Password = "password" };
+			IUserCredentials uc = MockUsers.CreateMockUserCredentials("test", "password");
 
 			// Act
 			ActionResult result = controller.Login(uc, "");
@@ -70,7 +70,7 @@ namespace MvcTemplate.Web.Tests
 		{
 			// Arrange
 			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
-			UserCredentials uc = new UserCredentials { Email = m_user.Credentials.Email, Password = "wrong" };
+			IUserCredentials uc = MockUsers.CreateMockUserCredentials(m_user.Credentials.Email, "wrong");
 
 			// Act
 			ActionResult result = controller.Login(uc, "");
@@ -85,7 +85,7 @@ namespace MvcTemplate.Web.Tests
 		{
 			// Arrange
 			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
-			UserCredentials uc = new UserCredentials { Email = "test", Password = "password" };
+			IUserCredentials uc = MockUsers.CreateMockUserCredentials("test", "password");
 
 			// Act
 			ViewResult result = controller.Login(uc, "") as ViewResult;
@@ -177,7 +177,36 @@ namespace MvcTemplate.Web.Tests
 		}
 
 		[TestMethod]
-		public void ShouldRegisterAndLoginIfDetailsCorrect()
+		public void ShouldRegisterAndLoginIfBindingCorrect()
+		{
+			// Arrange
+			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
+			IUser newUser = MockUsers.CreateMockUser("new@test.com", "password");
+			newUser.Forename = "New";
+
+			// Act
+			ActionResult result = controller.Register(newUser, "");
+
+			// Assert
+			m_membership.Verify(x => x.Register(newUser));
+			m_authentication.Verify(x => x.Login(newUser.Forename, false));
+		}
+
+		[TestMethod]
+		public void ShouldFailToRegisterIfBindingFailed()
+		{
+			// Arrange
+			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
+
+			// Act
+			ActionResult result = controller.Register(MockUsers.CreateMockUser("invalid", "password"), "");
+
+			// Assert
+			m_membership.Verify(x => x.Register(m_user), Times.Never());
+		}
+
+		[TestMethod]
+		public void ShouldFailToRegisterIfEmailAlreadyRegistered()
 		{
 			// Arrange
 			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
@@ -187,30 +216,22 @@ namespace MvcTemplate.Web.Tests
 
 			// Assert
 			m_membership.Verify(x => x.Register(m_user));
-			m_authentication.Verify(x => x.Login(m_user.Forename, false));
-		}
-
-		[TestMethod]
-		public void ShouldFailToRegisterIfXXXIncorrect()
-		{
-			// Arrange
-
-			// Act
-
-			// Assert
+			m_authentication.Verify(x => x.Login(m_user.Forename, false), Times.Never());
 		}
 
 		[TestMethod]
 		public void ShouldRedisplayRegisterPageOnFailure()
 		{
 			// Arrange
+			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
 
 			// Act
+			ViewResult result = controller.Register(m_user, "") as ViewResult;
 
 			// Assert
-			//Assert.AreEqual("", result.ViewName);
-			//Assert.IsFalse(result.ViewData.ModelState.IsValid);
-			//Assert.AreEqual(1, result.ViewData.ModelState["Email"].Errors.Count);
+			Assert.AreEqual("", result.ViewName);
+			Assert.IsFalse(result.ViewData.ModelState.IsValid);
+			Assert.AreEqual(1, result.ViewData.ModelState["Email"].Errors.Count);
 		}
 
 		[TestMethod]
@@ -220,7 +241,7 @@ namespace MvcTemplate.Web.Tests
 			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
 
 			// Act
-			ShouldRedirectToUrl(controller.Register, m_user);
+			ShouldRedirectToUrl(controller.Register, MockUsers.CreateMockUser("new@test.com", "password"));
 		}
 
 		[TestMethod]
@@ -230,7 +251,7 @@ namespace MvcTemplate.Web.Tests
 			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
 
 			// Act
-			ShouldRedirectToHomePage(controller.Register, m_user);
+			ShouldRedirectToHomePage(controller.Register, MockUsers.CreateMockUser("new@test.com", "password"));
 		}
 
 		#endregion
@@ -238,11 +259,13 @@ namespace MvcTemplate.Web.Tests
 		[TestInitialize]
 		public void SetupTest()
 		{
-			m_user = MockUsers.CreateMockUser(new UserCredentials { Email = "test@test.com", Password = "password" });
+			m_user = MockUsers.CreateMockUser(MockUsers.CreateMockUserCredentials("test@test.com", "password"));
 			string email = m_user.Credentials.Email;
 			m_repository.Setup(x => x.Get(email)).Returns(m_user);
 			m_repository.Setup(x => x.Get(It.Is<string>(s => s != email))).Throws(new Exception(""));
 			m_membership.Setup(x => x.Validate(m_user.Credentials)).Returns(m_user);
+			m_membership.Setup(x => x.Validate(It.Is<IUserCredentials>(uc => uc != m_user.Credentials))).Throws(new AuthenticationException());
+			m_membership.Setup(x => x.Register(m_user)).Throws(new ValidationException("Email", "Email already registered"));
 		}
 
 		private void ShouldRedirectToUrl<TParam>(Func<TParam, string, ActionResult> a_actionMethod, TParam a_param)

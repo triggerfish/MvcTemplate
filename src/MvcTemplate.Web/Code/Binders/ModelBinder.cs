@@ -7,31 +7,6 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
 {
-	public class ModelBinderException : Exception
-	{
-		public string Key { get; private set; } 
-
-		public ModelBinderException() : base() { }
-
-		public ModelBinderException(string a_key)
-			: base()
-		{
-			Key = a_key;
-		}
-
-		public ModelBinderException(string a_key, string a_message)
-			: base(a_message)
-		{
-			Key = a_key;
-		}
-	
-		public ModelBinderException(string a_key, string a_message, Exception a_inner)
-			: base(a_message, a_inner)
-		{
-			Key = a_key;
-		}
-	}
-
 	public abstract class ModelBinder<T> : IModelBinder where T : class
 	{
 		// data
@@ -61,11 +36,18 @@ namespace MvcTemplate.Web
 
 			try
 			{
-				return Bind();
+				object obj = Bind();
+
+				if (null != obj)
+				{
+					Validate(obj);
+				}
+
+				return obj;
 			}
-			catch (ModelBinderException ex)
+			catch (ValidationException ex)
 			{
-				a_bindingContext.ModelState.AddModelError(ex.Key, ex.Message);
+				ex.ToModelErrors(a_bindingContext.ModelState, "");
 			}
 
 			return null;
@@ -76,22 +58,31 @@ namespace MvcTemplate.Web
 
 		protected abstract object Bind();
 
-		protected string GetValue(string a_key, bool a_valueMustExist)
+		protected virtual void Validate(object a_object)
+		{
+			IValidator validator = ObjectFactory.TryGet<IValidator>();
+			if (null != validator)
+			{
+				validator.Validate(a_object);
+			}
+		}
+
+		protected string GetValue(string a_key, bool a_mustHaveValue)
 		{
 			ValueProviderResult v;
 			if (m_context.ValueProvider.TryGetValue(a_key, out v))
 			{
 				m_context.ModelState.SetModelValue(a_key, v);
 
-				if (!a_valueMustExist || !String.IsNullOrEmpty(v.AttemptedValue))
+				if (!a_mustHaveValue || !String.IsNullOrEmpty(v.AttemptedValue))
 				{
 					return v.AttemptedValue;
 				}
 			}
 
-			if (a_valueMustExist)
+			if (a_mustHaveValue)
 			{
-				throw new ModelBinderException(a_key, String.Format("{0} must be specified", a_key));
+				throw new ValidationException(a_key, String.Format("{0} must be specified", a_key));
 			}
 
 			return null;
