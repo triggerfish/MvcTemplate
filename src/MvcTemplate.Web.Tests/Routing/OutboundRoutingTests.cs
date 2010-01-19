@@ -28,19 +28,19 @@ namespace MvcTemplate.Web.Tests
 		[TestMethod]
 		public void ShouldResolveRegisterRoute()
 		{
-			MvcAssert.IsOutboundRouteCorrect("/register", RouteHelpers.RegisterRoute(), MvcApplication.RegisterRoutes);
+			MvcAssert.IsOutboundRouteCorrect("/register", RouteHelpers.RegisterRoute(null), MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveLoginRoute()
 		{
-			MvcAssert.IsOutboundRouteCorrect("/login", RouteHelpers.LoginRoute(), MvcApplication.RegisterRoutes);
+			MvcAssert.IsOutboundRouteCorrect("/login", RouteHelpers.LoginRoute(null), MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveLogoutRoute()
 		{
-			MvcAssert.IsOutboundRouteCorrect("/logout", RouteHelpers.LogoutRoute(), MvcApplication.RegisterRoutes);
+			MvcAssert.IsOutboundRouteCorrect("/logout", RouteHelpers.LogoutRoute(null), MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]

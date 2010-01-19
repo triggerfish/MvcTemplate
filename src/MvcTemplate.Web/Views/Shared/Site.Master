@@ -12,20 +12,20 @@
 </head>
 
 <body>
-    <span id="auth-user">
+    <div id="auth-user">
     <% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
     Hello, <%= Html.Encode(HttpContext.Current.User.Identity.Name) %>
     <% } else { %>
     &nbsp;
     <% } %>
-    </span>
-    <span id="auth-links">
+    </div>
+    <div id="auth-links">
         <% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
-        <%= Html.RouteLink("Logout", RouteHelpers.LogoutRoute().AddReturnUrl(Request.Url))%>
+        <%= Html.RouteLink("Logout", RouteHelpers.LogoutRoute(Request.Url))%>
         <% } else { %>
-        <%= Html.RouteLink("Login", RouteHelpers.LoginRoute().AddReturnUrl(Request.Url))%>&nbsp;|&nbsp;<%= Html.RouteLink("Register", RouteHelpers.RegisterRoute().AddReturnUrl(Request.Url))%>
+        <%= Html.RouteLink("Login", RouteHelpers.LoginRoute(Request.Url))%>&nbsp;|&nbsp;<%= Html.RouteLink("Register", RouteHelpers.RegisterRoute(Request.Url))%>
 	    <% } %>
-	</span>
+	</div>
     <div id="header">
 	    <div id="website-name"><%= Html.RouteLink(System.Web.Configuration.WebConfigurationManager.AppSettings["WebSiteName"], RouteHelpers.HomeRoute()) %></div>
 	    <% if (vd.DisplaySearch) { %>

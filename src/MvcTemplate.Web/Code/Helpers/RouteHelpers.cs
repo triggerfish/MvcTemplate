@@ -19,19 +19,19 @@ namespace MvcTemplate.Web
 			return new RouteValueDictionary(new { controller = "Search", action = "Index" });
 		}
 
-		public static RouteValueDictionary RegisterRoute()
+		public static RouteValueDictionary RegisterRoute(Uri a_returnUrl)
 		{
-			return new RouteValueDictionary(new { controller = "Account", action = "Register" });
+			return new RouteValueDictionary(new { controller = "Account", action = "Register" }).AddReturnUrl(a_returnUrl);
 		}
 
-		public static RouteValueDictionary LoginRoute()
+		public static RouteValueDictionary LoginRoute(Uri a_returnUrl)
 		{
-			return new RouteValueDictionary(new { controller = "Account", action = "Login" });
+			return new RouteValueDictionary(new { controller = "Account", action = "Login" }).AddReturnUrl(a_returnUrl);
 		}
 
-		public static RouteValueDictionary LogoutRoute()
+		public static RouteValueDictionary LogoutRoute(Uri a_returnUrl)
 		{
-			return new RouteValueDictionary(new { controller = "Account", action = "Logout" });
+			return new RouteValueDictionary(new { controller = "Account", action = "Logout" }).AddReturnUrl(a_returnUrl);
 		}
 
 		public static RouteValueDictionary GenreRoute(IGenre a_genre)

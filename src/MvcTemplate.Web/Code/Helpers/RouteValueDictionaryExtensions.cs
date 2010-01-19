@@ -10,7 +10,10 @@ namespace MvcTemplate.Web
 	{
 		public static RouteValueDictionary AddReturnUrl(this RouteValueDictionary a_route, Uri a_uri)
 		{
-			a_route.Add("returnUrl", a_uri.PathAndQuery);
+			if (null != a_uri && !String.IsNullOrEmpty(a_uri.PathAndQuery))
+			{
+				a_route.Add("returnUrl", a_uri.PathAndQuery);
+			}
 			return a_route;
 		}
 	}
