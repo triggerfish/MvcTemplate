@@ -38,7 +38,7 @@ fieldset label {
 }
 
 fieldset input {
-	margin: 0 0 0 1em;
+	margin: 0 0.5em 0 1em;
 }
 
 fieldset #Email {
@@ -209,4 +209,5 @@ fieldset #submit-row a {
 
 .validation-summary-errors {
 	color: red; 
+	margin-left: 11em;
 }

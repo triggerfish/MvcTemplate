@@ -7,17 +7,17 @@
     <% using (Html.BeginForm()) { %>
     <fieldset>
         <legend>Required Details</legend>
-        <div class="row"><label for="Email">Email:</label><%= Html.TextBox("Email")%>&nbsp;<%= Html.ValidationMessage("Email") %></div>
-        <div class="row"><label for="Forename">Forename:</label><%= Html.TextBox("Forename")%>&nbsp;<%= Html.ValidationMessage("Forename") %></div>
-        <div class="row"><label for="Password">Password:</label><%= Html.Password("Password")%>&nbsp;<%= Html.ValidationMessage("Password") %></div>
+        <div class="row"><label for="Email">Email:</label><%= Html.TextBox("Email")%><%= Html.ValidationMessage("Email") %></div>
+        <div class="row"><label for="Forename">Forename:</label><%= Html.TextBox("Forename")%><%= Html.ValidationMessage("Forename") %></div>
+        <div class="row"><label for="Password">Password:</label><%= Html.Password("Password")%><%= Html.ValidationMessage("Password") %></div>
     </fieldset>
     <fieldset>
         <legend>Optional Details</legend>
-        <div class="row"><label for="Surname">Surname:</label><%= Html.TextBox("Surname")%>&nbsp;<%= Html.ValidationMessage("Surname") %></div>
+        <div class="row"><label for="Surname">Surname:</label><%= Html.TextBox("Surname")%><%= Html.ValidationMessage("Surname") %></div>
     </fieldset>
     <fieldset>
         <div id="submit-row"><input type="submit" value="Register" /><a href="<%= ViewData["returnUrl"]%>">Cancel</a></div>
     </fieldset>
     <% } %>
-    <br />
+    <%= Html.ClientSideValidation<MvcTemplate.Model.IUser>(null) %>
 </asp:Content>

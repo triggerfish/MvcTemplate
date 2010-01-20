@@ -4,7 +4,7 @@
 
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Login</h2>
-    <p><%= Html.ValidationSummary() %></p>
+    <p><%= Html.ValidationSummary("Unable to login:") %></p>
     <% using (Html.BeginForm()) { %>
     <fieldset>
         <div class="row"><label for="Email">Email:</label><%= Html.TextBox("Email")%></div>
@@ -14,4 +14,5 @@
         <div id="submit-row"><input type="submit" value="Login" /><a href="<%= ViewData["returnUrl"]%>">Cancel</a></div>
     </fieldset>
     <% } %>    
+    <%= Html.ClientSideValidation<MvcTemplate.Model.IUserCredentials>(null) %>
 </asp:Content>

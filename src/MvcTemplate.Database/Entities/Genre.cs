@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NHibernate.Validator.Constraints;
 using MvcTemplate.Model;
 
 namespace MvcTemplate.Database
 {
 	public class Genre : Entity<int>, IGenre
 	{
-		[NotNullNotEmpty]
 		public virtual string Name { get; set; }
 
 		public virtual IList<Artist> Artists  { get; set; }

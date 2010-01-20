@@ -39,6 +39,8 @@ namespace MvcTemplate.Database
 			Bind<IUserRepository>()
 				.To<UserRepository>()
 				.InRequestScope();
+
+			xVal.ActiveRuleProviders.Providers.Add(new xVal.RulesProviders.NHibernateValidator.NHibernateValidatorRulesProvider(ValidatorMode.UseAttribute));
 		}
 
 		protected abstract IPersistenceConfigurer CreateDatabase();

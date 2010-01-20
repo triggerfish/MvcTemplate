@@ -9,7 +9,7 @@ namespace MvcTemplate.Web
 	public class AuthenticationException : ValidationException
 	{
 		public AuthenticationException()
-			: base("Email", "Invalid email/password specified")
+			: base("", "Invalid email/password specified")
 		{
 		}
 	}

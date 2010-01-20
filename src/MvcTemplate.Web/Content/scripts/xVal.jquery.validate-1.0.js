@@ -7,9 +7,9 @@ xVal.AttachValidator = function(elementPrefix, rulesConfig, options, pluginName)
         this.Plugins[pluginName].AttachValidator(elementPrefix, rulesConfig, options);
     else
         for (var key in this.Plugins) {
-            this.Plugins[key].AttachValidator(elementPrefix, rulesConfig, options);
-            return;
-        }
+        this.Plugins[key].AttachValidator(elementPrefix, rulesConfig, options);
+        return;
+    }
 };
 
 // xVal.jquery.validate.js
@@ -58,7 +58,7 @@ xVal.AttachValidator = function(elementPrefix, rulesConfig, options, pluginName)
             if (parentForm.length != 1)
                 alert("Error: Element " + element.attr("id") + " is not in a form");
             this._ensureFormIsMarkedForValidation($(parentForm[0]), options);
-            this._associateNearbyValidationMessageDivWithElement(element);
+            this._associateNearbyValidationMessageSpanWithElement(element);
 
             var options = {};
 
@@ -207,10 +207,10 @@ xVal.AttachValidator = function(elementPrefix, rulesConfig, options, pluginName)
             return result;
         },
 
-        _associateNearbyValidationMessageDivWithElement: function(element) {
+        _associateNearbyValidationMessageSpanWithElement: function(element) {
             // If there's a <span class='field-validation-error'> soon after, it's probably supposed to display the error message
             // jquery.validation goes looking for an attribute called "htmlfor" as follows
-            var nearbyMessages = element.nextAll("div.field-validation-error");
+            var nearbyMessages = element.nextAll("span.field-validation-error");
             if (nearbyMessages.length > 0) {
                 $(nearbyMessages[0]).attr("generated", "true")
                                     .attr("htmlfor", element.attr("id"));
@@ -222,7 +222,7 @@ xVal.AttachValidator = function(elementPrefix, rulesConfig, options, pluginName)
                 formElement.data("isMarkedForValidation", true);
                 var validationOptions = {
                     errorClass: "field-validation-error",
-                    errorElement: "div",
+                    errorElement: "span",
                     highlight: function(element) { $(element).addClass("input-validation-error"); },
                     unhighlight: function(element) { $(element).removeClass("input-validation-error"); }
                 };

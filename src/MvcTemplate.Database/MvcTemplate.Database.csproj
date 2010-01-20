@@ -83,6 +83,14 @@
       <HintPath>..\..\tools\SQLite\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="xVal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f8fbed92c68c4006, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\xVal\xVal.dll</HintPath>
+    </Reference>
+    <Reference Include="xVal.RulesProviders.NHibernateValidator, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f8fbed92c68c4006, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\xVal\xVal.RulesProviders.NHibernateValidator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\UserCredentials.cs" />
