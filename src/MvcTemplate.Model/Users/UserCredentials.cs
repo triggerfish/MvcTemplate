@@ -8,9 +8,11 @@ namespace MvcTemplate.Model
 {
 	public interface IUserCredentials
 	{
+		[NotNullNotEmpty(Message = "This field is required")]
 		[Email]
 		string Email { get; set; }
-		[NotNullNotEmpty]
+
+		[NotNullNotEmpty(Message = "This field is required")]
 		string Password { get; set; }
 	}
 }

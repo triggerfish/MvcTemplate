@@ -10,7 +10,7 @@ namespace MvcTemplate.Model
 	{
 		int Id { get; }
 
-		[NotNullNotEmpty]
+		[NotNullNotEmpty(Message = "This field is required")]
 		string Name { get; set; }
 
 		[Past]

@@ -6,12 +6,13 @@ using NHibernate.Validator.Constraints;
 
 namespace MvcTemplate.Model
 {
-	public interface IUser
+	public interface IGenre
 	{
-		[NotNullNotEmpty]
-		string Forename { get; set; }
-		string Surname { get; set; }
-		[Valid]
-		IUserCredentials Credentials { get; set; }
+		int Id { get; }
+
+		[NotNullNotEmpty(Message = "This field is required")]
+		string Name { get; }
+
+		IEnumerable<IArtist> Artists { get; }
 	}
 }
