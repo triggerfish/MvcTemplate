@@ -25,7 +25,10 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Register()
 		{
-			ViewData["returnUrl"] = Request.QueryString["returnUrl"];
+			if (null != Request)
+			{
+				ViewData["returnUrl"] = QualifyReturnUrl(Request.QueryString["returnUrl"]);
+			}
 			return View(new ViewData { DisplaySearch = false });
 		}
 
@@ -57,6 +60,10 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
         public ViewResult Login()
         {
+			if (null != Request)
+			{
+				ViewData["returnUrl"] = QualifyReturnUrl(Request.QueryString["returnUrl"]);
+			}
 			return View(new ViewData { DisplaySearch = false });
         }
 
@@ -94,14 +101,16 @@ namespace MvcTemplate.Web.Controllers
 
 		private ActionResult DoRedirect(string returnUrl)
 		{
-			if (!String.IsNullOrEmpty(returnUrl))
-			{
-				return Redirect(returnUrl);
-			}
-			else
-			{
-				return RedirectToRoute(RouteHelpers.HomeRoute());
-			}
+			return Redirect(QualifyReturnUrl(returnUrl));
 		}
-    }
+	
+		private string QualifyReturnUrl(string returnUrl)
+		{
+			if (String.IsNullOrEmpty(returnUrl))
+			{
+				returnUrl = "/";
+			}
+			return returnUrl;
+		}
+	}
 }
