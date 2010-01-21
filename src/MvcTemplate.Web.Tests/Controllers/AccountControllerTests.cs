@@ -9,6 +9,7 @@ using MvcTemplate.Model;
 using MvcTemplate.Web.Controllers;
 using Triggerfish.Testing.Web.Routing;
 using System.Linq.Expressions;
+using System.Web;
 
 namespace MvcTemplate.Web.Tests
 {
@@ -93,7 +94,7 @@ namespace MvcTemplate.Web.Tests
 			// Assert
 			Assert.AreEqual("", result.ViewName);
 			Assert.IsFalse(result.ViewData.ModelState.IsValid);
-			Assert.AreEqual(1, result.ViewData.ModelState["Email"].Errors.Count);
+			Assert.AreEqual(1, result.ViewData.ModelState[""].Errors.Count);
 		}
 
 		[TestMethod]
@@ -152,11 +153,11 @@ namespace MvcTemplate.Web.Tests
 			AccountController controller = new AccountController(m_authentication.Object, null);
 
 			// Act
-			RedirectToRouteResult result = controller.Logout(null) as RedirectToRouteResult;
+			RedirectResult result = controller.Logout(null) as RedirectResult;
 
 			// Assert
 			Assert.AreNotEqual(null, result);
-			RoutingAssert.AreDictionariesEqual(RouteHelpers.HomeRoute(), result.RouteValues);
+			Assert.AreEqual("/", result.Url);
 		}
 
 		#endregion
@@ -281,11 +282,11 @@ namespace MvcTemplate.Web.Tests
 		public void ShouldRedirectToHomePage<TParam>(Func<TParam, string, ActionResult> a_actionMethod, TParam a_param)
 		{
 			// Act
-			RedirectToRouteResult result = a_actionMethod(a_param, null) as RedirectToRouteResult;
+			RedirectResult result = a_actionMethod(a_param, null) as RedirectResult;
 
 			// Assert
 			Assert.AreNotEqual(null, result);
-			RoutingAssert.AreDictionariesEqual(RouteHelpers.HomeRoute(), result.RouteValues);
+			Assert.AreEqual("/", result.Url); 
 		}	
 	}
 }
