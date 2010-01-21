@@ -1,8 +1,14 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<ViewData>" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainTitle" runat="server">Register</asp:Content>
+<asp:Content ID="Title" ContentPlaceHolderID="MainTitle" runat="server">Register</asp:Content>
 
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Scripts" ContentPlaceHolderID="Scripts" runat="server">
+	<script src="<%= Url.Content("~/content/scripts/jquery-1.3.2.min.js") %>" type="text/javascript"></script>
+	<script src="<%= Url.Content("~/content/scripts/jquery.validate-1.5.5.min.js") %>" type="text/javascript"></script>
+	<script src="<%= Url.Content("~/content/scripts/xVal.jquery.validate-1.0.js") %>" type="text/javascript"></script>
+</asp:Content>
+
+<asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
     <h2>Register</h2>
     <% using (Html.BeginForm()) { %>
     <fieldset>
