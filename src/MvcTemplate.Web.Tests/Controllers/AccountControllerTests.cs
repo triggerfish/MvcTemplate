@@ -139,11 +139,11 @@ namespace MvcTemplate.Web.Tests
 			AccountController controller = new AccountController(m_authentication.Object, null);
 
 			// Act
-			RedirectResult result = controller.Logout("/redirect") as RedirectResult;
+			RedirectResult result = controller.Logout("/artists") as RedirectResult;
 
 			// Assert
 			Assert.AreNotEqual(null, result);
-			Assert.AreEqual("/redirect", result.Url);
+			Assert.AreEqual("/artists", result.Url);
 		}
 
 		[TestMethod]
@@ -221,18 +221,20 @@ namespace MvcTemplate.Web.Tests
 		}
 
 		[TestMethod]
-		public void ShouldRedisplayRegisterPageOnFailure()
+		public void ShouldRedirectToGetRegisterPageOnFailure()
 		{
 			// Arrange
 			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
 
 			// Act
-			ViewResult result = controller.Register(m_user, "") as ViewResult;
+			RedirectToRouteResult result = controller.Register(m_user, "") as RedirectToRouteResult;
 
 			// Assert
-			Assert.AreEqual("", result.ViewName);
-			Assert.IsFalse(result.ViewData.ModelState.IsValid);
-			Assert.AreEqual(1, result.ViewData.ModelState["Email"].Errors.Count);
+			Assert.AreEqual("Register", result.RouteValues["action"]);
+			Assert.IsTrue(controller.TempData.ContainsKey("RegisterErrors"));
+			ModelStateDictionary dic = (ModelStateDictionary)controller.TempData["RegisterErrors"];
+			Assert.AreNotEqual(null, dic);
+			Assert.AreEqual(1, dic["Email"].Errors.Count);
 		}
 
 		[TestMethod]
@@ -272,11 +274,11 @@ namespace MvcTemplate.Web.Tests
 		private void ShouldRedirectToUrl<TParam>(Func<TParam, string, ActionResult> a_actionMethod, TParam a_param)
 		{
 			// Act
-			RedirectResult result = a_actionMethod(a_param, "/redirect") as RedirectResult;
+			RedirectResult result = a_actionMethod(a_param, "/artists") as RedirectResult;
 
 			// Assert
 			Assert.AreNotEqual(null, result);
-			Assert.AreEqual("/redirect", result.Url);
+			Assert.AreEqual("/artists", result.Url);
 		}
 
 		public void ShouldRedirectToHomePage<TParam>(Func<TParam, string, ActionResult> a_actionMethod, TParam a_param)

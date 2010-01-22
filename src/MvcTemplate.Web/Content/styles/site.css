@@ -45,8 +45,12 @@ fieldset #Email {
 	width: 17em;
 }
 
-fieldset #submit-row {
+fieldset .align-inputs {
 	margin: 2em 0 0 10em;
+}
+
+fieldset .align-inputs span {
+	padding-left: 1em;
 }
 
 fieldset #submit-row a {

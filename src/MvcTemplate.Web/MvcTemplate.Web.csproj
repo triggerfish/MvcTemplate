@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq, Version=3.1.416.3, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\Moq\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Ninject\Ninject.dll</HintPath>
@@ -61,6 +65,10 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="Triggerfish.Testing, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\Triggerfish\Triggerfish.Testing.dll</HintPath>
+    </Reference>
     <Reference Include="Triggerfish.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Triggerfish\Triggerfish.Web.dll</HintPath>
@@ -101,6 +109,7 @@
     <Compile Include="Code\Navigation\GenreHyperlinks.cs" />
     <Compile Include="Code\Navigation\Hyperlink.cs" />
     <Compile Include="Code\ViewData\ArtistsViewData.cs" />
+    <Compile Include="Code\ViewData\AccountViewData.cs" />
     <Compile Include="Code\ViewData\GenreViewData.cs" />
     <Compile Include="Code\ViewData\ArtistViewData.cs" />
     <Compile Include="Code\ViewData\SearchViewData.cs" />
@@ -131,6 +140,7 @@
     <Content Include="Views\Artists\Index.aspx" />
     <Content Include="Views\Artists\ArtistList.ascx" />
     <Content Include="Views\Artists\Genre.aspx" />
+    <Content Include="Views\Artists\Secret.aspx" />
     <Content Include="Views\Search\Index.aspx" />
     <Content Include="Views\Search\Results.aspx" />
     <Content Include="Views\Shared\SearchForm.ascx" />

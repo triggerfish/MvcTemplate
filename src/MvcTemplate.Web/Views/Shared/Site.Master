@@ -18,10 +18,12 @@
     <% } %>
     </div>
     <div id="auth-links">
-        <% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
-        <%= Html.RouteLink("Logout", RouteHelpers.LogoutRoute(Request.Url))%>
-        <% } else { %>
-        <%= Html.RouteLink("Login", RouteHelpers.LoginRoute(Request.Url))%>&nbsp;|&nbsp;<%= Html.RouteLink("Register", RouteHelpers.RegisterRoute(Request.Url))%>
+        <% if (vd.DisplayAuthLinks) { %>
+            <% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
+            <%= Html.RouteLink("Logout", RouteHelpers.LogoutRoute(Request.Url.PathAndQuery))%>
+            <% } else { %>
+            <%= Html.RouteLink("Login", RouteHelpers.LoginRoute(Request.Url.PathAndQuery))%>&nbsp;|&nbsp;<%= Html.RouteLink("Register", RouteHelpers.RegisterRoute(Request.Url.PathAndQuery))%>
+	        <% } %>
 	    <% } %>
 	</div>
     <div id="header">

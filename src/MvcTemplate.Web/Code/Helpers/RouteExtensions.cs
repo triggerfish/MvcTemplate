@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Routing;
 using MvcTemplate.Model;
+using Triggerfish.Testing.Web.Mvc;
 
 namespace MvcTemplate.Web
 {
@@ -17,6 +18,16 @@ namespace MvcTemplate.Web
 		public static RouteValueDictionary Route(this IGenre a_genre)
 		{
 			return RouteHelpers.GenreRoute(a_genre);
+		}
+
+		public static string SanitiseUrl(this RouteInformation a_routeInfo, bool a_allowAuthoriseAttributeOnAction)
+		{
+			if (a_routeInfo.Valid && (a_allowAuthoriseAttributeOnAction || !a_routeInfo.DoesActionRequireAuthorisation("MvcTemplate.Web.Controllers", "MvcTemplate.Web")))
+			{
+				return a_routeInfo.Url;
+			}
+
+			return "/"; // return home url by default
 		}
 	}
 }

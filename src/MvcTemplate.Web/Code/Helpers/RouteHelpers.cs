@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Routing;
 using MvcTemplate.Model;
+using Triggerfish.Testing.Web.Mvc;
 
 namespace MvcTemplate.Web
 {
@@ -19,17 +20,17 @@ namespace MvcTemplate.Web
 			return new RouteValueDictionary(new { controller = "Search", action = "Index" });
 		}
 
-		public static RouteValueDictionary RegisterRoute(Uri a_returnUrl)
+		public static RouteValueDictionary RegisterRoute(string a_returnUrl)
 		{
 			return new RouteValueDictionary(new { controller = "Account", action = "Register" }).AddReturnUrl(a_returnUrl);
 		}
 
-		public static RouteValueDictionary LoginRoute(Uri a_returnUrl)
+		public static RouteValueDictionary LoginRoute(string a_returnUrl)
 		{
 			return new RouteValueDictionary(new { controller = "Account", action = "Login" }).AddReturnUrl(a_returnUrl);
 		}
 
-		public static RouteValueDictionary LogoutRoute(Uri a_returnUrl)
+		public static RouteValueDictionary LogoutRoute(string a_returnUrl)
 		{
 			return new RouteValueDictionary(new { controller = "Account", action = "Logout" }).AddReturnUrl(a_returnUrl);
 		}
@@ -47,6 +48,15 @@ namespace MvcTemplate.Web
 		public static RouteValueDictionary ArtistRoute(IArtist a_artist)
 		{
 			return new RouteValueDictionary(new { controller = "Artists", action = "Artist", artist = a_artist.Name });
+		}
+		public static RouteValueDictionary SecretRoute()
+		{
+			return new RouteValueDictionary(new { controller = "Artists", action = "Secret" });
+		}
+
+		public static string SanitiseUrl(string a_url, bool a_allowAuthoriseAttributeOnAction)
+		{
+			return RouteInformation.Create(a_url, MvcApplication.RegisterRoutes).SanitiseUrl(a_allowAuthoriseAttributeOnAction);
 		}
 	}
 }

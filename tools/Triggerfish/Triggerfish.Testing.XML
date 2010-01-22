@@ -4,18 +4,6 @@
         <name>Triggerfish.Testing</name>
     </assembly>
     <members>
-        <member name="T:Triggerfish.Testing.Web.Routing.RoutingAssert">
-            <summary>
-            Assert methods for use in unit test projects
-            </summary>
-        </member>
-        <member name="M:Triggerfish.Testing.Web.Routing.RoutingAssert.AreDictionariesEqual(System.Web.Routing.RouteValueDictionary,System.Web.Routing.RouteValueDictionary)">
-            <summary>
-            Tests whether two RouteValueDictionary objects have equal values
-            </summary>
-            <param name="a_expected">The expected values</param>
-            <param name="a_actual">The actual values</param>
-        </member>
         <member name="T:Triggerfish.Testing.Web.Mvc.MvcAssert">
             <summary>
             Asserts for use in unit testing code
@@ -160,18 +148,6 @@
             <param name="a_registerRoutes">Delegate to register all possible routes</param>
             <returns>The virtual path data object</returns>
         </member>
-        <member name="T:Triggerfish.Testing.Web.HttpHelpers">
-            <summary>
-            Helpers for mocking http objects
-            </summary>
-        </member>
-        <member name="M:Triggerfish.Testing.Web.HttpHelpers.MockHttpContext(System.String)">
-            <summary>
-            Create a mock HttpContext object
-            </summary>
-            <param name="a_url">The url that initiated the HttpContext (can be null)</param>
-            <returns>The http context</returns>
-        </member>
         <member name="T:Triggerfish.Testing.Web.Mvc.InboundRoutingHelpers">
             <summary>
             Static helper methods to create inbound urls using the MVC framework
@@ -193,6 +169,95 @@
             <param name="a_url">The url from which to generate the route</param>
             <param name="a_registerRoutes">Delegate to register all possible routes</param>
             <returns>The route values</returns>
+        </member>
+        <member name="T:Triggerfish.Testing.Web.Mvc.RouteInformation">
+            <summary>
+            Helper class to lookup a route based on a string url 
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.RouteInformation.Create(System.String,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Static creation method
+            </summary>
+            <param name="a_relativeUrl">The relative url for which to get the route information</param>
+            <param name="a_registerRoutes">Delegate instance to register routes</param>
+            <returns>A new RouteInformation object for the url</returns>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.RouteInformation.#ctor(System.String,System.Action{System.Web.Routing.RouteCollection})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="a_relativeUrl">The relative url for which to get the route information</param>
+            <param name="a_registerRoutes">Delegate instance to register routes</param>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.RouteInformation.DoesActionRequireAuthorisation(System.String,System.String)">
+            <summary>
+            Tests whether the route action requires authorization to be invoked, i.e. it is 
+            decorated with the AuthorizeAttribute
+            </summary>
+            <param name="a_namespace">The full namespace name to which the controller class belongs</param>
+            <param name="a_assembly">The full assembly name to which the controller class belongs</param>
+            <returns>true if the action requires authorisation, false otherwise</returns>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Mvc.RouteInformation.IsActionOnController(System.String)">
+            <summary>
+            Tests whether or not the action method is on the specified controller class
+            </summary>
+            <param name="a_controller">The name of the controller</param>
+            <returns>true if the action method is in the controller class, false otherwise</returns>
+        </member>
+        <member name="P:Triggerfish.Testing.Web.Mvc.RouteInformation.Url">
+            <summary>
+            Property to get the Url with which this object was constructed
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Testing.Web.Mvc.RouteInformation.Valid">
+            <summary>
+            Test whether or not the url specifies a valid route
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Testing.Web.Mvc.RouteInformation.RouteValues">
+            <summary>
+            Get the RouteDataDictionary containing the route values
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Testing.Web.Mvc.RouteInformation.Controller">
+            <summary>
+            Gets the name of the controller to which this route belongs
+            </summary>
+            <value>
+            The returned value excludes the Controller suffix: for example, it will return 
+            "Authentication", not "AuthenticationController"
+            </value>
+        </member>
+        <member name="P:Triggerfish.Testing.Web.Mvc.RouteInformation.Action">
+            <summary>
+            Gets the name of the action invoked by this route
+            </summary>
+        </member>
+        <member name="T:Triggerfish.Testing.Web.HttpHelpers">
+            <summary>
+            Helpers for mocking http objects
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.HttpHelpers.MockHttpContext(System.String)">
+            <summary>
+            Create a mock HttpContext object
+            </summary>
+            <param name="a_url">The url that initiated the HttpContext (can be null)</param>
+            <returns>The http context</returns>
+        </member>
+        <member name="T:Triggerfish.Testing.Web.Routing.RoutingAssert">
+            <summary>
+            Assert methods for use in unit test projects
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Testing.Web.Routing.RoutingAssert.AreDictionariesEqual(System.Web.Routing.RouteValueDictionary,System.Web.Routing.RouteValueDictionary)">
+            <summary>
+            Tests whether two RouteValueDictionary objects have equal values
+            </summary>
+            <param name="a_expected">The expected values</param>
+            <param name="a_actual">The actual values</param>
         </member>
     </members>
 </doc>

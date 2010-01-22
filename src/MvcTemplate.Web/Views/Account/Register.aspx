@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<ViewData>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<AccountViewData>" %>
 
 <asp:Content ID="Title" ContentPlaceHolderID="MainTitle" runat="server">Register</asp:Content>
 
@@ -22,8 +22,9 @@
         <div class="row"><label for="Surname">Surname:</label><%= Html.TextBox("Surname")%><%= Html.ValidationMessage("Surname") %></div>
     </fieldset>
     <fieldset>
-        <div id="submit-row"><input type="submit" value="Register" /><a href="<%= ViewData["returnUrl"]%>">Cancel</a></div>
+        <div class="align-inputs"><input type="submit" value="Register" /><a href="<%= Model.CancelUrl%>">Cancel</a></div>
+        <div class="align-inputs"><span>Already registered? </span><%= Html.RouteLink("Login", RouteHelpers.LoginRoute(Model.ReturnUrl)) %></div>
     </fieldset>
     <% } %>
-    <%= Html.ClientSideValidation<MvcTemplate.Model.IUser>(null) %>
+    <%--<%= Html.ClientSideValidation<MvcTemplate.Model.IUser>(null) %>--%>
 </asp:Content>

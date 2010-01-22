@@ -8,11 +8,11 @@ namespace MvcTemplate.Web
 {
 	public static class RouteValueDictionaryExtensions
 	{
-		public static RouteValueDictionary AddReturnUrl(this RouteValueDictionary a_route, Uri a_uri)
+		public static RouteValueDictionary AddReturnUrl(this RouteValueDictionary a_route, string a_url)
 		{
-			if (null != a_uri && !String.IsNullOrEmpty(a_uri.PathAndQuery))
+			if (null != a_url && !String.IsNullOrEmpty(a_url))// && a_url != "/")
 			{
-				a_route.Add("returnUrl", a_uri.PathAndQuery);
+				a_route.Add("returnUrl", a_url);
 			}
 			return a_route;
 		}

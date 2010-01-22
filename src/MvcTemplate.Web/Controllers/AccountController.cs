@@ -7,6 +7,7 @@ using System.Web.Mvc.Ajax;
 using Triggerfish.Web.Mvc;
 using MvcTemplate.Model;
 using System.Web.Security;
+using Triggerfish.Testing.Web.Mvc;
 
 namespace MvcTemplate.Web.Controllers
 {
@@ -25,11 +26,21 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Register()
 		{
+			string returnUrl = null;
 			if (null != Request)
 			{
-				ViewData["returnUrl"] = QualifyReturnUrl(Request.QueryString["returnUrl"]);
+				returnUrl = Request.QueryString["returnUrl"];
 			}
-			return View(new ViewData { DisplaySearch = false });
+			if (TempData.ContainsKey("RegisterErrors"))
+			{
+				ModelStateDictionary dic = (ModelStateDictionary)TempData["RegisterErrors"];
+				foreach (var kvp in dic)
+				{
+					ModelState.Add(kvp);
+				}
+			}
+
+			return View(new AccountViewData(returnUrl, true));
 		}
 
 		[Route(Url = "register")]
@@ -39,7 +50,8 @@ namespace MvcTemplate.Web.Controllers
 			// problem with the binding of user
 			if (!ModelState.IsValid)
 			{
-				return View(new ViewData { DisplaySearch = false });
+				TempData["RegisterErrors"] = ModelState;
+				return RedirectToAction("Register", new { returnUrl = returnUrl });
 			} 
 			
 			try
@@ -50,22 +62,24 @@ namespace MvcTemplate.Web.Controllers
 			catch (ValidationException ex)
 			{
 				ex.ToModelErrors(ModelState, "");
-				return View(new ViewData { DisplaySearch = false });
+				TempData["RegisterErrors"] = ModelState;
+				return RedirectToAction("Register", new { returnUrl = returnUrl });
 			}
 
-			return DoRedirect(returnUrl);
+			return Redirect(RouteHelpers.SanitiseUrl(returnUrl, true));
 		}
 
 		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Get)]
         public ViewResult Login()
         {
+			string returnUrl = null;
 			if (null != Request)
 			{
-				ViewData["returnUrl"] = QualifyReturnUrl(Request.QueryString["returnUrl"]);
+				returnUrl = Request.QueryString["returnUrl"];
 			}
-			return View(new ViewData { DisplaySearch = false });
-        }
+			return View(new AccountViewData(returnUrl, true));
+		}
 
 		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Post)]
@@ -74,7 +88,7 @@ namespace MvcTemplate.Web.Controllers
 			// problem with the binding of credentials
 			if (!ModelState.IsValid)
 			{
-				return View(new ViewData { DisplaySearch = false });
+				return View(new AccountViewData(returnUrl, true));
 			}
 
 			try
@@ -85,10 +99,10 @@ namespace MvcTemplate.Web.Controllers
 			catch (ValidationException ex)
 			{
 				ex.ToModelErrors(ModelState, "");
-				return View(new ViewData { DisplaySearch = false });
+				return View(new AccountViewData(returnUrl, true));
 			}
 
-			return DoRedirect(returnUrl);
+			return Redirect(RouteHelpers.SanitiseUrl(returnUrl, true));
 		}
 
 		[Route(Url = "logout")]
@@ -96,21 +110,8 @@ namespace MvcTemplate.Web.Controllers
 		{
 			m_authentication.Logout();
 
-			return DoRedirect(returnUrl);
+			return Redirect(RouteHelpers.SanitiseUrl(returnUrl, false));
 		}
 
-		private ActionResult DoRedirect(string returnUrl)
-		{
-			return Redirect(QualifyReturnUrl(returnUrl));
-		}
-	
-		private string QualifyReturnUrl(string returnUrl)
-		{
-			if (String.IsNullOrEmpty(returnUrl))
-			{
-				returnUrl = "/";
-			}
-			return returnUrl;
-		}
 	}
 }

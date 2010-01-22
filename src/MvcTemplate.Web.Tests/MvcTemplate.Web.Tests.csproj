@@ -87,6 +87,7 @@
     <Compile Include="Helpers\MockArtist.cs" />
     <Compile Include="Helpers\MockGenre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routing\SanitiseUrlTests.cs" />
     <Compile Include="Routing\OutboundRoutingTests.cs" />
     <Compile Include="Routing\InboundRoutingTests.cs" />
   </ItemGroup>

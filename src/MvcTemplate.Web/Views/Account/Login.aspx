@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<MvcTemplate.Web.ViewData>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<AccountViewData>" %>
 
 <asp:Content ID="Title" ContentPlaceHolderID="MainTitle" runat="server">Login</asp:Content>
 
@@ -17,7 +17,8 @@
         <div class="row"><label for="Password">Password:</label><%= Html.Password("Password")%></div>
     </fieldset>
     <fieldset>
-        <div id="submit-row"><input type="submit" value="Login" /><a href="<%= ViewData["returnUrl"]%>">Cancel</a></div>
+        <div class="align-inputs"><input type="submit" value="Login" /><a href="<%= Model.CancelUrl%>">Cancel</a></div>
+        <div class="align-inputs"><span>Not registered? </span><%= Html.RouteLink("Register", RouteHelpers.RegisterRoute(Model.ReturnUrl)) %></div>
     </fieldset>
     <% } %>    
     <%= Html.ClientSideValidation<MvcTemplate.Model.IUserCredentials>(null) %>
