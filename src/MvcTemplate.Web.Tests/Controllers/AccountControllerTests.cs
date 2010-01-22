@@ -31,7 +31,7 @@ namespace MvcTemplate.Web.Tests
 			AccountController controller = new AccountController(null, null);
 
 			// Act
-			ViewResult result = controller.Login();
+			ViewResult result = controller.Login(null);
 
 			// Assert
 			Assert.AreEqual("", result.ViewName);
@@ -82,19 +82,19 @@ namespace MvcTemplate.Web.Tests
 		}
 
 		[TestMethod]
-		public void ShouldRedisplayLoginPageOnLoginFailure()
+		public void ShouldRedirectToLoginOnFailure()
 		{
 			// Arrange
 			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
 			IUserCredentials uc = MockUsers.CreateMockUserCredentials("test", "password");
 
 			// Act
-			ViewResult result = controller.Login(uc, "") as ViewResult;
+			RedirectToRouteResult result = controller.Login(uc, "") as RedirectToRouteResult;
 
 			// Assert
-			Assert.AreEqual("", result.ViewName);
-			Assert.IsFalse(result.ViewData.ModelState.IsValid);
-			Assert.AreEqual(1, result.ViewData.ModelState[""].Errors.Count);
+			Assert.AreEqual("Login", result.RouteValues["action"]);
+			Assert.IsFalse(controller.ViewData.ModelState.IsValid);
+			Assert.AreEqual(1, controller.ViewData.ModelState[""].Errors.Count);
 		}
 
 		[TestMethod]
@@ -171,7 +171,7 @@ namespace MvcTemplate.Web.Tests
 			AccountController controller = new AccountController(null, null);
 
 			// Act
-			ViewResult result = controller.Register();
+			ViewResult result = controller.Register(null);
 
 			// Assert
 			Assert.AreEqual("", result.ViewName);
@@ -221,7 +221,7 @@ namespace MvcTemplate.Web.Tests
 		}
 
 		[TestMethod]
-		public void ShouldRedirectToGetRegisterPageOnFailure()
+		public void ShouldRedirectToRegisterPageOnFailure()
 		{
 			// Arrange
 			AccountController controller = new AccountController(m_authentication.Object, m_membership.Object);
@@ -231,10 +231,8 @@ namespace MvcTemplate.Web.Tests
 
 			// Assert
 			Assert.AreEqual("Register", result.RouteValues["action"]);
-			Assert.IsTrue(controller.TempData.ContainsKey("RegisterErrors"));
-			ModelStateDictionary dic = (ModelStateDictionary)controller.TempData["RegisterErrors"];
-			Assert.AreNotEqual(null, dic);
-			Assert.AreEqual(1, dic["Email"].Errors.Count);
+			Assert.IsFalse(controller.ViewData.ModelState.IsValid);
+			Assert.AreEqual(1, controller.ViewData.ModelState["Email"].Errors.Count);
 		}
 
 		[TestMethod]

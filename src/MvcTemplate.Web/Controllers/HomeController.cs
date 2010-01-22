@@ -20,6 +20,7 @@ namespace MvcTemplate.Web.Controllers
 		}
 
 		[Route(IsRoot = true)]
+		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Index()
 		{
 			ViewData vd = new ViewData() { 

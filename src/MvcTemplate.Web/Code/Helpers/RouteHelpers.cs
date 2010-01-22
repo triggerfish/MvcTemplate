@@ -20,6 +20,11 @@ namespace MvcTemplate.Web
 			return new RouteValueDictionary(new { controller = "Search", action = "Index" });
 		}
 
+		public static RouteValueDictionary SearchResultsRoute()
+		{
+			return new RouteValueDictionary(new { controller = "Search", action = "Results" });
+		}
+
 		public static RouteValueDictionary RegisterRoute(string a_returnUrl)
 		{
 			return new RouteValueDictionary(new { controller = "Account", action = "Register" }).AddReturnUrl(a_returnUrl);

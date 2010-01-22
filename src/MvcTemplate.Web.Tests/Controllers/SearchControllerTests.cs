@@ -30,33 +30,51 @@ namespace MvcTemplate.Web.Tests
 		}
 
 		[TestMethod]
-		public void ShouldPerformSearchOfArtistsAndGenres()
+		public void ShouldRedirectFromSearchPost()
 		{
 			// Arrange
-			string keywords = "Pop";
-
 			Mock<ISearchResults> results = new Mock<ISearchResults>();
-			results.Setup(r => r.Artists).Returns(MockArtist.CreateMockArtists(new List<string> { "Poppy" }));
-			results.Setup(r => r.Genres).Returns(MockGenre.CreateMockGenres(new List<string> { "Pop" }));
-
 			Mock<IArtistsRepository> repository = new Mock<IArtistsRepository>();
-			repository.Setup(r => r.Search(keywords)).Returns(results.Object);
+			repository.Setup(r => r.Search(It.IsAny<string>())).Returns(results.Object);
 
 			SearchController controller = new SearchController(repository.Object);
 
 			// Act
-			ViewResult result = controller.Index("Pop");
+			RedirectToRouteResult result = controller.Index("Pop") as RedirectToRouteResult;
 
 			// Assert
-			Assert.AreEqual("Results", result.ViewName);
-			SearchViewData vd = result.ViewData.Model as SearchViewData;
-			Assert.AreNotEqual(null, vd);
-			Assert.AreEqual(false, vd.DisplaySearch);
-			Assert.AreEqual(1, vd.Results.Artists.Count());
-			Assert.AreEqual(1, vd.Results.Genres.Count());
+			Assert.AreEqual("Results", (string)result.RouteValues["action"]);
+			SearchViewData svd = controller.ViewData.Model as SearchViewData;
+			Assert.AreNotEqual(null, svd);
+			Assert.AreEqual(results.Object, svd.Results);
+		}
 
-			Assert.AreEqual("Poppy", vd.Results.Artists.First().Name);
-			Assert.AreEqual("Pop", vd.Results.Genres.First().Name);
+		[TestMethod]
+		public void ShouldDisplaySearchResults()
+		{
+			// Arrange
+			SearchController controller = new SearchController(null);
+
+			// Act
+			controller.ViewData.Model = new SearchViewData();
+			ViewResult result = controller.Results() as ViewResult;
+
+			// Assert
+			Assert.AreNotEqual(null, result);
+			Assert.AreEqual("", result.ViewName);
+		}
+
+		[TestMethod]
+		public void ShouldRedirectFromSearchResultsIfNoViewData()
+		{
+			// Arrange
+			SearchController controller = new SearchController(null);
+
+			// Act
+			RedirectToRouteResult result = controller.Results() as RedirectToRouteResult;
+
+			// Assert
+			Assert.AreEqual("Index", (string)result.RouteValues["action"]);
 		}
 	}
 }

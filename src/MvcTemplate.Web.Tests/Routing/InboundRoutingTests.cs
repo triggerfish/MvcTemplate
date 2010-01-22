@@ -29,6 +29,12 @@ namespace MvcTemplate.Web.Tests
 		}
 
 		[TestMethod]
+		public void ShouldResolveSearchResultsRoute()
+		{
+			MvcAssert.IsInboundRouteCorrect(RouteHelpers.SearchResultsRoute(), "~/search-results", MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
 		public void ShouldResolveRegisterRoute()
 		{
 			MvcAssert.IsInboundRouteCorrect(RouteHelpers.RegisterRoute(null), "~/register", MvcApplication.RegisterRoutes);

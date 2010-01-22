@@ -19,12 +19,14 @@ namespace MvcTemplate.Web.Controllers
 		}
 
 		[Route(Url = "artists")]
+		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Index()
 		{
 			return View(new ArtistsViewData(m_repository.Artists) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, "All") });
 		}
 
 		[Route(Url = "genre/{genre}")]
+		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Genre(IGenre genre)
 		{
 			if (ModelState.IsValid) // error
@@ -41,6 +43,7 @@ namespace MvcTemplate.Web.Controllers
 		}
 
 		[Route(Url = "artists/{artist}")]
+		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Artist(IArtist artist)
 		{
 			if (ModelState.IsValid)
@@ -58,6 +61,7 @@ namespace MvcTemplate.Web.Controllers
 
 		[Authorize]
 		[Route(Url = "secret")]
+		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Secret()
 		{
 			return View(new ViewData { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, "Secret") });

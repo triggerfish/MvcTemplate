@@ -30,16 +30,29 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "search")]
 		[AcceptVerbs(HttpVerbs.Post)]
-		public ViewResult Index(string keyword)
+		[ExportModelToTempData("SearchResults", typeof(SearchViewData))]
+		public ActionResult Index(string keyword)
 		{
-			SearchViewData vd = new SearchViewData
-			{
+			ViewData.Model = new SearchViewData {
 				Results = m_repository.Search(keyword),
 				DisplaySearch = false,
 				NavBarLinks = GenreHyperlinks.CreateLinks(m_repository)
 			};
 
-			return View("Results", vd);
+			return RedirectToAction("Results");
+		}
+
+		[Route(Url = "search-results")]
+		[AcceptVerbs(HttpVerbs.Get)]
+		[ImportModelFromTempData("SearchResults", typeof(SearchViewData))]
+		public ActionResult Results()
+		{
+			if (ViewData.Model == null)
+			{
+				return RedirectToAction("Index");
+			}
+
+			return View(ViewData.Model);
 		}
 	}
 }

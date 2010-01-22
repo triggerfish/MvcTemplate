@@ -24,33 +24,20 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "register")]
 		[AcceptVerbs(HttpVerbs.Get)]
-		public ViewResult Register()
+		[ImportModelStateFromTempData("RegisterErrors")]
+		public ViewResult Register(string returnUrl)
 		{
-			string returnUrl = null;
-			if (null != Request)
-			{
-				returnUrl = Request.QueryString["returnUrl"];
-			}
-			if (TempData.ContainsKey("RegisterErrors"))
-			{
-				ModelStateDictionary dic = (ModelStateDictionary)TempData["RegisterErrors"];
-				foreach (var kvp in dic)
-				{
-					ModelState.Add(kvp);
-				}
-			}
-
 			return View(new AccountViewData(returnUrl, true));
 		}
 
 		[Route(Url = "register")]
 		[AcceptVerbs(HttpVerbs.Post)]
+		[ExportModelStateToTempData("RegisterErrors")]
 		public ActionResult Register(IUser user, string returnUrl)
 		{
 			// problem with the binding of user
 			if (!ModelState.IsValid)
 			{
-				TempData["RegisterErrors"] = ModelState;
 				return RedirectToAction("Register", new { returnUrl = returnUrl });
 			} 
 			
@@ -62,33 +49,29 @@ namespace MvcTemplate.Web.Controllers
 			catch (ValidationException ex)
 			{
 				ex.ToModelErrors(ModelState, "");
-				TempData["RegisterErrors"] = ModelState;
 				return RedirectToAction("Register", new { returnUrl = returnUrl });
 			}
 
-			return Redirect(RouteHelpers.SanitiseUrl(returnUrl, true));
+			return this.SanitisedRedirect(returnUrl);
 		}
 
 		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Get)]
-        public ViewResult Login()
+		[ImportModelStateFromTempData("LoginErrors")]
+		public ViewResult Login(string returnUrl)
         {
-			string returnUrl = null;
-			if (null != Request)
-			{
-				returnUrl = Request.QueryString["returnUrl"];
-			}
 			return View(new AccountViewData(returnUrl, true));
 		}
 
 		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Post)]
+		[ExportModelStateToTempData("LoginErrors")]
 		public ActionResult Login(IUserCredentials credentials, string returnUrl)
 		{
 			// problem with the binding of credentials
 			if (!ModelState.IsValid)
 			{
-				return View(new AccountViewData(returnUrl, true));
+				return RedirectToAction("Login", new { returnUrl = returnUrl });
 			}
 
 			try
@@ -99,18 +82,19 @@ namespace MvcTemplate.Web.Controllers
 			catch (ValidationException ex)
 			{
 				ex.ToModelErrors(ModelState, "");
-				return View(new AccountViewData(returnUrl, true));
+				return RedirectToAction("Login", new { returnUrl = returnUrl });
 			}
 
-			return Redirect(RouteHelpers.SanitiseUrl(returnUrl, true));
+			return this.SanitisedRedirect(returnUrl);
 		}
 
 		[Route(Url = "logout")]
+		[AcceptVerbs(HttpVerbs.Get)]
 		public ActionResult Logout(string returnUrl)
 		{
 			m_authentication.Logout();
 
-			return Redirect(RouteHelpers.SanitiseUrl(returnUrl, false));
+			return this.SanitisedRedirect(returnUrl, false);
 		}
 
 	}
