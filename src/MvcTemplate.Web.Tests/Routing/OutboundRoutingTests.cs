@@ -62,5 +62,11 @@ namespace MvcTemplate.Web.Tests
 			IArtist a = MockArtist.CreateMockArtist(3, "Crosby Stills And Nash");
 			MvcAssert.IsOutboundRouteCorrect("/artists/crosby-stills-and-nash", RouteHelpers.ArtistRoute(a), MvcApplication.RegisterRoutes);
 		}
+
+		[TestMethod]
+		public void ShouldResolveSecretRoute()
+		{
+			MvcAssert.IsOutboundRouteCorrect("/secret", RouteHelpers.SecretRoute(), MvcApplication.RegisterRoutes);
+		}
 	}
 }

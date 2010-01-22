@@ -89,6 +89,19 @@ namespace MvcTemplate.Web.Tests
 			Assert.AreEqual("Artist", vd.Artist.Name);
 		}
 
+		[TestMethod]
+		public void ShouldDisplaySecret()
+		{
+			// Arrange
+			ArtistsController controller = new ArtistsController(null);
+
+			// Act
+			ViewResult result = controller.Secret();
+
+			// Assert
+			Assert.AreEqual("", result.ViewName);
+		}
+
 		private void ValidateArtistsList(IList<string> a_expected, IList<IArtist> a_actual)
 		{
 			Assert.AreEqual(a_expected.Count, a_actual.Count);

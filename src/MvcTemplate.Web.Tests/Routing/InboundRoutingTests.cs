@@ -67,6 +67,12 @@ namespace MvcTemplate.Web.Tests
 		}
 
 		[TestMethod]
+		public void ShouldResolveSecretRoute()
+		{
+			MvcAssert.IsInboundRouteCorrect(RouteHelpers.SecretRoute(), "~/secret", MvcApplication.RegisterRoutes);
+		}
+
+		[TestMethod]
 		public void SlashControllerSlashActionIsValid()
 		{
 			MvcAssert.IsInboundRouteCorrect(new	{

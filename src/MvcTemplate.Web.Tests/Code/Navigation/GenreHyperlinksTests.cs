@@ -12,15 +12,16 @@ namespace MvcTemplate.Web.Tests
 	public class GenreHyperlinksTests
 	{
 		[TestMethod]
-		public void ShouldGenerateAllLinkOnlyWhenNoRepository()
+		public void ShouldGenerateAllAndSecretLinksOnlyWhenNoRepository()
 		{
 			// Act
 			IList<Hyperlink> links = GenreHyperlinks.CreateLinks(null);
 
 			// Assert
 			Assert.AreNotEqual(null, links);
-			Assert.AreEqual(1, links.Count);
+			Assert.AreEqual(2, links.Count);
 			Assert.AreEqual(links[0].Text, "All");
+			Assert.AreEqual(links[1].Text, "Secret");
 		}
 
 		[TestMethod]
@@ -38,7 +39,7 @@ namespace MvcTemplate.Web.Tests
 
 			// Assert
 			Assert.AreNotEqual(null, links);
-			Assert.AreEqual(genres.Count + 1, links.Count);
+			Assert.AreEqual(genres.Count + 2, links.Count);
 			Assert.AreEqual(links[0].Text, "All");
 			Assert.AreEqual(false, links[0].IsSelected);
 

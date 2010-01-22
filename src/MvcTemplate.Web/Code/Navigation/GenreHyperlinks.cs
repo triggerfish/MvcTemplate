@@ -37,6 +37,12 @@ namespace MvcTemplate.Web
 				});
 			}
 
+			nav.Add(new Hyperlink()
+			{
+				Text = "Secret",
+				Route = RouteHelpers.SecretRoute()
+			});
+
 			if (!String.IsNullOrEmpty(a_toSelect))
 			{
 				Hyperlink l = nav.FirstOrDefault(h => (0 == String.Compare(h.Text, a_toSelect, true)));

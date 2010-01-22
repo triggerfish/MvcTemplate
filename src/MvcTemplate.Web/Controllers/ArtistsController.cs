@@ -55,5 +55,12 @@ namespace MvcTemplate.Web.Controllers
 				});
 			}
 		}
+
+		[Authorize]
+		[Route(Url = "secret")]
+		public ViewResult Secret()
+		{
+			return View(new ViewData { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, "Secret") });
+		}
 	}
 }
