@@ -58,10 +58,5 @@ namespace MvcTemplate.Web
 		{
 			return new RouteValueDictionary(new { controller = "Artists", action = "Secret" });
 		}
-
-		public static string SanitiseUrl(string a_url, bool a_allowAuthoriseAttributeOnAction)
-		{
-			return RouteInformation.Create(a_url, MvcApplication.RegisterRoutes).SanitiseUrl(a_allowAuthoriseAttributeOnAction);
-		}
 	}
 }

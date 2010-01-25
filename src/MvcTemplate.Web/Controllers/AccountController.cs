@@ -38,7 +38,7 @@ namespace MvcTemplate.Web.Controllers
 			// problem with the binding of user
 			if (!ModelState.IsValid)
 			{
-				return RedirectToAction("Register", new { returnUrl = returnUrl });
+				return RedirectTo("Register", returnUrl);
 			} 
 			
 			try
@@ -49,10 +49,10 @@ namespace MvcTemplate.Web.Controllers
 			catch (ValidationException ex)
 			{
 				ex.ToModelErrors(ModelState, "");
-				return RedirectToAction("Register", new { returnUrl = returnUrl });
+				return RedirectTo("Register", returnUrl);
 			}
 
-			return this.SanitisedRedirect(returnUrl);
+			return Redirect(UrlHelpers.SanitiseUrl(returnUrl));
 		}
 
 		[Route(Url = "login")]
@@ -71,7 +71,7 @@ namespace MvcTemplate.Web.Controllers
 			// problem with the binding of credentials
 			if (!ModelState.IsValid)
 			{
-				return RedirectToAction("Login", new { returnUrl = returnUrl });
+				return RedirectTo("Login", returnUrl);
 			}
 
 			try
@@ -82,10 +82,10 @@ namespace MvcTemplate.Web.Controllers
 			catch (ValidationException ex)
 			{
 				ex.ToModelErrors(ModelState, "");
-				return RedirectToAction("Login", new { returnUrl = returnUrl });
+				return RedirectTo("Login", returnUrl);
 			}
 
-			return this.SanitisedRedirect(returnUrl);
+			return Redirect(UrlHelpers.SanitiseUrl(returnUrl));
 		}
 
 		[Route(Url = "logout")]
@@ -94,8 +94,14 @@ namespace MvcTemplate.Web.Controllers
 		{
 			m_authentication.Logout();
 
-			return this.SanitisedRedirect(returnUrl, false);
+			return Redirect(UrlHelpers.SanitiseUrl(returnUrl, false));
 		}
 
+		private RedirectToRouteResult RedirectTo(string a_action, string a_returnUrl)
+		{
+			RedirectToRouteResult res = RedirectToAction(a_action);
+			res.RouteValues.AddReturnUrl(a_returnUrl);
+			return res;
+		}
 	}
 }

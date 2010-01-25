@@ -3,9 +3,9 @@
 <asp:Content ID="Title" ContentPlaceHolderID="MainTitle" runat="server">Register</asp:Content>
 
 <asp:Content ID="Scripts" ContentPlaceHolderID="Scripts" runat="server">
-	<script src="<%= Url.Content("~/content/scripts/jquery-1.3.2.min.js") %>" type="text/javascript"></script>
-	<script src="<%= Url.Content("~/content/scripts/jquery.validate-1.5.5.min.js") %>" type="text/javascript"></script>
-	<script src="<%= Url.Content("~/content/scripts/xVal.jquery.validate-1.0.js") %>" type="text/javascript"></script>
+	<script src="<%= Url.Script("jquery-1.3.2.min.js") %>" type="text/javascript"></script>
+	<script src="<%= Url.Script("jquery.validate-1.5.5.min.js") %>" type="text/javascript"></script>
+	<script src="<%= Url.Script("xVal.jquery.validate-1.0.js") %>" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">

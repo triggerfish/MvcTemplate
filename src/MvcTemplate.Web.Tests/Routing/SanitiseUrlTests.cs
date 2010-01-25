@@ -16,25 +16,25 @@ namespace MvcTemplate.Web.Tests
 		[TestMethod]
 		public void ShouldSanitiseValidRoute()
 		{
-			Assert.AreEqual("/artists", RouteHelpers.SanitiseUrl("/artists", true));
+			Assert.AreEqual("/artists", UrlHelpers.SanitiseUrl("/artists", true));
 		}
 	
 		[TestMethod]
 		public void ShouldSanitiseInvalidRoute()
 		{
-			Assert.AreEqual("/", RouteHelpers.SanitiseUrl("/invalid", true));
+			Assert.AreEqual("/", UrlHelpers.SanitiseUrl("/invalid", true));
 		}
 
 		[TestMethod]
 		public void ShouldSanitiseRouteRequiringAuthorisation1()
 		{
-			Assert.AreEqual("/secret", RouteHelpers.SanitiseUrl("/secret", true));
+			Assert.AreEqual("/secret", UrlHelpers.SanitiseUrl("/secret", true));
 		}
 
 		[TestMethod]
 		public void ShouldSanitiseRouteRequiringAuthorisation2()
 		{
-			Assert.AreEqual("/", RouteHelpers.SanitiseUrl("/secret", false));
+			Assert.AreEqual("/", UrlHelpers.SanitiseUrl("/secret", false));
 		}
 	}
 }

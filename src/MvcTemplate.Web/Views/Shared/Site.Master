@@ -5,7 +5,7 @@
 <head id="head" runat="server">
 	<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
 	<title><asp:ContentPlaceHolder ID="MainTitle" runat="server" /></title>
-	<link href="<%= Url.Content("~/content/styles/site.css") %>" rel="stylesheet" type="text/css" />
+	<link href="<%= Url.Stylesheet("site.css") %>" rel="stylesheet" type="text/css" />
 	<asp:ContentPlaceHolder ID="Scripts" runat="server" />
 </head>
 
