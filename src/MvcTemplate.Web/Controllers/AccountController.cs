@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using Triggerfish.Web.Mvc;
+using Triggerfish.Web.Routing;
 using MvcTemplate.Model;
-using System.Web.Security;
-using Triggerfish.Testing.Web.Mvc;
+using Triggerfish.Validator;
 
 namespace MvcTemplate.Web.Controllers
 {
@@ -24,7 +24,7 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "register")]
 		[AcceptVerbs(HttpVerbs.Get)]
-		[ImportModelStateFromTempData("RegisterErrors")]
+		[ImportModelState("RegisterErrors")]
 		public ViewResult Register(string returnUrl)
 		{
 			return View(new AccountViewData(returnUrl, true));
@@ -32,7 +32,7 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "register")]
 		[AcceptVerbs(HttpVerbs.Post)]
-		[ExportModelStateToTempData("RegisterErrors")]
+		[ExportModelState("RegisterErrors")]
 		public ActionResult Register(IUser user, string returnUrl)
 		{
 			// problem with the binding of user
@@ -57,7 +57,7 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Get)]
-		[ImportModelStateFromTempData("LoginErrors")]
+		[ImportModelState("LoginErrors")]
 		public ViewResult Login(string returnUrl)
         {
 			return View(new AccountViewData(returnUrl, true));
@@ -65,7 +65,7 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Post)]
-		[ExportModelStateToTempData("LoginErrors")]
+		[ExportModelState("LoginErrors")]
 		public ActionResult Login(IUserCredentials credentials, string returnUrl)
 		{
 			// problem with the binding of credentials

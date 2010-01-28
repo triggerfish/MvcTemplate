@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Text.RegularExpressions;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using Triggerfish.Web.Mvc;
 using MvcTemplate.Model;
 
@@ -30,7 +29,7 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "search")]
 		[AcceptVerbs(HttpVerbs.Post)]
-		[ExportModelToTempData("SearchResults", typeof(SearchViewData))]
+		[ExportModel("SearchResults", typeof(SearchViewData))]
 		public ActionResult Index(string keyword)
 		{
 			ViewData.Model = new SearchViewData {
@@ -44,7 +43,7 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "search-results")]
 		[AcceptVerbs(HttpVerbs.Get)]
-		[ImportModelFromTempData("SearchResults", typeof(SearchViewData))]
+		[ImportModel("SearchResults", typeof(SearchViewData))]
 		public ActionResult Results()
 		{
 			if (ViewData.Model == null)
