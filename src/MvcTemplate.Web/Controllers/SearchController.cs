@@ -11,7 +11,8 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Web.Controllers
 {
-    public class SearchController : Controller
+	[NavBarLinkGenerator(typeof(GenresNavBarHyperlinkGenerator))]
+	public class SearchController : Controller
     {
 		private IArtistsRepository m_repository;
 
@@ -24,7 +25,7 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Index()
         {
-			return View(new SearchViewData { DisplaySearch = false, NavBarLinks = GenreHyperlinks.CreateLinks(m_repository) });
+			return View(new SearchViewData());
         }
 
 		[Route(Url = "search")]
@@ -33,9 +34,7 @@ namespace MvcTemplate.Web.Controllers
 		public ActionResult Index(string keyword)
 		{
 			ViewData.Model = new SearchViewData {
-				Results = m_repository.Search(keyword),
-				DisplaySearch = false,
-				NavBarLinks = GenreHyperlinks.CreateLinks(m_repository)
+				Results = m_repository.Search(keyword)
 			};
 
 			return RedirectToAction("Results");

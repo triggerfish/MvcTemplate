@@ -9,6 +9,8 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Web.Controllers
 {
+	[HandleError]
+	[NavBarLinkGenerator(typeof(GenresNavBarHyperlinkGenerator))]
     public class ArtistsController : Controller
     {
 		private IArtistsRepository m_repository;
@@ -24,7 +26,9 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult AllArtists(int page)
 		{
-			return View(new ArtistsViewData(m_repository.Artists.ToPagedList(page, ArtistsViewData.c_itemsPerPageCount)) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, "All") });
+			ArtistsViewData vd = new ArtistsViewData(m_repository.Artists.ToPagedList(page, ArtistsViewData.c_itemsPerPageCount));
+			vd.NavBarWidget.Selected = "All";
+			return View(vd);
 		}
 
 		[Route(Url = "genre/{genre}")]
@@ -33,14 +37,14 @@ namespace MvcTemplate.Web.Controllers
 		{
 			if (ModelState.IsValid) // error
 			{
-				return View(new GenreViewData(genre) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, genre.Name) });
+				GenreViewData vd = new GenreViewData(genre);
+				vd.NavBarWidget.Selected = genre.Name;
+				return View(vd);
 			}
 			else
 			{
-				return View("Error", new ErrorViewData(new Exception(ModelState["genre"].Errors.First().ErrorMessage)) // how to get the duff data?
-				{
-					NavBarLinks = GenreHyperlinks.CreateLinks(m_repository)
-				});
+				// captured by [HandleError]
+				throw new ArgumentException(ModelState["genre"].Errors.First().ErrorMessage);
 			}
 		}
 
@@ -50,14 +54,12 @@ namespace MvcTemplate.Web.Controllers
 		{
 			if (ModelState.IsValid)
 			{
-				return View(new ArtistViewData(artist) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository) });
+				return View(new ArtistViewData(artist));
 			}
 			else
 			{
-				return View("Error", new ErrorViewData(new Exception(ModelState["artist"].Errors.First().ErrorMessage)) // how to get the duff data?
-				{
-					NavBarLinks = GenreHyperlinks.CreateLinks(m_repository)
-				});
+				// captured by [HandleError]
+				throw new ArgumentException(ModelState["artist"].Errors.First().ErrorMessage);
 			}
 		}
 
@@ -66,7 +68,9 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Secret()
 		{
-			return View(new ViewData { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, "Secret") });
+			ViewData vd = new ViewData();
+			vd.NavBarWidget.Selected = "Secret";
+			return View(vd);
 		}
 	}
 }

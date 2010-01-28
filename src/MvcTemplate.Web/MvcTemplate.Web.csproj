@@ -103,6 +103,8 @@
     <Compile Include="Code\Binders\ModelBinder.cs" />
     <Compile Include="Code\Diagnostics\Diagnostics.cs" />
     <Compile Include="Code\Diagnostics\DiagnosticsModule.cs" />
+    <Compile Include="Code\Filters\HandleErrorAttribute.cs" />
+    <Compile Include="Code\Filters\NavBarLinkGeneratorAttribute.cs" />
     <Compile Include="Code\Helpers\PagedListExtensions.cs" />
     <Compile Include="Code\Helpers\UrlExtensions.cs" />
     <Compile Include="Code\Helpers\RouteHelpers.cs" />
@@ -110,14 +112,16 @@
     <Compile Include="Code\Helpers\RouteExtensions.cs" />
     <Compile Include="Code\Helpers\UrlHelpers.cs" />
     <Compile Include="Code\IoC\WebDependencies.cs" />
-    <Compile Include="Code\Navigation\GenreHyperlinks.cs" />
+    <Compile Include="Code\Navigation\NavBarWidget.cs" />
+    <Compile Include="Code\Navigation\HyperlinkGenerator.cs" />
+    <Compile Include="Code\Navigation\GenresNavBarHyperlinkGenerator.cs" />
     <Compile Include="Code\Navigation\Hyperlink.cs" />
     <Compile Include="Code\ViewData\ArtistsViewData.cs" />
     <Compile Include="Code\ViewData\AccountViewData.cs" />
+    <Compile Include="Code\ViewData\ErrorViewData.cs" />
     <Compile Include="Code\ViewData\GenreViewData.cs" />
     <Compile Include="Code\ViewData\ArtistViewData.cs" />
     <Compile Include="Code\ViewData\SearchViewData.cs" />
-    <Compile Include="Code\ViewData\ErrorViewData.cs" />
     <Compile Include="Code\ViewData\ViewData.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArtistsController.cs" />
@@ -170,7 +174,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Code\Filters\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

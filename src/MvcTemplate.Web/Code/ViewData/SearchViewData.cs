@@ -9,5 +9,10 @@ namespace MvcTemplate.Web
 	public class SearchViewData : ViewData
 	{
 		public ISearchResults Results { get; set; }
+
+		public SearchViewData()
+		{
+			DisplaySearch = false;
+		}
 	}
 }

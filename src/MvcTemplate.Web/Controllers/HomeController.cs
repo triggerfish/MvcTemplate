@@ -9,7 +9,7 @@ using Triggerfish.Web.Mvc;
 
 namespace MvcTemplate.Web.Controllers
 {
-	[HandleError]
+	[NavBarLinkGenerator(typeof(GenresNavBarHyperlinkGenerator))]
 	public class HomeController : Controller
 	{
 		private IArtistsRepository m_repository;
@@ -23,11 +23,7 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Index()
 		{
-			ViewData vd = new ViewData() { 
-				NavBarLinks = GenreHyperlinks.CreateLinks(m_repository)
-			};
-			
-			return View(vd);
+			return View(new ViewData());
 		}
 	}
 }

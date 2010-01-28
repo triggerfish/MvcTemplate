@@ -36,7 +36,7 @@
 	</div>
 
 	<div id="navbar">
-	    <% if (null != model.NavBarLinks) { Html.RenderPartial("NavBar", model.NavBarLinks); }%>
+	    <% Html.RenderPartial("NavBar", model.NavBarWidget);%>
 	</div>
 
 	<div id="content">
