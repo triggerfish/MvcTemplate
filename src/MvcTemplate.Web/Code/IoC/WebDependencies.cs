@@ -1,6 +1,8 @@
 ﻿using Ninject.Modules;
 using System.Security.Cryptography;
+using Triggerfish.Web.Mvc;
 using MvcTemplate.Model;
+using Triggerfish.Security;
 
 namespace MvcTemplate.Web
 {
@@ -28,6 +30,12 @@ namespace MvcTemplate.Web
 				.InRequestScope();
 			Bind<ModelBinder<IUser>>()
 				.To<UserBinder>()
+				.InRequestScope();
+			Bind<IPageLinksAlgorithm>()
+				.To<PageLinkCentredAlgorithm>()
+				.InRequestScope();
+			Bind<IPageLinkHtmlGenerator>()
+				.To<FirstPrevNextLastPageLinkHtmlGenerator>()
 				.InRequestScope();
 		}
     }

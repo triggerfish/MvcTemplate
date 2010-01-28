@@ -18,11 +18,13 @@ namespace MvcTemplate.Web.Controllers
 			m_repository = a_repository;
 		}
 
-		[Route(Url = "artists")]
+		[Route(Url = "artists/{page}")]
+		[RouteDefault(Name = "page", Value = 1)]
+		[RouteConstraint(Name = "page", Regex = @"\d+")]
 		[AcceptVerbs(HttpVerbs.Get)]
-		public ViewResult Index()
+		public ViewResult AllArtists(int page)
 		{
-			return View(new ArtistsViewData(m_repository.Artists) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, "All") });
+			return View(new ArtistsViewData(m_repository.Artists.ToPagedList(page, ArtistsViewData.c_itemsPerPageCount)) { NavBarLinks = GenreHyperlinks.CreateLinks(m_repository, "All") });
 		}
 
 		[Route(Url = "genre/{genre}")]
@@ -42,7 +44,7 @@ namespace MvcTemplate.Web.Controllers
 			}
 		}
 
-		[Route(Url = "artists/{artist}")]
+		[Route(Url = "artist/{artist}")]
 		[AcceptVerbs(HttpVerbs.Get)]
 		public ViewResult Artist(IArtist artist)
 		{

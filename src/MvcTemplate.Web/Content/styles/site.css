@@ -90,8 +90,8 @@ fieldset #submit-row a {
 }
 
 #header #search {
-	display: inline;
 	float: right;
+	margin-top: 0.5em;
 }
 
 #navbar {
@@ -214,4 +214,39 @@ fieldset #submit-row a {
 .validation-summary-errors {
 	color: red; 
 	margin-left: 11em;
+}
+
+.pager {
+	float: right;
+	padding-top: 0.6em;
+}
+
+.pager a, .pager .disabled, .pager .selected {
+	padding: .2em .5em .2em .5em; 
+}
+
+.pager .first, .pager .prev {
+	border-right: 1px solid #444;
+}
+
+.pager .next, .pager .last {
+	border-left: 1px solid #444;
+}
+
+.pager a {
+	color: black;
+	text-decoration: none;
+}
+
+.pager a:hover { 
+	background-color: #ccc; 
+}
+
+.pager .disabled {
+	color: Gray;
+}
+
+.pager .selected {
+	color: #FF6A00; 
+	font-weight: bold;
 }
