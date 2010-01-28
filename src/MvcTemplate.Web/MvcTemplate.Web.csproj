@@ -151,7 +151,6 @@
     <Content Include="Views\Artists\Secret.aspx" />
     <Content Include="Views\Search\Index.aspx" />
     <Content Include="Views\Search\Results.aspx" />
-    <Content Include="Views\Search\SearchResultsList.ascx" />
     <Content Include="Views\Shared\GenreList.ascx" />
     <Content Include="Views\Shared\SearchForm.ascx" />
     <Content Include="Views\Shared\NavBar.ascx" />
