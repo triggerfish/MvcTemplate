@@ -1,5 +1,5 @@
 <%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
-<% ViewData vd = ViewData.Model as ViewData; %>
+<% ViewData model = ViewData.Model as ViewData; %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="head" runat="server">
@@ -18,7 +18,7 @@
     <% } %>
     </div>
     <div id="auth-links">
-        <% if (vd.DisplayAuthLinks) { %>
+        <% if (model.DisplayAuthLinks) { %>
             <% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
             <%= Html.RouteLink("Logout", RouteHelpers.LogoutRoute(Request.Url.PathAndQuery))%>
             <% } else { %>
@@ -27,16 +27,16 @@
 	    <% } %>
 	</div>
     <div id="header">
-	    <div id="website-name"><%= Html.RouteLink(System.Web.Configuration.WebConfigurationManager.AppSettings["WebSiteName"], RouteHelpers.HomeRoute()) %></div>
-	    <% if (vd.DisplaySearch) { %>
+	    <% if (model.DisplaySearch) { %>
 		<div id="search">
 		    <% Html.RenderPartial("SearchForm"); %>
 		</div>
 		<% } %>
+	    <div id="website-name"><%= Html.RouteLink(System.Web.Configuration.WebConfigurationManager.AppSettings["WebSiteName"], RouteHelpers.HomeRoute()) %></div>
 	</div>
 
 	<div id="navbar">
-	    <% if (null != vd.NavBarLinks) { Html.RenderPartial("NavBar", vd.NavBarLinks); }%>
+	    <% if (null != model.NavBarLinks) { Html.RenderPartial("NavBar", model.NavBarLinks); }%>
 	</div>
 
 	<div id="content">
