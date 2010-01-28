@@ -11,9 +11,9 @@ namespace MvcTemplate.Web
 {
 	public class DiagnosticsModule : IHttpModule
 	{
-		public void Init(HttpApplication a_context)
+		public void Init(HttpApplication appContext)
 		{
-			a_context.PreRequestHandlerExecute += (sender, e) =>
+			appContext.PreRequestHandlerExecute += (sender, e) =>
 			{
 				// Set up a new empty log
 				HttpContext context = ((HttpApplication)sender).Context;
@@ -22,7 +22,7 @@ namespace MvcTemplate.Web
 				d.Start();
 			};
 
-			a_context.PostRequestHandlerExecute += (sender, e) =>
+			appContext.PostRequestHandlerExecute += (sender, e) =>
 			{
 				HttpContext context = ((HttpApplication)sender).Context;
 				Diagnostics d = context.Items["MvcTemplate.Web.Diagnostics"] as Diagnostics;

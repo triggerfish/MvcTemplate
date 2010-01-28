@@ -10,9 +10,9 @@ namespace MvcTemplate.Web
 	{
 		public IArtist Artist { get; private set; }
 
-		public ArtistViewData(IArtist a_artist)
+		public ArtistViewData(IArtist artist)
 		{
-			Artist = a_artist;
+			Artist = artist;
 		}
 	}
 }

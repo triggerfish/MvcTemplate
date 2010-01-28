@@ -9,14 +9,14 @@ namespace MvcTemplate.Web
 {
 	public static class RouteExtensions
 	{
-		public static RouteValueDictionary Route(this IArtist a_artist)
+		public static RouteValueDictionary Route(this IArtist artist)
 		{
-			return RouteHelpers.ArtistRoute(a_artist);
+			return RouteHelpers.ArtistRoute(artist);
 		}
 
-		public static RouteValueDictionary Route(this IGenre a_genre)
+		public static RouteValueDictionary Route(this IGenre genre)
 		{
-			return RouteHelpers.GenreRoute(a_genre);
+			return RouteHelpers.GenreRoute(genre);
 		}
 	}
 }

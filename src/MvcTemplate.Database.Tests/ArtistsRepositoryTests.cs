@@ -72,9 +72,9 @@ namespace MvcTemplate.Database.Tests
 			Assert.AreEqual(0, results.Artists.Count());
 		}
 
-		protected override void SetupContext(ISession a_session)
+		protected override void SetupContext(ISession session)
 		{
-			m_repository = new ArtistsRepository(a_session);
+			m_repository = new ArtistsRepository(session);
 
 			SortedDictionary<int, Artist> artists = new SortedDictionary<int, Artist>();
 			for (int i = 1; i <= 4; i++)
@@ -88,17 +88,17 @@ namespace MvcTemplate.Database.Tests
 			Genre rock = new Genre { Name = "Rock" };
 			rock.AddArtists(artists.Values.Skip(2).Take(2));
 
-			a_session.Save(pop);
-			a_session.Save(rock);
+			session.Save(pop);
+			session.Save(rock);
 		}
 
-		private void ValidateArtists(IEnumerable<Artist> a_artists, int a_iExpectedCount)
+		private void ValidateArtists(IEnumerable<Artist> artists, int iExpectedCount)
 		{
-			Assert.AreNotEqual(null, a_artists);
-			Assert.AreEqual(a_iExpectedCount, a_artists.Count());
+			Assert.AreNotEqual(null, artists);
+			Assert.AreEqual(iExpectedCount, artists.Count());
 
 			int i = 1;
-			foreach (IArtist a in a_artists)
+			foreach (IArtist a in artists)
 			{
 				Assert.AreEqual(i.ToString(), a.Name);
 				Assert.AreEqual(i++, a.Id);

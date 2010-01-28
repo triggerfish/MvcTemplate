@@ -11,10 +11,10 @@ namespace MvcTemplate.Web
 		public string SelectedGenre { get; private set; }
 		public IEnumerable<IArtist> Artists { get; private set; }
 
-		public GenreViewData(IGenre a_genre)
+		public GenreViewData(IGenre genre)
 		{
-			Artists = a_genre.Artists;
-			SelectedGenre = a_genre.Name;
+			Artists = genre.Artists;
+			SelectedGenre = genre.Name;
 		}
 	}
 }

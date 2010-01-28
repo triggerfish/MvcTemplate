@@ -271,20 +271,20 @@ namespace MvcTemplate.Web.Tests
 			m_membership.Setup(x => x.Register(m_user)).Throws(new ValidationException("Email", "Email already registered"));
 		}
 
-		private void ShouldRedirectToUrl<TParam>(Func<TParam, string, ActionResult> a_actionMethod, TParam a_param)
+		private void ShouldRedirectToUrl<TParam>(Func<TParam, string, ActionResult> actionMethod, TParam param)
 		{
 			// Act
-			RedirectResult result = a_actionMethod(a_param, "/artists") as RedirectResult;
+			RedirectResult result = actionMethod(param, "/artists") as RedirectResult;
 
 			// Assert
 			Assert.AreNotEqual(null, result);
 			Assert.AreEqual("/artists", result.Url);
 		}
 
-		public void ShouldRedirectToHomePage<TParam>(Func<TParam, string, ActionResult> a_actionMethod, TParam a_param)
+		public void ShouldRedirectToHomePage<TParam>(Func<TParam, string, ActionResult> actionMethod, TParam param)
 		{
 			// Act
-			RedirectResult result = a_actionMethod(a_param, null) as RedirectResult;
+			RedirectResult result = actionMethod(param, null) as RedirectResult;
 
 			// Assert
 			Assert.AreNotEqual(null, result);

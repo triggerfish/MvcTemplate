@@ -25,24 +25,24 @@ namespace MvcTemplate.Web
 			return new RouteValueDictionary(new { controller = "Search", action = "Results" });
 		}
 
-		public static RouteValueDictionary RegisterRoute(string a_returnUrl)
+		public static RouteValueDictionary RegisterRoute(string returnUrl)
 		{
-			return new RouteValueDictionary(new { controller = "Account", action = "Register" }).AddReturnUrl(a_returnUrl);
+			return new RouteValueDictionary(new { controller = "Account", action = "Register" }).AddReturnUrl(returnUrl);
 		}
 
-		public static RouteValueDictionary LoginRoute(string a_returnUrl)
+		public static RouteValueDictionary LoginRoute(string returnUrl)
 		{
-			return new RouteValueDictionary(new { controller = "Account", action = "Login" }).AddReturnUrl(a_returnUrl);
+			return new RouteValueDictionary(new { controller = "Account", action = "Login" }).AddReturnUrl(returnUrl);
 		}
 
-		public static RouteValueDictionary LogoutRoute(string a_returnUrl)
+		public static RouteValueDictionary LogoutRoute(string returnUrl)
 		{
-			return new RouteValueDictionary(new { controller = "Account", action = "Logout" }).AddReturnUrl(a_returnUrl);
+			return new RouteValueDictionary(new { controller = "Account", action = "Logout" }).AddReturnUrl(returnUrl);
 		}
 
-		public static RouteValueDictionary GenreRoute(IGenre a_genre)
+		public static RouteValueDictionary GenreRoute(IGenre genre)
 		{
-			return new RouteValueDictionary(new { controller = "Artists", action = "Genre", genre = a_genre.Name });
+			return new RouteValueDictionary(new { controller = "Artists", action = "Genre", genre = genre.Name });
 		}
 
 		public static RouteValueDictionary AllArtistsRoute()
@@ -55,9 +55,9 @@ namespace MvcTemplate.Web
 			return new RouteValueDictionary(new { controller = "Artists", action = "AllArtists", page = page });
 		}
 
-		public static RouteValueDictionary ArtistRoute(IArtist a_artist)
+		public static RouteValueDictionary ArtistRoute(IArtist artist)
 		{
-			return new RouteValueDictionary(new { controller = "Artists", action = "Artist", artist = a_artist.Name });
+			return new RouteValueDictionary(new { controller = "Artists", action = "Artist", artist = artist.Name });
 		}
 		public static RouteValueDictionary SecretRoute()
 		{

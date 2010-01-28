@@ -13,10 +13,10 @@ namespace MvcTemplate.Web
 		private IUserRepository m_repository;
 		private IEncryptor m_encryptor;
 
-		public UserBinder(IUserRepository a_repository, IEncryptor a_encryptor)
+		public UserBinder(IUserRepository repository, IEncryptor encryptor)
 		{
-			m_repository = a_repository;
-			m_encryptor = a_encryptor;
+			m_repository = repository;
+			m_encryptor = encryptor;
 		}
 		
 		protected override object Bind()

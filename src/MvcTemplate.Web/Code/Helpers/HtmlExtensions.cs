@@ -10,20 +10,20 @@ namespace MvcTemplate.Web
 {
 	public static class HtmlExtensions
 	{
-		public static string RouteLink(this HtmlHelper a_html, Hyperlink a_link)
+		public static string RouteLink(this HtmlHelper html, Hyperlink link)
 		{
-			return a_html.RouteLink(a_link.Text, a_link.Route);
+			return html.RouteLink(link.Text, link.Route);
 		}
 
-		public static string ActionLink(this HtmlHelper a_html, IArtist a_artist)
+		public static string ActionLink(this HtmlHelper html, IArtist artist)
 		{
-			string str = a_html.RouteLink(a_artist.Name, a_artist.Route());
+			string str = html.RouteLink(artist.Name, artist.Route());
 			return str;
 		}
 
-		public static string ActionLink(this HtmlHelper a_html, IGenre a_genre)
+		public static string ActionLink(this HtmlHelper html, IGenre genre)
 		{
-			return a_html.RouteLink(a_genre.Name, a_genre.Route());
+			return html.RouteLink(genre.Name, genre.Route());
 		}
 	}
 }

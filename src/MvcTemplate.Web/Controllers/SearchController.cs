@@ -15,9 +15,9 @@ namespace MvcTemplate.Web.Controllers
     {
 		private IArtistsRepository m_repository;
 
-		public SearchController(IArtistsRepository a_repository)
+		public SearchController(IArtistsRepository repository)
 		{
-			m_repository = a_repository;
+			m_repository = repository;
 		}
 
 		[Route(Url = "search")]

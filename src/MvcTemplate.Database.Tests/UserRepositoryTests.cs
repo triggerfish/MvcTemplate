@@ -91,15 +91,15 @@ namespace MvcTemplate.Database.Tests
 			}
 		}
 
-		protected override void SetupContext(ISession a_session)
+		protected override void SetupContext(ISession session)
 		{
-			m_repository = new UserRepository(a_session);
+			m_repository = new UserRepository(session);
 
 			for (int i = 1; i <= 4; i++)
 			{
 				string s = i.ToString();
 				User u = new User { Forename = s, Surname = s, Credentials = new UserCredentials { Email = s, Password = s } };
-				a_session.Save(u);
+				session.Save(u);
 			}
 		}
 	}

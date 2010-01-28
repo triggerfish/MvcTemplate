@@ -97,12 +97,12 @@ namespace MvcTemplate.Web.Tests
 			Assert.AreEqual("", result.ViewName);
 		}
 
-		private void ValidateArtistsList(IList<string> a_expected, IList<IArtist> a_actual)
+		private void ValidateArtistsList(IList<string> expected, IList<IArtist> actual)
 		{
-			Assert.AreEqual(a_expected.Count, a_actual.Count);
-			for (int i = 0; i < a_expected.Count; i++)
+			Assert.AreEqual(expected.Count, actual.Count);
+			for (int i = 0; i < expected.Count; i++)
 			{
-				Assert.AreEqual(a_expected[i], a_actual[i].Name);
+				Assert.AreEqual(expected[i], actual[i].Name);
 			}
 		}
 	}

@@ -9,14 +9,14 @@ namespace MvcTemplate.Web
 {
 	public static class UrlHelpers
 	{
-		public static string SanitiseUrl(string a_url)
+		public static string SanitiseUrl(string url)
 		{
-			return SanitiseUrl(a_url, true);
+			return SanitiseUrl(url, true);
 		}
 
-		public static string SanitiseUrl(string a_url, bool a_allowAuthoriseAttributeOnAction)
+		public static string SanitiseUrl(string url, bool allowAuthoriseAttributeOnAction)
 		{
-			return Triggerfish.Web.Mvc.Testing.UrlHelpers.SanitiseUrl(a_url, MvcApplication.RegisterRoutes, a_allowAuthoriseAttributeOnAction);
+			return Triggerfish.Web.Mvc.Testing.UrlHelpers.SanitiseUrl(url, MvcApplication.RegisterRoutes, allowAuthoriseAttributeOnAction);
 		}
 	}
 }

@@ -13,49 +13,49 @@ namespace MvcTemplate.Database
 {
 	public class UserRepository : Repository, IUserRepository
 	{
-		public UserRepository(ISession a_session)
-			: base(a_session)
+		public UserRepository(ISession session)
+			: base(session)
 		{
 		}
 
-		public UserRepository(IDbSession a_session)
-			: base(a_session)
+		public UserRepository(IDbSession session)
+			: base(session)
 		{
 		}
 
-		IUserCredentials IUserRepository.CreateUserCredentials(string a_email, string a_password)
+		IUserCredentials IUserRepository.CreateUserCredentials(string email, string password)
 		{
-			return new UserCredentials { Email = a_email, Password = a_password } as IUserCredentials;
+			return new UserCredentials { Email = email, Password = password } as IUserCredentials;
 		}
 
-		IUser IUserRepository.CreateUser(string a_forename, string a_surname, IUserCredentials a_credentials)
+		IUser IUserRepository.CreateUser(string forename, string surname, IUserCredentials credentials)
 		{
-			IUser user = new User { Forename = a_forename ?? "", Surname = a_surname ?? "" };
-			user.Credentials = a_credentials;
+			IUser user = new User { Forename = forename ?? "", Surname = surname ?? "" };
+			user.Credentials = credentials;
 			return user;
 		}
 
-		public bool UserExists(string a_email)
+		public bool UserExists(string email)
 		{
-			return (null != Get(a_email));
+			return (null != Get(email));
 		}
 
-		public IUser Get(string a_email)
+		public IUser Get(string email)
 		{
 			return
 				(from u in GetAll<User>()
-				 where a_email == u.Credentials.Email
+				 where email == u.Credentials.Email
 				 select u).FirstOrDefault();
 		}
 
-		public void Register(IUser a_user)
+		public void Register(IUser user)
 		{
-			if (UserExists(a_user.Credentials.Email))
+			if (UserExists(user.Credentials.Email))
 			{
 				throw new ValidationException("Email", "The email is already registered");
 			}
 
-			Save(a_user as User);
+			Save(user as User);
 		}
 	}
 }

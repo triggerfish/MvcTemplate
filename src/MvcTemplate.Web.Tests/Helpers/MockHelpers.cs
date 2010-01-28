@@ -11,12 +11,12 @@ namespace MvcTemplate.Web.Tests
 {
 	internal static class MockHelpers
 	{
-		public static IEnumerable<TObj> CreateMockObjects<TObj, TData>(IEnumerable<TData> a_data, Func<int, TData, TObj> a_creator)
+		public static IEnumerable<TObj> CreateMockObjects<TObj, TData>(IEnumerable<TData> data, Func<int, TData, TObj> creator)
 		{
 			List<TObj> objects = new List<TObj>();
 			int i = 1;
-			a_data.ForEach(n => {
-				objects.Add(a_creator(i++, n));
+			data.ForEach(n => {
+				objects.Add(creator(i++, n));
 			});
 			return objects;
 		}

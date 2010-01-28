@@ -11,9 +11,9 @@ namespace MvcTemplate.Web
 	{
 		private IUserRepository m_repository;
 
-		public UserCredentialsBinder(IUserRepository a_repository)
+		public UserCredentialsBinder(IUserRepository repository)
 		{
-			m_repository = a_repository;
+			m_repository = repository;
 		}
 		
 		protected override object Bind()

@@ -12,9 +12,9 @@ namespace MvcTemplate.Web
 	{
 		protected IArtistsRepository Repository { get; private set; }
 
-		public GenreBinder(IArtistsRepository a_repository)
+		public GenreBinder(IArtistsRepository repository)
 		{
-			Repository = a_repository;
+			Repository = repository;
 		}
 		
 		protected override object Bind()

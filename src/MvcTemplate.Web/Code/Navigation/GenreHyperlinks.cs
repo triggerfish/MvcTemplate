@@ -11,12 +11,12 @@ namespace MvcTemplate.Web
 {
 	public class GenreHyperlinks
 	{
-		public static IList<Hyperlink> CreateLinks(IArtistsRepository a_repository)
+		public static IList<Hyperlink> CreateLinks(IArtistsRepository repository)
 		{
-			return CreateLinks(a_repository, null);
+			return CreateLinks(repository, null);
 		}
 
-		public static IList<Hyperlink> CreateLinks(IArtistsRepository a_repository, string a_toSelect)
+		public static IList<Hyperlink> CreateLinks(IArtistsRepository repository, string toSelect)
 		{
 			List<Hyperlink> nav = new List<Hyperlink>();
 			nav.Add(new Hyperlink()
@@ -25,9 +25,9 @@ namespace MvcTemplate.Web
 				Route = RouteHelpers.AllArtistsRoute()
 			});
 
-			if (null != a_repository)
+			if (null != repository)
 			{
-				IEnumerable<IGenre> genres = a_repository.Genres;
+				IEnumerable<IGenre> genres = repository.Genres;
 				genres.ForEach(g =>	{
 					nav.Add(new Hyperlink()	{
 						Text = g.Name,
@@ -41,9 +41,9 @@ namespace MvcTemplate.Web
 				Route = RouteHelpers.SecretRoute()
 			});
 
-			if (!String.IsNullOrEmpty(a_toSelect))
+			if (!String.IsNullOrEmpty(toSelect))
 			{
-				Hyperlink l = nav.FirstOrDefault(h => (0 == String.Compare(h.Text, a_toSelect, true)));
+				Hyperlink l = nav.FirstOrDefault(h => (0 == String.Compare(h.Text, toSelect, true)));
 				if (null != l)
 				{
 					l.IsSelected = true;

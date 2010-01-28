@@ -10,28 +10,28 @@ namespace MvcTemplate.Web.Tests
 {
 	internal static class MockGenre
 	{
-		public static IGenre CreateMockGenre(string a_name)
+		public static IGenre CreateMockGenre(string name)
 		{
-			return CreateMockGenre(0, a_name, null);
+			return CreateMockGenre(0, name, null);
 		}
 
-		public static IGenre CreateMockGenre(int a_id, string a_name)
+		public static IGenre CreateMockGenre(int id, string name)
 		{
-			return CreateMockGenre(a_id, a_name, null);
+			return CreateMockGenre(id, name, null);
 		}
 
-		public static IGenre CreateMockGenre(int a_id, string a_name, IEnumerable<IArtist> a_artists)
+		public static IGenre CreateMockGenre(int id, string name, IEnumerable<IArtist> artists)
 		{
 			Mock<IGenre> mock = new Mock<IGenre>();
-			mock.Setup(g => g.Id).Returns(a_id);
-			mock.Setup(g => g.Name).Returns(a_name);
-			mock.Setup(g => g.Artists).Returns(a_artists);
+			mock.Setup(g => g.Id).Returns(id);
+			mock.Setup(g => g.Name).Returns(name);
+			mock.Setup(g => g.Artists).Returns(artists);
 			return mock.Object;
 		}
 
-		public static IEnumerable<IGenre> CreateMockGenres(IEnumerable<string> a_names)
+		public static IEnumerable<IGenre> CreateMockGenres(IEnumerable<string> names)
 		{
-			return MockHelpers.CreateMockObjects<IGenre, string>(a_names, CreateMockGenre);
+			return MockHelpers.CreateMockObjects<IGenre, string>(names, CreateMockGenre);
 		}
 	}
 }

@@ -9,19 +9,19 @@ namespace MvcTemplate.Web
 {
 	public static class UrlExtensions
 	{
-		public static string Stylesheet(this UrlHelper a_helper, string a_filename)
+		public static string Stylesheet(this UrlHelper helper, string filename)
 		{
-			return a_helper.Content(String.Format("~/content/styles/{0}", a_filename));
+			return helper.Content(String.Format("~/content/styles/{0}", filename));
 		}
 
-		public static string Script(this UrlHelper a_helper, string a_filename)
+		public static string Script(this UrlHelper helper, string filename)
 		{
-			return a_helper.Content(String.Format("~/content/script/{0}", a_filename));
+			return helper.Content(String.Format("~/content/script/{0}", filename));
 		}
 		
-		public static string Image(this UrlHelper a_helper, string a_filename)
+		public static string Image(this UrlHelper helper, string filename)
 		{
-			return a_helper.Content(String.Format("~/content/images/{0}", a_filename));
+			return helper.Content(String.Format("~/content/images/{0}", filename));
 		}
 	}
 }

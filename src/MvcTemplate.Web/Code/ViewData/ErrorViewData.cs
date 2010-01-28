@@ -9,9 +9,9 @@ namespace MvcTemplate.Web
 	{
 		public Exception Exception { get; set; }
 
-		public ErrorViewData(Exception a_ex)
+		public ErrorViewData(Exception ex)
 		{
-			Exception = a_ex;
+			Exception = ex;
 		}
 	}
 }

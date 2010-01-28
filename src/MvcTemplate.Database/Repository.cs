@@ -16,19 +16,19 @@ namespace MvcTemplate.Database
 	{
 		protected ISession Session { get; private set; }
 
-		protected Repository(ISession a_session)
+		protected Repository(ISession session)
 		{
-			Session = a_session;
+			Session = session;
 		}
 
-		protected Repository(IDbSession a_session)
-			: this(a_session.CreateSession())
+		protected Repository(IDbSession session)
+			: this(session.CreateSession())
 		{
 		}
 
-		public T Get<T>(int a_id)
+		public T Get<T>(int id)
 		{
-			return Session.Get<T>(a_id);
+			return Session.Get<T>(id);
 		}
 
 		public IOrderedQueryable<T> GetAll<T>()
@@ -36,19 +36,19 @@ namespace MvcTemplate.Database
 			return Session.Linq<T>();
 		}
 
-		public void Delete<T>(T a_target)
+		public void Delete<T>(T target)
 		{
-			Session.WithinTransaction(s => s.Delete(a_target));
+			Session.WithinTransaction(s => s.Delete(target));
 		}
 
-		public void Save<T>(T a_target)
+		public void Save<T>(T target)
 		{
-			Session.WithinTransaction(s => s.SaveOrUpdate(a_target));
+			Session.WithinTransaction(s => s.SaveOrUpdate(target));
 		}
 
-		public void Save<T>(IEnumerable<T> a_targets)
+		public void Save<T>(IEnumerable<T> targets)
 		{
-			IEnumerable<object> objs = a_targets.Cast<object>();
+			IEnumerable<object> objs = targets.Cast<object>();
 			Session.WithinTransaction(s => objs.ForEach(s.SaveOrUpdate));
 		}
 	}

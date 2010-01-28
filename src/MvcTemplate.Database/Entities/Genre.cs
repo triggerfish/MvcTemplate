@@ -24,15 +24,15 @@ namespace MvcTemplate.Database
 			Artists = new List<Artist>();
 		}
 
-		public virtual void AddArtist(Artist a_artist)
+		public virtual void AddArtist(Artist artist)
 		{
-			a_artist.Genre = this;
-			Artists.Add(a_artist);
+			artist.Genre = this;
+			Artists.Add(artist);
 		}
 	
-		public virtual void AddArtists(IEnumerable<Artist> a_artists)
+		public virtual void AddArtists(IEnumerable<Artist> artists)
 		{
-			a_artists.ForEach(a => AddArtist(a));
+			artists.ForEach(a => AddArtist(a));
 		}
 	}
 }

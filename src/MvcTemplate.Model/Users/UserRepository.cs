@@ -7,10 +7,10 @@ namespace MvcTemplate.Model
 {
 	public interface IUserRepository
 	{
-		IUserCredentials CreateUserCredentials(string a_email, string a_password);
-		IUser CreateUser(string a_forename, string a_surname, IUserCredentials a_credentials);
-		bool UserExists(string a_email);
-		IUser Get(string a_email);
-		void Register(IUser a_user);
+		IUserCredentials CreateUserCredentials(string email, string password);
+		IUser CreateUser(string forename, string surname, IUserCredentials credentials);
+		bool UserExists(string email);
+		IUser Get(string email);
+		void Register(IUser user);
 	}
 }

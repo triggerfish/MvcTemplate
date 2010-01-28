@@ -14,9 +14,9 @@ namespace MvcTemplate.Web
 
 		public PagedList<IArtist> ArtistsPagedList { get; private set; }
 
-		public ArtistsViewData(PagedList<IArtist> a_artists)
+		public ArtistsViewData(PagedList<IArtist> artists)
 		{
-			ArtistsPagedList = a_artists;
+			ArtistsPagedList = artists;
 		}
 	}
 }

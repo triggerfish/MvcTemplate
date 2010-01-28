@@ -10,7 +10,7 @@ namespace MvcTemplate.Web
 {
 	public interface IAuthenticationProvider
 	{
-		void Login(string a_name, bool a_createPersistentCookie);
+		void Login(string name, bool createPersistentCookie);
 		void Logout();
 	}
 }

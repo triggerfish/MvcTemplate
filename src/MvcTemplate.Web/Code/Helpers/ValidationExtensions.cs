@@ -10,18 +10,18 @@ namespace MvcTemplate.Web
 {
 	public static class ValidationExtensions
 	{
-		public static void ToModelErrors(this ValidationException a_exception, ModelStateDictionary a_dictionary, string a_prefix)
+		public static void ToModelErrors(this ValidationException exception, ModelStateDictionary dictionary, string prefix)
 		{
-			if (!String.IsNullOrEmpty(a_prefix))
+			if (!String.IsNullOrEmpty(prefix))
 			{
-				a_prefix = a_prefix + ".";
+				prefix = prefix + ".";
 			}
 
-			foreach (string key in a_exception.Errors)
+			foreach (string key in exception.Errors)
 			{
-				foreach (string value in a_exception.Errors.GetValues(key))
+				foreach (string value in exception.Errors.GetValues(key))
 				{
-					a_dictionary.AddModelError(a_prefix + key, value);
+					dictionary.AddModelError(prefix + key, value);
 				}
 			}
 		}

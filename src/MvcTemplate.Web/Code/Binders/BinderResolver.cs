@@ -11,9 +11,9 @@ namespace MvcTemplate.Web
 		private Func<Type, IModelBinder> m_resolver;
 		private readonly Type m_binderOpenType = typeof(ModelBinder<>);
 
-		public BinderResolver(Func<Type, IModelBinder> a_resolver)
+		public BinderResolver(Func<Type, IModelBinder> resolver)
 		{
-			m_resolver = a_resolver;
+			m_resolver = resolver;
 		}
 
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)

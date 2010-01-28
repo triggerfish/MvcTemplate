@@ -10,9 +10,9 @@ namespace MvcTemplate.Model
 		IEnumerable<IArtist> Artists { get; }
 		IEnumerable<IGenre> Genres { get; }
 
-		IEnumerable<IArtist> GetArtistsByGenre(int a_genreID);
-		IEnumerable<IArtist> GetArtistsByGenre(string a_genreName);
+		IEnumerable<IArtist> GetArtistsByGenre(int genreID);
+		IEnumerable<IArtist> GetArtistsByGenre(string genreName);
 
-		ISearchResults Search(string a_keywords);
+		ISearchResults Search(string keywords);
 	}
 }

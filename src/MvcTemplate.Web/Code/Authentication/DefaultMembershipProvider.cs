@@ -14,17 +14,17 @@ namespace MvcTemplate.Web
 		private IUserRepository m_repository;
 		private IEncryptor m_encryptor;
 
-		public DefaultMembershipProvider(IUserRepository a_repository, IEncryptor a_encryptor)
+		public DefaultMembershipProvider(IUserRepository repository, IEncryptor encryptor)
 		{
-			m_repository = a_repository;
-			m_encryptor = a_encryptor;
+			m_repository = repository;
+			m_encryptor = encryptor;
 		}
 
-		public IUser Validate(IUserCredentials a_credentials)
+		public IUser Validate(IUserCredentials credentials)
 		{
-			IUser user = m_repository.Get(a_credentials.Email);
+			IUser user = m_repository.Get(credentials.Email);
 
-			if (null == user || !m_encryptor.IsMatch(a_credentials.Password, user.Credentials.Password))
+			if (null == user || !m_encryptor.IsMatch(credentials.Password, user.Credentials.Password))
 			{
 				throw new AuthenticationException();
 			}
@@ -33,9 +33,9 @@ namespace MvcTemplate.Web
 			return user;
 		}
 
-		public void Register(IUser a_user)
+		public void Register(IUser user)
 		{
-			m_repository.Register(a_user);
+			m_repository.Register(user);
 		}
 	}
 }

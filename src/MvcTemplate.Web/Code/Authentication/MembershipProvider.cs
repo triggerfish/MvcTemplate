@@ -11,7 +11,7 @@ namespace MvcTemplate.Web
 {
 	public interface IMembershipProvider
 	{
-		IUser Validate(IUserCredentials a_credentials);
-		void Register(IUser a_user);
+		IUser Validate(IUserCredentials credentials);
+		void Register(IUser user);
 	}
 }

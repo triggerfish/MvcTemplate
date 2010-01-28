@@ -10,24 +10,24 @@ namespace MvcTemplate.Web.Tests
 {
 	internal static class MockArtist
 	{
-		public static IArtist CreateMockArtist(string a_name)
+		public static IArtist CreateMockArtist(string name)
 		{
 			Mock<IArtist> mock = new Mock<IArtist>();
-			mock.Setup(a => a.Name).Returns(a_name);
+			mock.Setup(a => a.Name).Returns(name);
 			return mock.Object;
 		}
 
-		public static IArtist CreateMockArtist(int a_id, string a_name)
+		public static IArtist CreateMockArtist(int id, string name)
 		{
 			Mock<IArtist> mock = new Mock<IArtist>();
-			mock.Setup(a => a.Id).Returns(a_id);
-			mock.Setup(a => a.Name).Returns(a_name);
+			mock.Setup(a => a.Id).Returns(id);
+			mock.Setup(a => a.Name).Returns(name);
 			return mock.Object;
 		}
 
-		public static IEnumerable<IArtist> CreateMockArtists(IEnumerable<string> a_names)
+		public static IEnumerable<IArtist> CreateMockArtists(IEnumerable<string> names)
 		{
-			return MockHelpers.CreateMockObjects<IArtist, string>(a_names, CreateMockArtist);
+			return MockHelpers.CreateMockObjects<IArtist, string>(names, CreateMockArtist);
 		}
 	}
 }

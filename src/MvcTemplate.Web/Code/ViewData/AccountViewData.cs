@@ -12,14 +12,14 @@ namespace MvcTemplate.Web
 		public string ReturnUrl { get; private set; }
 		public string CancelUrl { get; private set; }
 
-		public AccountViewData(string a_returnUrl, bool a_allowAuthoriseAttributeOnAction)
+		public AccountViewData(string returnUrl, bool allowAuthoriseAttributeOnAction)
 		{
 			DisplayAuthLinks = false;
 			DisplaySearch = false;
 
-			RouteInformation ri = new RouteInformation(a_returnUrl, MvcApplication.RegisterRoutes);
+			RouteInformation ri = new RouteInformation(returnUrl, MvcApplication.RegisterRoutes);
 
-			ReturnUrl = ri.SanitiseUrl(a_allowAuthoriseAttributeOnAction);
+			ReturnUrl = ri.SanitiseUrl(allowAuthoriseAttributeOnAction);
 			CancelUrl = ri.SanitiseUrl(false);
 		}
 	}

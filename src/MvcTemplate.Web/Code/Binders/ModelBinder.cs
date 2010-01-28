@@ -31,10 +31,10 @@ namespace MvcTemplate.Web
 		// public methods
 		//
 
-		public object BindModel(ControllerContext a_controllerContext, ModelBindingContext a_bindingContext)
+		public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
 			// The action method argument
-			m_context = a_bindingContext;
+			m_context = bindingContext;
 
 			try
 			{
@@ -49,7 +49,7 @@ namespace MvcTemplate.Web
 			}
 			catch (ValidationException ex)
 			{
-				ex.ToModelErrors(a_bindingContext.ModelState, "");
+				ex.ToModelErrors(bindingContext.ModelState, "");
 			}
 
 			return null;
@@ -60,43 +60,43 @@ namespace MvcTemplate.Web
 
 		protected abstract object Bind();
 
-		protected virtual void Validate(object a_object)
+		protected virtual void Validate(object obj)
 		{
 			IValidator validator = ObjectFactory.TryGet<IValidator>();
 			if (null != validator)
 			{
-				validator.Validate(a_object);
+				validator.Validate(obj);
 			}
 		}
 
-		protected string GetValue(string a_key, bool a_mustHaveValue)
+		protected string GetValue(string key, bool mustHaveValue)
 		{
 			ValueProviderResult v;
 
 			// first try with the prefix
-			string key = m_context.ModelName + "." + a_key;
-			bool gotIt = m_context.ValueProvider.TryGetValue(key, out v);
+			string k = m_context.ModelName + "." + key;
+			bool gotIt = m_context.ValueProvider.TryGetValue(k, out v);
 
 			// if that failed, try with the raw name (unless the model has the Bind(Prefix = XXX) attribute specified)
 			if (!gotIt && m_context.FallbackToEmptyPrefix)
 			{
-				key = a_key;
-				gotIt = m_context.ValueProvider.TryGetValue(key, out v);
+				k = key;
+				gotIt = m_context.ValueProvider.TryGetValue(k, out v);
 			}
 
 			if (gotIt)
 			{
-				m_context.ModelState.SetModelValue(key, v);
+				m_context.ModelState.SetModelValue(k, v);
 
-				if (!a_mustHaveValue || !String.IsNullOrEmpty(v.AttemptedValue))
+				if (!mustHaveValue || !String.IsNullOrEmpty(v.AttemptedValue))
 				{
 					return v.AttemptedValue;
 				}
 			}
 
-			if (a_mustHaveValue)
+			if (mustHaveValue)
 			{
-				throw new ValidationException(key, String.Format("{0} must be specified", a_key));
+				throw new ValidationException(key, String.Format("{0} must be specified", key));
 			}
 
 			return null;

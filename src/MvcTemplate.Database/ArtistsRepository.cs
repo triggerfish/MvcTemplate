@@ -12,13 +12,13 @@ namespace MvcTemplate.Database
 {
 	public class ArtistsRepository : Repository, IArtistsRepository
 	{
-		public ArtistsRepository(ISession a_session)
-			: base(a_session)
+		public ArtistsRepository(ISession session)
+			: base(session)
 		{
 		}
 
-		public ArtistsRepository(IDbSession a_session)
-			: base(a_session)
+		public ArtistsRepository(IDbSession session)
+			: base(session)
 		{
 		}
 
@@ -32,23 +32,23 @@ namespace MvcTemplate.Database
 			get { return GetAll<Genre>(); }
 		}
 
-		public IEnumerable<Artist> GetArtistsByGenre(string a_genre)
+		public IEnumerable<Artist> GetArtistsByGenre(string genre)
 		{
-			return Artists.Where(a => a.Genre.Name == a_genre);
+			return Artists.Where(a => a.Genre.Name == genre);
 		}
 
-		public IEnumerable<Artist> GetArtistsByGenre(int a_genreID)
+		public IEnumerable<Artist> GetArtistsByGenre(int genreID)
 		{
-			return Genres.Where(g => g.Id == a_genreID).First().Artists;
+			return Genres.Where(g => g.Id == genreID).First().Artists;
 		}
 
-		public ISearchResults Search(string a_keyword)
+		public ISearchResults Search(string keyword)
 		{
 			SearchResults results = new SearchResults();
 
 			// no join operator in LINQ to NHibernate
 
-			string k = a_keyword.ToLower();
+			string k = keyword.ToLower();
 			results.Artists = Artists.Where(a => a.Name.ToLower().Contains(k)).Cast<IArtist>();
 			results.Genres = Genres.Where(g => g.Name.ToLower().Contains(k)).Cast<IGenre>();
 
@@ -73,14 +73,14 @@ namespace MvcTemplate.Database
 			}
 		}
 
-		IEnumerable<IArtist> IArtistsRepository.GetArtistsByGenre(string a_genre)
+		IEnumerable<IArtist> IArtistsRepository.GetArtistsByGenre(string genre)
 		{
-			return GetArtistsByGenre(a_genre).Cast<IArtist>();
+			return GetArtistsByGenre(genre).Cast<IArtist>();
 		}
 
-		IEnumerable<IArtist> IArtistsRepository.GetArtistsByGenre(int a_genreID)
+		IEnumerable<IArtist> IArtistsRepository.GetArtistsByGenre(int genreID)
 		{
-			return GetArtistsByGenre(a_genreID).Cast<IArtist>();
+			return GetArtistsByGenre(genreID).Cast<IArtist>();
 		}
 
 		#endregion

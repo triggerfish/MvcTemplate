@@ -9,27 +9,27 @@ namespace MvcTemplate.Web.Tests
 {
 	public static class BinderHelpers
 	{
-		public static ModelBindingContext CreateModelBindingContext(string a_argName)
+		public static ModelBindingContext CreateModelBindingContext(string argName)
 		{
 			return new ModelBindingContext() {
 				FallbackToEmptyPrefix = true,
-				ModelName = a_argName,
+				ModelName = argName,
 				ModelState = new ModelStateDictionary(),
 				ValueProvider = new Dictionary<string, ValueProviderResult>(),
 			};
 		}
 
-		public static ModelBindingContext CreateModelBindingContext(string a_argName, string a_argValue)
+		public static ModelBindingContext CreateModelBindingContext(string argName, string argValue)
 		{
-			ModelBindingContext ctx = CreateModelBindingContext(a_argName);
-			ctx.ValueProvider.Add(a_argName, new ValueProviderResult(a_argValue, a_argValue, CultureInfo.CurrentCulture));
+			ModelBindingContext ctx = CreateModelBindingContext(argName);
+			ctx.ValueProvider.Add(argName, new ValueProviderResult(argValue, argValue, CultureInfo.CurrentCulture));
 			return ctx;
 		}
 
-		public static ModelBindingContext CreateModelBindingContext(string a_argName, IDictionary<string, string> a_argValues)
+		public static ModelBindingContext CreateModelBindingContext(string argName, IDictionary<string, string> argValues)
 		{
-			ModelBindingContext ctx = CreateModelBindingContext(a_argName);
-			foreach (KeyValuePair<string, string> kvp in a_argValues)
+			ModelBindingContext ctx = CreateModelBindingContext(argName);
+			foreach (KeyValuePair<string, string> kvp in argValues)
 			{
 				ctx.ValueProvider.Add(kvp.Key, new ValueProviderResult(kvp.Value, kvp.Value, CultureInfo.CurrentCulture));
 			}

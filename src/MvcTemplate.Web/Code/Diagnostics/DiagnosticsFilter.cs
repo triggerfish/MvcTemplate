@@ -13,10 +13,10 @@ namespace MvcTemplate.Web
 		private Stream m_innerStream;
 		private string m_text;
 
-		public DiagnosticsFilter(Stream a_inner, string a_text)
+		public DiagnosticsFilter(Stream inner, string text)
 		{
-			m_innerStream = a_inner;
-			m_text = a_text;
+			m_innerStream = inner;
+			m_text = text;
 		}
 
 		public override void Write(byte[] buffer, int offset, int count)

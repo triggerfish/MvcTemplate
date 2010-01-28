@@ -16,10 +16,10 @@ namespace MvcTemplate.Web.Controllers
 		private IAuthenticationProvider m_authentication;
 		private IMembershipProvider m_membership;
 
-		public AccountController(IAuthenticationProvider a_authentication, IMembershipProvider a_membership)
+		public AccountController(IAuthenticationProvider authentication, IMembershipProvider membership)
 		{
-			m_authentication = a_authentication;
-			m_membership = a_membership;
+			m_authentication = authentication;
+			m_membership = membership;
 		}
 
 		[Route(Url = "register")]
@@ -97,10 +97,10 @@ namespace MvcTemplate.Web.Controllers
 			return Redirect(UrlHelpers.SanitiseUrl(returnUrl, false));
 		}
 
-		private RedirectToRouteResult RedirectTo(string a_action, string a_returnUrl)
+		private RedirectToRouteResult RedirectTo(string action, string returnUrl)
 		{
-			RedirectToRouteResult res = RedirectToAction(a_action);
-			res.RouteValues.AddReturnUrl(a_returnUrl);
+			RedirectToRouteResult res = RedirectToAction(action);
+			res.RouteValues.AddReturnUrl(returnUrl);
 			return res;
 		}
 	}

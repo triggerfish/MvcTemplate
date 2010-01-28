@@ -13,9 +13,9 @@ namespace MvcTemplate.Web.Controllers
     {
 		private IArtistsRepository m_repository;
 
-		public ArtistsController(IArtistsRepository a_repository)
+		public ArtistsController(IArtistsRepository repository)
 		{
-			m_repository = a_repository;
+			m_repository = repository;
 		}
 
 		[Route(Url = "artists/{page}")]

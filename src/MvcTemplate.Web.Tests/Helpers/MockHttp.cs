@@ -27,12 +27,12 @@ namespace MvcTemplate.Web.Tests
 			return context;
 		}
 
-		public static VirtualPathData GenerateUrlViaMocks(object a_route)
+		public static VirtualPathData GenerateUrlViaMocks(object route)
 		{
-			return GenerateUrlViaMocks(new RouteValueDictionary(a_route));
+			return GenerateUrlViaMocks(new RouteValueDictionary(route));
 		}
 
-		public static VirtualPathData GenerateUrlViaMocks(RouteValueDictionary a_route)
+		public static VirtualPathData GenerateUrlViaMocks(RouteValueDictionary route)
 		{
 			// Arrange (get the routing config and test context)
 			RouteCollection routeConfig = new RouteCollection();
@@ -42,14 +42,14 @@ namespace MvcTemplate.Web.Tests
 			RequestContext context = new RequestContext(mockContext.Object, new RouteData());
 
 			// Act (generate a URL)
-			return routeConfig.GetVirtualPath(context, a_route);
+			return routeConfig.GetVirtualPath(context, route);
 		}
 
-		public static bool IsValidOutboundUrl(RouteValueDictionary a_route, string a_expectedUrl)
+		public static bool IsValidOutboundUrl(RouteValueDictionary route, string expectedUrl)
 		{
-			VirtualPathData result = MockHttp.GenerateUrlViaMocks(a_route);
+			VirtualPathData result = MockHttp.GenerateUrlViaMocks(route);
 
-			return (a_expectedUrl == result.VirtualPath);
+			return (expectedUrl == result.VirtualPath);
 		}
 	}
 }

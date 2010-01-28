@@ -46,7 +46,7 @@ namespace MvcTemplate.Database.Tests
 			Session.Dispose();
 		}
 
-		protected virtual void SetupContext(ISession a_session)
+		protected virtual void SetupContext(ISession session)
 		{
 		}
 	}
