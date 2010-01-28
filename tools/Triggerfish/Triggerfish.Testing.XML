@@ -296,6 +296,14 @@
             Static helper methods for processing urls
             </summary>
         </member>
+        <member name="M:Triggerfish.Web.Mvc.Testing.RouteInformationExtensions.SanitiseUrl(Triggerfish.Web.Mvc.Testing.RouteInformation)">
+            <summary>
+            Sanitises a url and ensures the url is valid for a registered route.
+            If the route is not valid the default home url is returned ("/")
+            </summary>
+            <param name="ri">The RouteInformation object</param>
+            <returns>A sanitised valid url for the site</returns>
+        </member>
         <member name="M:Triggerfish.Web.Mvc.Testing.RouteInformationExtensions.SanitiseUrl(Triggerfish.Web.Mvc.Testing.RouteInformation,System.Boolean)">
             <summary>
             Sanitises a url and ensures the url is valid for a registered route.
@@ -305,6 +313,18 @@
             <param name="allowAuthoriseAttributeOnAction">Applies if the url is valid and the controller action to which the url refers has an AuthorizeAttribute. 
             If true, the AuthorizeAttribute is allowed and the original url is returned. If false, the AuthorizeAttribute
             is not allowed and the default home url is returned ("/")</param>
+            <returns>A sanitised valid url for the site</returns>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.Testing.RouteInformationExtensions.SanitiseUrl(Triggerfish.Web.Mvc.Testing.RouteInformation,System.Boolean,System.Reflection.Assembly)">
+            <summary>
+            Sanitises a url and ensures the url is valid for a registered route.
+            If the route is not valid the default home url is returned ("/")
+            </summary>
+            <param name="ri">The RouteInformation object</param>
+            <param name="allowAuthoriseAttributeOnAction">Applies if the url is valid and the controller action to which the url refers has an AuthorizeAttribute. 
+            If true, the AuthorizeAttribute is allowed and the original url is returned. If false, the AuthorizeAttribute
+            is not allowed and the default home url is returned ("/")</param>
+            <param name="callingAssembly">The assembly with the controller/action</param>
             <returns>A sanitised valid url for the site</returns>
         </member>
     </members>
