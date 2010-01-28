@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Routing;
+using Triggerfish.Web.Routing;
 using MvcTemplate.Model;
-using Triggerfish.Testing.Web.Mvc;
 
 namespace MvcTemplate.Web
 {
@@ -47,7 +47,12 @@ namespace MvcTemplate.Web
 
 		public static RouteValueDictionary AllArtistsRoute()
 		{
-			return new RouteValueDictionary(new { controller = "Artists", action = "Index" });
+			return AllArtistsRoute(1);
+		}
+
+		public static RouteValueDictionary AllArtistsRoute(int page)
+		{
+			return new RouteValueDictionary(new { controller = "Artists", action = "AllArtists", page = page });
 		}
 
 		public static RouteValueDictionary ArtistRoute(IArtist a_artist)

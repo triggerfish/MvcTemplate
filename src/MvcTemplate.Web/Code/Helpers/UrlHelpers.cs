@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Routing;
 using MvcTemplate.Model;
-using Triggerfish.Testing.Web.Mvc;
 
 namespace MvcTemplate.Web
 {
@@ -17,7 +16,7 @@ namespace MvcTemplate.Web
 
 		public static string SanitiseUrl(string a_url, bool a_allowAuthoriseAttributeOnAction)
 		{
-			return RouteInformation.Create(a_url, MvcApplication.RegisterRoutes).SanitiseUrl(a_allowAuthoriseAttributeOnAction);
+			return Triggerfish.Web.Mvc.Testing.UrlHelpers.SanitiseUrl(a_url, MvcApplication.RegisterRoutes, a_allowAuthoriseAttributeOnAction);
 		}
 	}
 }
