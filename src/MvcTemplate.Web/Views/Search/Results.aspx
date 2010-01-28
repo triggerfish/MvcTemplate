@@ -15,23 +15,11 @@
 <% } else { %>
 <% if (bHaveArtists) { %>
     <h2>Artists</h2>
-    <div class="list">
-        <ul>
-        <% foreach (MvcTemplate.Model.IArtist a in Model.Results.Artists) { %> 
-            <li><%= Html.ActionLink(a)%></li>
-        <% } %>
-        </ul>
-    </div>
+    <% Html.RenderPartial("ArtistList", Model.Results.Artists); %>
 <% } %>
 <% if (bHaveGenres) { %>
     <h2>Genres</h2>
-    <div class="list">
-        <ul>
-        <% foreach (MvcTemplate.Model.IGenre g in Model.Results.Genres) { %>
-            <li><%= Html.ActionLink(g)%></li>
-        <% } %>
-        </ul>
-    </div>
+    <% Html.RenderPartial("GenreList", Model.Results.Genres); %>
 <% }
 } %>
 </asp:Content>
