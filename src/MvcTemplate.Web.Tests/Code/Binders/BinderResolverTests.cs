@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MvcTemplate.Web.Controllers;
 using Moq;
-using MvcTemplate.Model;
 using System.Globalization;
+using MvcTemplate.Web;
 
 namespace MvcTemplate.Web.Tests
 {
@@ -37,6 +36,29 @@ namespace MvcTemplate.Web.Tests
 			// Arrange
 			ModelBindingContext context = new ModelBindingContext();
 			context.ModelType = typeof(string);
+
+			BinderResolver resolver = new BinderResolver(mb => { return null; });
+
+			// Act
+			try
+			{
+				resolver.BindModel(null, context);
+			}
+			catch (NullReferenceException)
+			{
+				return; // success - DefaultModelBinder will throw because the ControllerContext arg is null
+			}
+
+			// Assert
+			Assert.Fail();
+		}
+
+		[TestMethod]
+		public void ShouldUseDefaultModelBinderForValueType()
+		{
+			// Arrange
+			ModelBindingContext context = new ModelBindingContext();
+			context.ModelType = typeof(int);
 
 			BinderResolver resolver = new BinderResolver(mb => { return null; });
 

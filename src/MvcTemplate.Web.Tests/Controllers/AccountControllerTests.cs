@@ -12,6 +12,7 @@ using System.Linq.Expressions;
 using System.Web;
 using Triggerfish.Security;
 using Triggerfish.Validator;
+using Triggerfish.Web.Security;
 
 namespace MvcTemplate.Web.Tests
 {

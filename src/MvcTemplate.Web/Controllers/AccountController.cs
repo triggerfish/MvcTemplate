@@ -8,6 +8,7 @@ using Triggerfish.Web.Mvc;
 using Triggerfish.Web.Routing;
 using MvcTemplate.Model;
 using Triggerfish.Validator;
+using Triggerfish.Web.Security;
 
 namespace MvcTemplate.Web.Controllers
 {

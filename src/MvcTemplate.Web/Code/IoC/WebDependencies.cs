@@ -3,6 +3,7 @@ using System.Security.Cryptography;
 using Triggerfish.Web.Mvc;
 using MvcTemplate.Model;
 using Triggerfish.Security;
+using Triggerfish.Web.Security;
 
 namespace MvcTemplate.Web
 {

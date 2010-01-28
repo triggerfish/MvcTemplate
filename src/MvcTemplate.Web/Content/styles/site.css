@@ -219,6 +219,7 @@ fieldset #submit-row a {
 .pager {
 	float: right;
 	padding-top: 0.6em;
+	font-size: 0.9em;
 }
 
 .pager a, .pager .disabled, .pager .selected {

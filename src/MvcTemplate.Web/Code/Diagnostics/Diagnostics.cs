@@ -1,19 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using Triggerfish.Ninject;
+using Triggerfish.Web.Diagnostics;
 using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
 {
-	public class Diagnostics
+	public class Diagnostics : IDiagnostics
 	{
-		Stopwatch m_timer = new Stopwatch();
-		StringWriter m_sqlLog = new StringWriter();
+		private Stopwatch m_timer = new Stopwatch();
+		private StringWriter m_sqlLog = new StringWriter();
+
+		public string Key
+		{
+			get { return "MvcTemplate.Web.Diagnostics"; }
+		}
 
 		public void Start()
 		{
@@ -28,7 +31,7 @@ namespace MvcTemplate.Web
 			ObjectFactory.Get<IRepositorySettings>().SqlLog = null;
 		}
 
-		public override string ToString()
+		public string ToHtmlString()
 		{
 			StringWriter html = new StringWriter();
 			string[] queries = m_sqlLog.ToString().Split(new string[] { m_sqlLog.NewLine }, StringSplitOptions.RemoveEmptyEntries);

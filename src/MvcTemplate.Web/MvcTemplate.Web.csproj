@@ -93,10 +93,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Authentication\AuthenticationException.cs" />
-    <Compile Include="Code\Authentication\AuthenticationProvider.cs" />
     <Compile Include="Code\Authentication\DefaultMembershipProvider.cs" />
     <Compile Include="Code\Authentication\MembershipProvider.cs" />
-    <Compile Include="Code\Authentication\FormsAuthenticationProvider.cs" />
     <Compile Include="Code\Binders\ArtistBinder.cs" />
     <Compile Include="Code\Binders\BinderResolver.cs" />
     <Compile Include="Code\Binders\UserCredentialsBinder.cs" />
@@ -104,7 +102,6 @@
     <Compile Include="Code\Binders\GenreBinder.cs" />
     <Compile Include="Code\Binders\ModelBinder.cs" />
     <Compile Include="Code\Diagnostics\Diagnostics.cs" />
-    <Compile Include="Code\Diagnostics\DiagnosticsFilter.cs" />
     <Compile Include="Code\Diagnostics\DiagnosticsModule.cs" />
     <Compile Include="Code\Helpers\PagedListExtensions.cs" />
     <Compile Include="Code\Helpers\UrlExtensions.cs" />
@@ -112,7 +109,6 @@
     <Compile Include="Code\Helpers\HtmlExtensions.cs" />
     <Compile Include="Code\Helpers\RouteExtensions.cs" />
     <Compile Include="Code\Helpers\UrlHelpers.cs" />
-    <Compile Include="Code\Helpers\ValidationExtensions.cs" />
     <Compile Include="Code\IoC\WebDependencies.cs" />
     <Compile Include="Code\Navigation\GenreHyperlinks.cs" />
     <Compile Include="Code\Navigation\Hyperlink.cs" />
