@@ -8,7 +8,7 @@ using System.Web.Configuration;
 using Ninject;
 using Ninject.Web.Mvc;
 using Triggerfish.Web.Mvc;
-using MvcTemplate.Model;
+using Triggerfish.Ninject;
 
 namespace MvcTemplate.Web
 {
@@ -21,10 +21,10 @@ namespace MvcTemplate.Web
 			routes.RegisterRoutes();
 
 			// ~/controller/action
-			routes.MapFriendlyUrlRoute(
-				null,
-				"{controller}/{action}"
-			);
+			//routes.MapFriendlyUrlRoute(
+			//    null,
+			//    "{controller}/{action}"
+			//);
 		}
 
 		protected override void OnApplicationStarted()

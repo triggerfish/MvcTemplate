@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MvcTemplate.Web.Controllers;
 using MvcTemplate.Model;
+using Triggerfish.Security;
 
 namespace MvcTemplate.Web.Tests
 {

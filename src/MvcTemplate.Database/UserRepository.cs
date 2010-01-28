@@ -5,6 +5,8 @@ using System.Text;
 using System.IO;
 using NHibernate;
 using NHibernate.Linq;
+using Triggerfish.FluentNHibernate;
+using Triggerfish.Validator;
 using MvcTemplate.Model;
 
 namespace MvcTemplate.Database

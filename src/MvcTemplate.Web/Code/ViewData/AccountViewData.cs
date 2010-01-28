@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MvcTemplate.Model;
-using Triggerfish.Testing.Web.Mvc;
+using Triggerfish.Web.Mvc.Testing;
 
 namespace MvcTemplate.Web
 {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Routing;
 using System.Diagnostics;
+using Triggerfish.Linq;
 using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
@@ -27,18 +28,15 @@ namespace MvcTemplate.Web
 			if (null != a_repository)
 			{
 				IEnumerable<IGenre> genres = a_repository.Genres;
-				genres.ForEach(g =>
-				{
-					nav.Add(new Hyperlink()
-					{
+				genres.ForEach(g =>	{
+					nav.Add(new Hyperlink()	{
 						Text = g.Name,
 						Route = g.Route()
 					});
 				});
 			}
 
-			nav.Add(new Hyperlink()
-			{
+			nav.Add(new Hyperlink()	{
 				Text = "Secret",
 				Route = RouteHelpers.SecretRoute()
 			});

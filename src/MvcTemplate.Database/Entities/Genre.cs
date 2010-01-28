@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Triggerfish.Database;
+using Triggerfish.Linq;
 using MvcTemplate.Model;
 
 namespace MvcTemplate.Database

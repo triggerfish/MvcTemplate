@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
+using Triggerfish.Validator;
 using MvcTemplate.Model;
 
 namespace MvcTemplate.Database.Tests

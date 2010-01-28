@@ -58,6 +58,10 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="Triggerfish, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\Triggerfish\Triggerfish.dll</HintPath>
+    </Reference>
     <Reference Include="Triggerfish.Testing, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Triggerfish\Triggerfish.Testing.dll</HintPath>
@@ -68,7 +72,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Code\Authentication\BCryptEncryptorTests.cs" />
     <Compile Include="Code\Authentication\DefaultMembershipProviderTests.cs" />
     <Compile Include="Code\Binders\ArtistBinderTests.cs" />
     <Compile Include="Code\Binders\BinderHelpers.cs" />
@@ -87,7 +90,6 @@
     <Compile Include="Helpers\MockArtist.cs" />
     <Compile Include="Helpers\MockGenre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Routing\SanitiseUrlTests.cs" />
     <Compile Include="Routing\OutboundRoutingTests.cs" />
     <Compile Include="Routing\InboundRoutingTests.cs" />
   </ItemGroup>

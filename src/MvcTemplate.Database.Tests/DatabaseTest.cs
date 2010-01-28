@@ -8,6 +8,7 @@ using FluentNHibernate;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Testing;
+using Triggerfish.NHibernate;
 
 namespace MvcTemplate.Database.Tests
 {

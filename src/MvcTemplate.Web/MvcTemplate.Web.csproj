@@ -44,9 +44,6 @@
       <HintPath>..\..\tools\Ninject\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -65,6 +62,18 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="Triggerfish, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\Triggerfish\Triggerfish.dll</HintPath>
+    </Reference>
+    <Reference Include="Triggerfish.NHibernate, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\Triggerfish\Triggerfish.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Triggerfish.Ninject, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\Triggerfish\Triggerfish.Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="Triggerfish.Testing, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Triggerfish\Triggerfish.Testing.dll</HintPath>
@@ -85,9 +94,6 @@
   <ItemGroup>
     <Compile Include="Code\Authentication\AuthenticationException.cs" />
     <Compile Include="Code\Authentication\AuthenticationProvider.cs" />
-    <Compile Include="Code\Authentication\BCrypt.cs" />
-    <Compile Include="Code\Authentication\BCryptEncryptor.cs" />
-    <Compile Include="Code\Authentication\Encryptor.cs" />
     <Compile Include="Code\Authentication\DefaultMembershipProvider.cs" />
     <Compile Include="Code\Authentication\MembershipProvider.cs" />
     <Compile Include="Code\Authentication\FormsAuthenticationProvider.cs" />
@@ -100,19 +106,12 @@
     <Compile Include="Code\Diagnostics\Diagnostics.cs" />
     <Compile Include="Code\Diagnostics\DiagnosticsFilter.cs" />
     <Compile Include="Code\Diagnostics\DiagnosticsModule.cs" />
-    <Compile Include="Code\Filters\TempData\ImportFromTempDataFilter.cs" />
-    <Compile Include="Code\Filters\TempData\ExportToTempDataFilter.cs" />
-    <Compile Include="Code\Filters\TempData\TempDataFilter.cs" />
-    <Compile Include="Code\Filters\TempData\ImportModelFromTempData.cs" />
-    <Compile Include="Code\Filters\TempData\ExportModelToTempData.cs" />
-    <Compile Include="Code\Filters\TempData\ImportModelStateFromTempData.cs" />
-    <Compile Include="Code\Filters\TempData\ExportModelStateToTempData.cs" />
-    <Compile Include="Code\Helpers\UrlHelpers.cs" />
+    <Compile Include="Code\Helpers\PagedListExtensions.cs" />
     <Compile Include="Code\Helpers\UrlExtensions.cs" />
     <Compile Include="Code\Helpers\RouteHelpers.cs" />
     <Compile Include="Code\Helpers\HtmlExtensions.cs" />
     <Compile Include="Code\Helpers\RouteExtensions.cs" />
-    <Compile Include="Code\Helpers\RouteValueDictionaryExtensions.cs" />
+    <Compile Include="Code\Helpers\UrlHelpers.cs" />
     <Compile Include="Code\Helpers\ValidationExtensions.cs" />
     <Compile Include="Code\IoC\WebDependencies.cs" />
     <Compile Include="Code\Navigation\GenreHyperlinks.cs" />
@@ -146,12 +145,14 @@
     <Content Include="Views\Account\Login.aspx" />
     <Content Include="Views\Account\Register.aspx" />
     <Content Include="Views\Artists\Artist.aspx" />
-    <Content Include="Views\Artists\Index.aspx" />
-    <Content Include="Views\Artists\ArtistList.ascx" />
+    <Content Include="Views\Artists\AllArtists.aspx" />
+    <Content Include="Views\Shared\ArtistList.ascx" />
     <Content Include="Views\Artists\Genre.aspx" />
     <Content Include="Views\Artists\Secret.aspx" />
     <Content Include="Views\Search\Index.aspx" />
     <Content Include="Views\Search\Results.aspx" />
+    <Content Include="Views\Search\SearchResultsList.ascx" />
+    <Content Include="Views\Shared\GenreList.ascx" />
     <Content Include="Views\Shared\SearchForm.ascx" />
     <Content Include="Views\Shared\NavBar.ascx" />
     <Content Include="Web.config" />
@@ -174,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Code\Filters\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

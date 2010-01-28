@@ -7,9 +7,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MvcTemplate.Model;
 using MvcTemplate.Web.Controllers;
-using Triggerfish.Testing.Web.Routing;
+using Triggerfish.Web.Routing.Testing;
 using System.Linq.Expressions;
 using System.Web;
+using Triggerfish.Security;
+using Triggerfish.Validator;
 
 namespace MvcTemplate.Web.Tests
 {

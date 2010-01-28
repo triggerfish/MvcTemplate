@@ -33,15 +33,10 @@ namespace MvcTemplate.Web.Tests
 			ArtistsController controller = new ArtistsController(repos);
 
 			// Act
-			ViewResult result = controller.Index();
-
-			ArtistsViewData vd = result.ViewData.Model as ArtistsViewData;
+			ViewResult result = controller.AllArtists(1);
 
 			// Assert
 			Assert.AreEqual("", result.ViewName);
-			Assert.AreNotEqual(null, vd);
-
-			ValidateArtistsList(artists, vd.Artists.ToList());
 		}
 
 		[TestMethod]

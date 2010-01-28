@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Linq.Expressions;
 using Moq;
+using Triggerfish.Linq;
 using MvcTemplate.Model;
 
 namespace MvcTemplate.Web.Tests

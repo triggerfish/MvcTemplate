@@ -8,6 +8,7 @@ using MvcTemplate.Web.Controllers;
 using Moq;
 using MvcTemplate.Model;
 using System.Globalization;
+using Triggerfish.Security;
 
 namespace MvcTemplate.Web.Tests
 {

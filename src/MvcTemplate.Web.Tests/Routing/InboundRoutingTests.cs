@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Routing;
-using Triggerfish.Testing.Web.Mvc;
+using Triggerfish.Web.Mvc.Testing;
 using MvcTemplate.Model;
 using MvcTemplate.Web;
 
@@ -19,75 +19,85 @@ namespace MvcTemplate.Web.Tests
 		[TestMethod]
 		public void ShouldResolveHomeRoute()
 		{
-			MvcAssert.IsInboundRouteCorrect(RouteHelpers.HomeRoute(), "~/", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(RouteHelpers.HomeRoute(), "~/", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveSearchRoute()
 		{
-			MvcAssert.IsInboundRouteCorrect(RouteHelpers.SearchRoute(), "~/search", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(RouteHelpers.SearchRoute(), "~/search", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveSearchResultsRoute()
 		{
-			MvcAssert.IsInboundRouteCorrect(RouteHelpers.SearchResultsRoute(), "~/search-results", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(RouteHelpers.SearchResultsRoute(), "~/search-results", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveRegisterRoute()
 		{
-			MvcAssert.IsInboundRouteCorrect(RouteHelpers.RegisterRoute(null), "~/register", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(RouteHelpers.RegisterRoute(null), "~/register", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveLoginRoute()
 		{
-			MvcAssert.IsInboundRouteCorrect(RouteHelpers.LoginRoute(null), "~/login", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(RouteHelpers.LoginRoute(null), "~/login", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveLogoutRoute()
 		{
-			MvcAssert.IsInboundRouteCorrect(RouteHelpers.LogoutRoute(null), "~/logout", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(RouteHelpers.LogoutRoute(null), "~/logout", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveGenreRoute()
 		{
 			IGenre g = MockGenre.CreateMockGenre("hip hop"); // need to be lower-case as this is how the urls are decoded
-			MvcAssert.IsInboundRouteCorrect(RouteHelpers.GenreRoute(g), "~/genre/hip-hop", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(RouteHelpers.GenreRoute(g), "~/genre/hip-hop", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveAllArtistsRoute()
 		{
-			MvcAssert.IsInboundRouteCorrect(RouteHelpers.AllArtistsRoute(), "~/artists", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(RouteHelpers.AllArtistsRoute(), "~/artists", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveArtistRoute()
 		{
 			IArtist a = MockArtist.CreateMockArtist(2, "crosby stills and nash"); // need to be lower-case as this is how the urls are decoded
-			MvcAssert.IsInboundRouteCorrect(RouteHelpers.ArtistRoute(a), "~/artists/crosby-stills-and-Nash", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(RouteHelpers.ArtistRoute(a), "~/artist/crosby-stills-and-nash", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
 		public void ShouldResolveSecretRoute()
 		{
-			MvcAssert.IsInboundRouteCorrect(RouteHelpers.SecretRoute(), "~/secret", MvcApplication.RegisterRoutes);
+			MvcAssert.IsInboundRouteValid(RouteHelpers.SecretRoute(), "~/secret", MvcApplication.RegisterRoutes);
 		}
 
 		[TestMethod]
-		public void SlashControllerSlashActionIsValid()
+		public void SlashControllerSlashActionIsInvalid()
 		{
-			MvcAssert.IsInboundRouteCorrect(new	{
+			try
+			{
+				MvcAssert.IsInboundRouteValid(new {
 					controller = "Abc",
 					action = "123"
 				},
-				"~/abc/123",
-				MvcApplication.RegisterRoutes
-			);
+					"~/abc/123",
+					MvcApplication.RegisterRoutes
+				);
+			}
+			catch (AssertFailedException)
+			{
+				// expected
+				return;
+			}
+
+			Assert.Fail("The default controller/action route should be disabled");
 		}
 	}
 }

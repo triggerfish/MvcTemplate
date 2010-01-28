@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Security;
 using MvcTemplate.Model;
 using System.Diagnostics;
+using Triggerfish.Security;
 
 namespace MvcTemplate.Web
 {

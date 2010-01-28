@@ -4,22 +4,6 @@
         <name>Triggerfish.Web</name>
     </assembly>
     <members>
-        <member name="T:Triggerfish.Web.Mvc.RouteDefaultAttribute">
-            <summary>
-            Assigns a default value to a route parameter in a UrlRouteAttribute
-            if not specified in the URL.
-            </summary>
-        </member>
-        <member name="P:Triggerfish.Web.Mvc.RouteDefaultAttribute.Name">
-            <summary>
-            Name of the route parameter for which to supply the default value.
-            </summary>
-        </member>
-        <member name="P:Triggerfish.Web.Mvc.RouteDefaultAttribute.Value">
-            <summary>
-            Default value to set on the route parameter if not specified in the URL.
-            </summary>
-        </member>
         <member name="T:Triggerfish.Web.Mvc.RouteAttribute">
             <summary>
             Assigns a URL route to an MVC Controller class method.
@@ -51,6 +35,283 @@
             order with respect to each other.
             </summary>
         </member>
+        <member name="T:Triggerfish.Web.Mvc.ImportModelStateAttribute">
+            <summary>
+            Attribute to import data from TempData into ViewData.ModelState
+            </summary>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.ImportFromTempDataAttribute">
+            <summary>
+            Abstract class to import data from TempData
+            </summary>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.TempDataAttribute">
+            <summary>
+            Base class for attributes that import/export data from/to TempData
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.TempDataAttribute.#ctor(System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="key">The TempData key</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.TempDataAttribute.Get(System.Web.Mvc.ControllerContext)">
+            <summary>
+            Get the data object from TempData
+            </summary>
+            <param name="filterContext">The context object that contains a reference to TempData</param>
+            <returns>The object</returns>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.TempDataAttribute.Set(System.Web.Mvc.ControllerContext,System.Object)">
+            <summary>
+            Sets the data object into TempData
+            </summary>
+            <param name="filterContext">The context object that contains a reference to TempData</param>
+            <param name="obj">The object to set</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.TempDataAttribute.Remove(System.Web.Mvc.ControllerContext)">
+            <summary>
+            Removes the data object from TempData
+            </summary>
+            <param name="filterContext">The context object that contains a reference to TempData</param>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.TempDataAttribute.Key">
+            <summary>
+            The key with which to store and retrieve data in TempData
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ImportFromTempDataAttribute.#ctor(System.String,System.Type)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="key">The key with which to store data in TempData</param>
+            <param name="modelType">The type of data to import</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ImportFromTempDataAttribute.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">
+            <summary>
+            Called befre the action method executes. Perform the import of data
+            from TempData
+            </summary>
+            <param name="filterContext">The filter context</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ImportFromTempDataAttribute.SetModel(System.Object,System.Web.Mvc.ControllerBase)">
+            <summary>
+            Abstract method to set the actual data object into the Controller object
+            </summary>
+            <param name="model">The object imported from TempData</param>
+            <param name="controller">The controller object</param>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.ImportFromTempDataAttribute.ModelType">
+            <summary>
+            The type of data to import
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ImportModelStateAttribute.#ctor(System.String)">
+            <summary>
+            Constuctor
+            </summary>
+            <param name="key">The key with which to store data in TempData</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ImportModelStateAttribute.SetModel(System.Object,System.Web.Mvc.ControllerBase)">
+            <summary>
+            Abstract method implementation to set the object in ViewData.ModelState
+            </summary>
+            <param name="model">The ViewData.ModelState object</param>
+            <param name="controller">The controller object</param>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.IPageLinkHtmlGenerator">
+            <summary>
+            Interface for a page link html generator
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.IPageLinkHtmlGenerator.ToHtml(System.Collections.Generic.IEnumerable{Triggerfish.Web.Mvc.PageLink},System.Int32,System.Int32,System.Int32,System.Func{System.Int32,System.String})">
+            <summary>
+            Convert the PageLink list into HTML
+            </summary>
+            <param name="pageLinks">The page links from which to generate the html</param>
+            <param name="pageCount">The total number of pages</param>
+            <param name="currentPage">The current displayed page index</param>
+            <param name="pageLinksPerPageCount">The number of page links to be displayed per page</param>
+            <param name="pageUrlGenerator">Delegate to return the URL for the given page index</param>
+            <returns>The HTML string</returns>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.PageLinkExtensions">
+            <summary>
+            Extension methods for pagination
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.PageLinkExtensions.ToAnchor(Triggerfish.Web.Mvc.PageLink,System.String,System.String)">
+            <summary>
+            Create an HTML anchor tag
+            </summary>
+            <param name="page">The page link object to which the anchor applies</param>
+            <param name="cssClass">The CSS class style to apply</param>
+            <param name="href">The link</param>
+            <returns>The HTML string</returns>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.PageLinkExtensions.ToSpan(Triggerfish.Web.Mvc.PageLink,System.String)">
+            <summary>
+            Create an HTML span tag
+            </summary>
+            <param name="page">The page link object to which the span applies</param>
+            <param name="cssClass">The CSS class style to apply</param>
+            <returns></returns>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.RouteDefaultAttribute">
+            <summary>
+            Assigns a default value to a route parameter in a UrlRouteAttribute
+            if not specified in the URL.
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.RouteDefaultAttribute.Name">
+            <summary>
+            Name of the route parameter for which to supply the default value.
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.RouteDefaultAttribute.Value">
+            <summary>
+            Default value to set on the route parameter if not specified in the URL.
+            </summary>
+        </member>
+        <member name="T:Triggerfish.StringExtensions">
+            <summary>
+            Extension methods for url processing
+            </summary>
+        </member>
+        <member name="M:Triggerfish.StringExtensions.Capitalise(System.String)">
+            <summary>
+            Converts the first character of a string to uppercase
+            </summary>
+            <param name="str">The string to convert</param>
+            <returns>A copy of the string with the first character capitalised</returns>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.ExportModelAttribute">
+            <summary>
+            Exports the ViewData.Model object to TempData
+            </summary>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.ExportToTempDataAttribute">
+            <summary>
+            Abstract class to export data to TempData
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ExportToTempDataAttribute.#ctor(System.String,Triggerfish.Web.Mvc.EExportWhen)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="key">The key with which to store data in TempData</param>
+            <param name="when">The EExportWhen value</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ExportToTempDataAttribute.OnActionExecuted(System.Web.Mvc.ActionExecutedContext)">
+            <summary>
+            Called after the action method executes. Perform the export of data
+            to TempData
+            </summary>
+            <param name="filterContext">The filter context</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ExportToTempDataAttribute.GetModel(System.Web.Mvc.ControllerBase)">
+            <summary>
+            Abstract method to get the actual data object from the Controller object
+            </summary>
+            <param name="controller">The controller object</param>
+            <returns>The object to export to TempData</returns>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.ExportToTempDataAttribute.ExportWhen">
+            <summary>
+            Property for the EExportWhen value
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ExportModelAttribute.#ctor(System.String,System.Type)">
+            <summary>
+            Constuctor
+            </summary>
+            <param name="key">The key with which to store data in TempData</param>
+            <param name="modelType">The type of data object in ViewData.Model</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ExportModelAttribute.GetModel(System.Web.Mvc.ControllerBase)">
+            <summary>
+            Abstract method implementation to get the object in ViewData.Model
+            </summary>
+            <param name="controller">The controller object</param>
+            <returns>The ViewData.Model object</returns>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.ExportModelAttribute.ModelType">
+            <summary>
+            The type of the data object stored in ViewData.Model
+            </summary>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.PageLink">
+            <summary>
+            A basic class to detail a page link although it doesn't actually
+            include data for the href
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.PageLink.Index">
+            <summary>
+            The page index
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.PageLink.Number">
+            <summary>
+            The page number (Index + 1)
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.PageLink.IsSelected">
+            <summary>
+            True if this page is currently selected, false otherwise
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.PageLink.IsFirst">
+            <summary>
+            True if this page is the first page, false otherwise
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.PageLink.IsLast">
+            <summary>
+            True if this page is the last page, false otherwise
+            </summary>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.RouteExtensions">
+            <summary>
+            Extension methods for MVC routing
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.RouteExtensions.RegisterRoutes(System.Web.Routing.RouteCollection)">
+            <summary>
+            Uses reflection to enumerate all Controller classes in the
+            assembly and registers a route for each method declaring a
+            UrlRoute attribute.
+            </summary>
+            <param name="routes">Route collection to add routes to.</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.RouteExtensions.MapFriendlyUrlRoute(System.Web.Routing.RouteCollection,System.String,System.String)">
+            <summary>
+            Adds a route entry to the route collection
+            </summary>
+            <param name="routes">The route collection</param>
+            <param name="name">The name for the route (can be null)</param>
+            <param name="url">The url</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.RouteExtensions.MapFriendlyUrlRoute(System.Web.Routing.RouteCollection,System.String,System.String,System.Object)">
+            <summary>
+            Adds a route entry to the route collection
+            </summary>
+            <param name="routes">The route collection</param>
+            <param name="name">The name for the route (can be null)</param>
+            <param name="url">The url</param>
+            <param name="defaults">The route default values</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.RouteExtensions.MapFriendlyUrlRoute(System.Web.Routing.RouteCollection,System.String,System.String,System.Object,System.Object)">
+            <summary>
+            Adds a route entry to the route collection
+            </summary>
+            <param name="routes">The route collection</param>
+            <param name="name">The name for the route (can be null)</param>
+            <param name="url">The url</param>
+            <param name="defaults">The route default values</param>
+            <param name="constraints">The route constraints</param>
+        </member>
         <member name="T:Triggerfish.Web.Mvc.RouteParser">
             <summary>
             Class to parse route information from controller methods decorated with
@@ -61,9 +322,9 @@
             <summary>
             Constructs a route parser
             </summary>
-            <param name="a_controller">The type of the controller class</param>
-            <param name="a_action">The action method on the controller</param>
-            <param name="a_route">The route attribute applied to the action method</param>
+            <param name="controller">The type of the controller class</param>
+            <param name="action">The action method on the controller</param>
+            <param name="route">The route attribute applied to the action method</param>
         </member>
         <member name="M:Triggerfish.Web.Mvc.RouteParser.CreateFromAttributes(System.Reflection.Assembly)">
             <summary>
@@ -71,7 +332,7 @@
             in the specified assembly. RouteParser objects are only created where a controller method 
             is decorated with a RouteAttribute
             </summary>
-            <param name="a_assembly">The assembly to scan</param>
+            <param name="assembly">The assembly to scan</param>
             <returns>List of RouteParser objects</returns>
         </member>
         <member name="P:Triggerfish.Web.Mvc.RouteParser.ControllerName">
@@ -125,6 +386,216 @@
             in the URL.
             </summary>
         </member>
+        <member name="T:Triggerfish.Web.Mvc.ImportModelAttribute">
+            <summary>
+            Attribute to import data from TempData into ViewData.Model
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ImportModelAttribute.#ctor(System.String,System.Type)">
+            <summary>
+            Constuctor
+            </summary>
+            <param name="key">The key with which to store data in TempData</param>
+            <param name="modelType">The type of data object in ViewData.Model</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ImportModelAttribute.SetModel(System.Object,System.Web.Mvc.ControllerBase)">
+            <summary>
+            Abstract method implementation to set the object in ViewData.Model
+            </summary>
+            <param name="model">The ViewData.Model object</param>
+            <param name="controller">The controller object</param>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.FirstPrevNextLastPageLinkHtmlGenerator">
+            <summary>
+            Created HTML page links with a format:
+            First | Prev | 1 2 3 4 | Next | Last
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.FirstPrevNextLastPageLinkHtmlGenerator.ToHtml(System.Collections.Generic.IEnumerable{Triggerfish.Web.Mvc.PageLink},System.Int32,System.Int32,System.Int32,System.Func{System.Int32,System.String})">
+            <summary>
+            Convert the PageLink list into HTML
+            </summary>
+            <param name="pageLinks">The page links from which to generate the html</param>
+            <param name="pageCount">The total number of pages</param>
+            <param name="currentPage">The current displayed page index</param>
+            <param name="pageLinksPerPageCount">The number of page links to be displayed per page</param>
+            <param name="pageUrlGenerator">Delegate to return the URL for the given page index</param>
+            <returns>The HTML string</returns>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.HtmlHelpers">
+            <summary>
+            Helper classes for building HTML strings
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.HtmlHelpers.CreateAnchor(System.String,System.String,System.String)">
+            <summary>
+            Creates an anchor tag
+            </summary>
+            <param name="cssClass">The class attribute value, can be null</param>
+            <param name="href">The href attribute value</param>
+            <param name="text">The anchor element text</param>
+            <returns>An HTML anchor tag</returns>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.HtmlHelpers.CreateSpan(System.String,System.String)">
+            <summary>
+            Creates a span tag
+            </summary>
+            <param name="cssClass">The class attribute value, can be null</param>
+            <param name="text">The span element text</param>
+            <returns>An HTML span tag</returns>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.IPageLinksAlgorithm">
+            <summary>
+            Interface for an algorithm to calculate which page links appear on a page
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.IPageLinksAlgorithm.GetPages(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Calculate which page links to display on a page
+            </summary>
+            <param name="currentPage">The current selected page</param>
+            <param name="pageCount">The total number of pages</param>
+            <param name="pageLinksPerPageCount">The number of page links to be displayed per page</param>
+            <returns>A list of PageLink objects</returns>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.PagedList`1">
+            <summary>
+            Paginates a list of items
+            </summary>
+            <typeparam name="T">The item type</typeparam>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.PagedList`1.#ctor(Triggerfish.Web.Mvc.IPageLinksAlgorithm,Triggerfish.Web.Mvc.IPageLinkHtmlGenerator)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="algorithm">The algorithm to use to calculate the page links to display on the page</param>
+            <param name="htmlGenerator">Interface with which to generate the page links html</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.PagedList`1.Paginate(System.Collections.Generic.IEnumerable{`0},System.Int32,System.Int32)">
+            <summary>
+            Paginate the list
+            </summary>
+            <param name="source">The source list of items</param>
+            <param name="currentPage">The current selected page</param>
+            <param name="itemsPerPageCount">The number of items to display per page</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.PagedList`1.GetPageLinks(System.Int32)">
+            <summary>
+            Get the page links to display on the current page
+            </summary>
+            <param name="pageLinksPerPageCount">The number of links to display per page</param>
+            <returns>A list of PageLink objects, or null if there is 0 or 1 pages</returns>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.PagedList`1.GetPageLinksHtml(System.Int32,System.Func{System.Int32,System.String})">
+            <summary>
+            Get the HTML for the page links using the html generator
+            </summary>
+            <param name="pageLinksPerPageCount">The number of page links to be displayed per page</param>
+            <param name="pageUrlGenerator">Delegate to return the URL for the given page index</param>
+            <returns>The HTML string</returns>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.PagedList`1.Items">
+            <summary>
+            Returns the items to be displayed in the current page
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.PagedList`1.PageCount">
+            <summary>
+            The total number of pages to display the entire source list
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.PagedList`1.CurrentPage">
+            <summary>
+            The current displayed page
+            </summary>
+        </member>
+        <member name="T:Triggerfish.Web.Routing.RouteValueDictionaryExtensions">
+            <summary>
+            Extension methods for url processing
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Routing.RouteValueDictionaryExtensions.AddReturnUrl(System.Web.Routing.RouteValueDictionary,System.String)">
+            <summary>
+            Adds a returnUrl parameter to the RouteValueDictionary
+            </summary>
+            <param name="route">The RouteValueDictionary object to amend</param>
+            <param name="url">The return url</param>
+            <returns>The amended RouteValueDictionary object</returns>
+        </member>
+        <member name="M:Triggerfish.Web.Routing.RouteValueDictionaryExtensions.Encode(System.Web.Routing.RouteValueDictionary)">
+            <summary>
+            Encodes the individual route values to be lower-case and containing hypens
+            instead of spaces.
+            It does not alter the controller and action route values
+            </summary>
+            <param name="route">Route value dictionary containing the route data</param>
+        </member>
+        <member name="M:Triggerfish.Web.Routing.RouteValueDictionaryExtensions.Decode(System.Web.Routing.RouteValueDictionary)">
+            <summary>
+            Decodes the individual route values to replace the hypens with spaces.
+            It does not alter the case of the value and does not alter the controller 
+            and action route values
+            </summary>
+            <param name="route">Route value dictionary containing the route data</param>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.EExportWhen">
+            <summary>
+            Enumeration to specify under what conditions the data should be
+            exported
+            </summary>
+        </member>
+        <member name="F:Triggerfish.Web.Mvc.EExportWhen.ModelStateValid">
+            <summary>
+            Export the data if ModelState.IsValid is true
+            </summary>
+        </member>
+        <member name="F:Triggerfish.Web.Mvc.EExportWhen.ModelStateInvalid">
+            <summary>
+            Export the data if ModelState.IsValid is false
+            </summary>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.ExportModelStateAttribute">
+            <summary>
+            Exports the ViewData.ModelState object to TempData
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ExportModelStateAttribute.#ctor(System.String)">
+            <summary>
+            Constuctor
+            </summary>
+            <param name="key">The key with which to store data in TempData</param>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ExportModelStateAttribute.GetModel(System.Web.Mvc.ControllerBase)">
+            <summary>
+            Abstract method implementation to get the object in ViewData.ModelState
+            </summary>
+            <param name="controller">The controller object</param>
+            <returns>The ViewData.ModelState object</returns>
+        </member>
+        <member name="T:Triggerfish.Web.Mvc.PageLinkCentredAlgorithm">
+            <summary>
+            Calculates a list of page links where the current page is centred in the list
+            For example, the following page links would be displayed for a list of 
+            6 pages with a max 3 page links per page:
+            
+            Page 0: 0 1 2
+            Page 1: 0 1 2
+            Page 2: 1 2 3
+            Page 3: 2 3 4
+            Page 4: 3 4 5
+            Page 5: 3 4 5
+            	
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.PageLinkCentredAlgorithm.GetPages(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Calculates the page links to be displayed on the current page
+            </summary>
+            <param name="currentPage">The current selected page</param>
+            <param name="pageCount">The total number of pages</param>
+            <param name="pageLinksPerPageCount">The number of page links to be displayed per page</param>
+            <returns>A list of PageLink objects</returns>
+        </member>
         <member name="T:Triggerfish.Web.Routing.FriendlyUrlRoute">
             <summary>
             Overrides the default route handling behaviour to alter the 
@@ -165,74 +636,6 @@
             <param name="requestContext">Context data about the requested route</param>
             <param name="values">The route values</param>
             <returns>Url data</returns>
-        </member>
-        <member name="T:Triggerfish.Web.Routing.UrlExtensions">
-            <summary>
-            Extension methods for url processing
-            </summary>
-        </member>
-        <member name="M:Triggerfish.Web.Routing.UrlExtensions.Capitalise(System.String)">
-            <summary>
-            Converts the first character of a string to uppercase
-            </summary>
-            <param name="a_string">The string to convert</param>
-            <returns>A copy of the string with the first character capitalised</returns>
-        </member>
-        <member name="M:Triggerfish.Web.Routing.UrlExtensions.Encode(System.Web.Routing.RouteValueDictionary)">
-            <summary>
-            Encodes the individual route values to be lower-case and containing hypens
-            instead of spaces.
-            It does not alter the controller and action route values
-            </summary>
-            <param name="a_route">Route value dictionary containing the route data</param>
-        </member>
-        <member name="M:Triggerfish.Web.Routing.UrlExtensions.Decode(System.Web.Routing.RouteValueDictionary)">
-            <summary>
-            Decodes the individual route values to replace the hypens with spaces.
-            It does not alter the case of the value and does not alter the controller 
-            and action route values
-            </summary>
-            <param name="a_route">Route value dictionary containing the route data</param>
-        </member>
-        <member name="T:Triggerfish.Web.Mvc.RouteExtensions">
-            <summary>
-            Extension methods for MVC routing
-            </summary>
-        </member>
-        <member name="M:Triggerfish.Web.Mvc.RouteExtensions.RegisterRoutes(System.Web.Routing.RouteCollection)">
-            <summary>
-            Uses reflection to enumerate all Controller classes in the
-            assembly and registers a route for each method declaring a
-            UrlRoute attribute.
-            </summary>
-            <param name="a_routes">Route collection to add routes to.</param>
-        </member>
-        <member name="M:Triggerfish.Web.Mvc.RouteExtensions.MapFriendlyUrlRoute(System.Web.Routing.RouteCollection,System.String,System.String)">
-            <summary>
-            Adds a route entry to the route collection
-            </summary>
-            <param name="a_routes">The route collection</param>
-            <param name="a_name">The name for the route (can be null)</param>
-            <param name="a_url">The url</param>
-        </member>
-        <member name="M:Triggerfish.Web.Mvc.RouteExtensions.MapFriendlyUrlRoute(System.Web.Routing.RouteCollection,System.String,System.String,System.Object)">
-            <summary>
-            Adds a route entry to the route collection
-            </summary>
-            <param name="a_routes">The route collection</param>
-            <param name="a_name">The name for the route (can be null)</param>
-            <param name="a_url">The url</param>
-            <param name="a_defaults">The route default values</param>
-        </member>
-        <member name="M:Triggerfish.Web.Mvc.RouteExtensions.MapFriendlyUrlRoute(System.Web.Routing.RouteCollection,System.String,System.String,System.Object,System.Object)">
-            <summary>
-            Adds a route entry to the route collection
-            </summary>
-            <param name="a_routes">The route collection</param>
-            <param name="a_name">The name for the route (can be null)</param>
-            <param name="a_url">The url</param>
-            <param name="a_defaults">The route default values</param>
-            <param name="a_constraints">The route constraints</param>
         </member>
     </members>
 </doc>

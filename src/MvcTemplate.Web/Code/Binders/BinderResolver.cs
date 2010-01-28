@@ -18,6 +18,11 @@ namespace MvcTemplate.Web
 
 		public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
 		{
+			if (bindingContext.ModelType.IsValueType)
+			{
+				return base.BindModel(controllerContext, bindingContext);
+			}
+
 			Type t = m_binderOpenType.MakeGenericType(bindingContext.ModelType);
 			var binder = m_resolver(t);
 

@@ -6,6 +6,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentNHibernate.Testing;
 using NHibernate;
+using Triggerfish.NHibernate;
 
 namespace MvcTemplate.Database.Tests
 {

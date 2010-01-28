@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Diagnostics;
 using System.IO;
-using MvcTemplate.Model;
 using System.Text.RegularExpressions;
+using Triggerfish.Ninject;
+using MvcTemplate.Model;
 
 namespace MvcTemplate.Web
 {

@@ -83,6 +83,18 @@
       <HintPath>..\..\tools\SQLite\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
+    <Reference Include="Triggerfish, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\Triggerfish\Triggerfish.dll</HintPath>
+    </Reference>
+    <Reference Include="Triggerfish.NHibernate, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\Triggerfish\Triggerfish.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Triggerfish.Ninject, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\Triggerfish\Triggerfish.Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="xVal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f8fbed92c68c4006, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\xVal\xVal.dll</HintPath>
@@ -99,10 +111,6 @@
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="UserRepository.cs" />
     <Compile Include="Entities\Artist.cs" />
-    <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Helpers\SessionExtensions.cs" />
-    <Compile Include="IoC\SqliteModule.cs" />
-    <Compile Include="IoC\SqlServerModule.cs" />
     <Compile Include="IoC\DatabaseModule.cs" />
     <Compile Include="Mappings\ArtistMap.cs" />
     <Compile Include="Mappings\GenreMap.cs" />
@@ -111,9 +119,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositorySettings.cs" />
     <Compile Include="SearchResults.cs" />
-    <Compile Include="Session.cs" />
-    <Compile Include="Logging\SqlLogger.cs" />
-    <Compile Include="Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

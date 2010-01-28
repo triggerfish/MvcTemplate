@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcTemplate.Model;
+using Triggerfish.Validator;
+using Triggerfish.Ninject;
 
 namespace MvcTemplate.Web
 {
