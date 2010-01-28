@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainTitle" runat="server">All Artists</asp:Content>
 
 <asp:Content ID="Content" ContentPlaceHolderID="MainContent" runat="server">
+<div class="pager">
+<%= Model.ArtistsPagedList.GetPageLinksHtml(ArtistsViewData.c_pageLinksPerPageCount, x => { return Url.RouteUrl(RouteHelpers.AllArtistsRoute(x+1)); })%>
+</div>
 <h2>All Artists</h2>
-<% Html.RenderPartial("ArtistList", Model.Artists); %>
+<% Html.RenderPartial("ArtistList", Model.ArtistsPagedList.Items); %>
 </asp:Content>
