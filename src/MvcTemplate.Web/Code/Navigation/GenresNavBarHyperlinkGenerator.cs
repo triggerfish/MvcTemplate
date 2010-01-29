@@ -42,7 +42,7 @@ namespace MvcTemplate.Web
 				Route = RouteHelpers.SecretRoute()
 			});
 
-			if (!String.IsNullOrEmpty(arguments.Selected))
+			if (null != arguments && !String.IsNullOrEmpty(arguments.Selected))
 			{
 				Hyperlink l = nav.FirstOrDefault(h => (0 == String.Compare(h.Text, arguments.Selected, true)));
 				if (null != l)

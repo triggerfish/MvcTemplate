@@ -6,31 +6,20 @@ namespace MvcTemplate.Web
 {
 	public class NavBarWidget : IHyperlinkGeneratorArguments
 	{
-		private Type m_generatorType;
-
-		public Type HyperlinkGenerator 
-		{
-			get { return m_generatorType; }
-			set
-			{
-				if (value == typeof(IHyperlinkGenerator))
-					throw new ArgumentException("Must be of type IHyperlinkGenerator");
-				m_generatorType = value;
-			}
-		}
+		private IHyperlinkGenerator m_generator;
 
 		public string Selected { get; set; }
 
+		public NavBarWidget(IHyperlinkGenerator generator)
+		{
+			m_generator = generator;
+		}
+
 		public IEnumerable<Hyperlink> GenerateHyperlinks()
 		{
-			if (null != m_generatorType)
+			if (null != m_generator)
 			{
-				IHyperlinkGenerator gen = ObjectFactory.TryGet<IHyperlinkGenerator>(m_generatorType);
-
-				if (null != gen)
-				{
-					return gen.Create(this);
-				}
+				return m_generator.Create(this);
 			}
 			return null;
 		}

@@ -8,14 +8,14 @@ namespace MvcTemplate.Web
 {
 	public class ViewData
 	{
-		public NavBarWidget NavBarWidget { get; private set; }
+		public NavBarWidget NavBarWidget { get; set; }
 
 		public bool DisplaySearch { get; set; }
 		public bool DisplayAuthLinks { get; set; }
 
 		public ViewData()
 		{
-			NavBarWidget = new NavBarWidget();
+			NavBarWidget = new NavBarWidget(null);
 			DisplaySearch = true;
 			DisplayAuthLinks = true;
 		}

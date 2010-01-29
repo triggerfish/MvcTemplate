@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Triggerfish.Ninject;
 
 namespace MvcTemplate.Web
 {
@@ -25,7 +26,7 @@ namespace MvcTemplate.Web
 
 			if (null != model && model is ViewData)
 			{
-				((ViewData)model).NavBarWidget.HyperlinkGenerator = Generator;
+				((ViewData)model).NavBarWidget = new NavBarWidget(ObjectFactory.TryGet<IHyperlinkGenerator>(Generator));
 			}
 
 			base.OnActionExecuted(filterContext);
