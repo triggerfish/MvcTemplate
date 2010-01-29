@@ -22,6 +22,7 @@
         <div class="row"><label for="Surname">Surname:</label><%= Html.TextBox("Surname")%><%= Html.ValidationMessage("Surname") %></div>
     </fieldset>
     <fieldset>
+        <%= Html.AntiForgeryToken() %>
         <div class="align-inputs"><input type="submit" value="Register" /><a href="<%= Model.CancelUrl%>">Cancel</a></div>
         <div class="align-inputs"><span>Already registered? </span><%= Html.RouteLink("Login", RouteHelpers.LoginRoute(Model.ReturnUrl)) %></div>
     </fieldset>

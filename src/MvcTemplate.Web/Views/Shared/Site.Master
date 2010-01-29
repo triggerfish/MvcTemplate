@@ -18,13 +18,7 @@
     <% } %>
     </div>
     <div id="auth-links">
-        <% if (model.DisplayAuthLinks) { %>
-            <% if (HttpContext.Current.User.Identity.IsAuthenticated) { %>
-            <%= Html.RouteLink("Logout", RouteHelpers.LogoutRoute(Request.Url.PathAndQuery))%>
-            <% } else { %>
-            <%= Html.RouteLink("Login", RouteHelpers.LoginRoute(Request.Url.PathAndQuery))%>&nbsp;|&nbsp;<%= Html.RouteLink("Register", RouteHelpers.RegisterRoute(Request.Url.PathAndQuery))%>
-	        <% } %>
-	    <% } %>
+    <% Html.RenderPartial("AuthenticationLinks", model); %>
 	</div>
     <div id="header">
 	    <% if (model.DisplaySearch) { %>

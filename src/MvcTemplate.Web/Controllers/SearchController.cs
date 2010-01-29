@@ -11,6 +11,7 @@ using MvcTemplate.Model;
 
 namespace MvcTemplate.Web.Controllers
 {
+	[ValidateInput(false)]
 	[NavBarLinkGenerator(typeof(GenresNavBarHyperlinkGenerator))]
 	public class SearchController : Controller
     {

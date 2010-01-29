@@ -103,6 +103,7 @@
     <Compile Include="Code\Binders\ModelBinder.cs" />
     <Compile Include="Code\Diagnostics\Diagnostics.cs" />
     <Compile Include="Code\Diagnostics\DiagnosticsModule.cs" />
+    <Compile Include="Code\Filters\IsAuthenticatedAttribute.cs" />
     <Compile Include="Code\Filters\HandleErrorAttribute.cs" />
     <Compile Include="Code\Filters\NavBarLinkGeneratorAttribute.cs" />
     <Compile Include="Code\Helpers\PagedListExtensions.cs" />
@@ -151,6 +152,7 @@
     <Content Include="Views\Artists\Secret.aspx" />
     <Content Include="Views\Search\Index.aspx" />
     <Content Include="Views\Search\Results.aspx" />
+    <Content Include="Views\Shared\AuthenticationLinks.ascx" />
     <Content Include="Views\Shared\GenreList.ascx" />
     <Content Include="Views\Shared\SearchForm.ascx" />
     <Content Include="Views\Shared\NavBar.ascx" />

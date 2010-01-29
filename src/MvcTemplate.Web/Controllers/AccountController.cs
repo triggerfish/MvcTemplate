@@ -12,7 +12,8 @@ using Triggerfish.Web.Security;
 
 namespace MvcTemplate.Web.Controllers
 {
-    public class AccountController : Controller
+	[ValidateInput(false)]
+	public class AccountController : Controller
     {
 		private IAuthenticationProvider m_authentication;
 		private IMembershipProvider m_membership;
@@ -33,6 +34,7 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "register")]
 		[AcceptVerbs(HttpVerbs.Post)]
+		[ValidateAntiForgeryToken]
 		[ExportModelState("RegisterErrors")]
 		public ActionResult Register(IUser user, string returnUrl)
 		{
@@ -66,6 +68,7 @@ namespace MvcTemplate.Web.Controllers
 
 		[Route(Url = "login")]
 		[AcceptVerbs(HttpVerbs.Post)]
+		[ValidateAntiForgeryToken]
 		[ExportModelState("LoginErrors")]
 		public ActionResult Login(IUserCredentials credentials, string returnUrl)
 		{
@@ -90,7 +93,9 @@ namespace MvcTemplate.Web.Controllers
 		}
 
 		[Route(Url = "logout")]
-		[AcceptVerbs(HttpVerbs.Get)]
+		[AcceptVerbs(HttpVerbs.Post)]
+		[ValidateAntiForgeryToken]
+		[IsAuthenticated]
 		public ActionResult Logout(string returnUrl)
 		{
 			m_authentication.Logout();

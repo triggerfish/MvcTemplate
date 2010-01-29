@@ -17,6 +17,7 @@
         <div class="row"><label for="Password">Password:</label><%= Html.Password("Password")%></div>
     </fieldset>
     <fieldset>
+        <%= Html.AntiForgeryToken() %>
         <div class="align-inputs"><input type="submit" value="Login" /><a href="<%= Model.CancelUrl%>">Cancel</a></div>
         <div class="align-inputs"><span>Not registered? </span><%= Html.RouteLink("Register", RouteHelpers.RegisterRoute(Model.ReturnUrl)) %></div>
     </fieldset>
