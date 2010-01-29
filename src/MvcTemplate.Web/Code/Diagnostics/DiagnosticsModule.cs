@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Triggerfish.Web.Diagnostics;
+using Triggerfish.Ninject;
 
 namespace MvcTemplate.Web
 {
@@ -8,7 +9,7 @@ namespace MvcTemplate.Web
 	{
 		protected override IDiagnostics CreateDiagnostics()
 		{
-			return new Diagnostics();
+			return ObjectFactory.TryGet<Diagnostics>();
 		}
 	}
 }

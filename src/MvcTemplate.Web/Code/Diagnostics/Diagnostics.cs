@@ -10,6 +10,7 @@ namespace MvcTemplate.Web
 {
 	public class Diagnostics : IDiagnostics
 	{
+		private IRepositorySettings m_settings;
 		private Stopwatch m_timer = new Stopwatch();
 		private StringWriter m_sqlLog = new StringWriter();
 
@@ -18,9 +19,15 @@ namespace MvcTemplate.Web
 			get { return "MvcTemplate.Web.Diagnostics"; }
 		}
 
+		public Diagnostics(IRepositorySettings settings)
+		{
+			m_settings = settings;
+		}
+
 		public void Start()
 		{
-			ObjectFactory.Get<IRepositorySettings>().SqlLog = m_sqlLog;
+			if (null != m_settings)
+				m_settings.SqlLog = m_sqlLog;
 			m_timer.Reset();
 			m_timer.Start();
 		}
@@ -28,7 +35,8 @@ namespace MvcTemplate.Web
 		public void Stop()
 		{
 			m_timer.Stop();
-			ObjectFactory.Get<IRepositorySettings>().SqlLog = null;
+			if (null != m_settings)
+				m_settings.SqlLog = null;
 		}
 
 		public string ToHtmlString()
@@ -41,11 +49,11 @@ namespace MvcTemplate.Web
 			// page generation time
 			html.WriteLine(String.Format("  <p>Page generated in {0}ms</p>", m_timer.ElapsedMilliseconds));
 
-			// sql queries
-			html.WriteLine(String.Format("  <p>Executed {0} SQL {1}:</p>", queries.Length, queries.Length == 1 ? "query" : "queries"));
-
 			if (queries.Length > 0)
 			{
+				// sql queries
+				html.WriteLine(String.Format("  <p>Executed {0} SQL {1}:</p>", queries.Length, queries.Length == 1 ? "query" : "queries"));
+
 				html.WriteLine("    <ol>");
 				foreach (string query in queries)
 				{
