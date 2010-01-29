@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MvcTemplate.Model;
+using Triggerfish.Validator;
 
 namespace MvcTemplate.Web
 {
@@ -11,7 +12,8 @@ namespace MvcTemplate.Web
 	{
 		private IUserRepository m_repository;
 
-		public UserCredentialsBinder(IUserRepository repository)
+		public UserCredentialsBinder(IUserRepository repository, IValidator validator)
+			: base(validator)
 		{
 			m_repository = repository;
 		}

@@ -12,7 +12,8 @@ namespace MvcTemplate.Web
 	{
 		protected IArtistsRepository Repository { get; private set; }
 
-		public GenreBinder(IArtistsRepository repository)
+		public GenreBinder(IArtistsRepository repository, IValidator validator)
+			: base(validator)
 		{
 			Repository = repository;
 		}

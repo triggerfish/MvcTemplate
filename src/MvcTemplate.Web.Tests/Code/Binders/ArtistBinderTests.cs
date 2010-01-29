@@ -8,6 +8,7 @@ using MvcTemplate.Web.Controllers;
 using Moq;
 using MvcTemplate.Model;
 using System.Globalization;
+using Triggerfish.Validator;
 
 namespace MvcTemplate.Web.Tests
 {
@@ -23,7 +24,7 @@ namespace MvcTemplate.Web.Tests
 			};
 
 			IArtistsRepository repos = MockArtistsRepository.CreateMockRepository("Pop", artists);
-			ArtistBinder binder = new ArtistBinder(repos);
+			ArtistBinder binder = new ArtistBinder(repos, null);
 
 			ModelBindingContext ctx = BinderHelpers.CreateModelBindingContext("artist", "artist2");
 			
@@ -46,7 +47,7 @@ namespace MvcTemplate.Web.Tests
 			};
 
 			IArtistsRepository repos = MockArtistsRepository.CreateMockRepository("Pop", artists);
-			ArtistBinder binder = new ArtistBinder(repos);
+			ArtistBinder binder = new ArtistBinder(repos, null);
 
 			ModelBindingContext ctx = BinderHelpers.CreateModelBindingContext("artist", "plibble");
 

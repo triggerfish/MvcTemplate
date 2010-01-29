@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Triggerfish.Security;
 using MvcTemplate.Model;
+using Triggerfish.Validator;
 
 namespace MvcTemplate.Web
 {
@@ -13,7 +14,8 @@ namespace MvcTemplate.Web
 		private IUserRepository m_repository;
 		private IEncryptor m_encryptor;
 
-		public UserBinder(IUserRepository repository, IEncryptor encryptor)
+		public UserBinder(IUserRepository repository, IEncryptor encryptor, IValidator validator)
+			: base(validator)
 		{
 			m_repository = repository;
 			m_encryptor = encryptor;
