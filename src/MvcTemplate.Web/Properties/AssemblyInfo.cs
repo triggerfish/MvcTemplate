@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Triggerfish Limited")]
 [assembly: AssemblyProduct("MvcTemplate")]
-[assembly: AssemblyCopyright("Copyright © Triggerfish Limited 2009")]
+[assembly: AssemblyCopyright("Copyright © Triggerfish Limited 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("0.1.4")]
-[assembly: AssemblyFileVersion("0.1.4")]
+[assembly: AssemblyVersion("0.1.5")]
+[assembly: AssemblyFileVersion("0.1.5")]
