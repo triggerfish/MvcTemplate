@@ -16,7 +16,7 @@ namespace MvcTemplate.Web
 
 		public static string Script(this UrlHelper helper, string filename)
 		{
-			return helper.Content(String.Format("~/content/script/{0}", filename));
+			return helper.Content(String.Format("~/content/scripts/{0}", filename));
 		}
 		
 		public static string Image(this UrlHelper helper, string filename)
