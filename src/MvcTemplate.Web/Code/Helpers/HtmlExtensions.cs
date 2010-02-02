@@ -32,7 +32,7 @@ namespace MvcTemplate.Web
 		{
 			bool enabled = false;
 			Boolean.TryParse(WebConfigurationManager.AppSettings["EnableClientSideValidation"], out enabled);
-			if (true)
+			if (enabled)
 			{
 				IClientSideValidation v = ObjectFactory.TryGet<IClientSideValidation>();
 				if (null != v)
