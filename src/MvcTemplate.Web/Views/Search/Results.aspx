@@ -7,8 +7,8 @@
 <% Html.RenderPartial("SearchForm"); %>
 <br />
 <% 
-    bool bHaveArtists = (Model.Results.Artists.Any());
-    bool bHaveGenres = (Model.Results.Genres.Any());
+    bool bHaveArtists = (Model.HasArtists);
+    bool bHaveGenres = (Model.HasGenres);
 %>
 <% if (!bHaveArtists && !bHaveGenres) { %>
     <p>No search results</p>   
