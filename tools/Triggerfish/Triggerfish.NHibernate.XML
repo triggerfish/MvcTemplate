@@ -4,6 +4,25 @@
         <name>Triggerfish.NHibernate</name>
     </assembly>
     <members>
+        <member name="T:Triggerfish.NHibernate.Validator.ValidatorExtensions">
+            <summary>
+            Extension methods for validation errors
+            </summary>
+        </member>
+        <member name="M:Triggerfish.NHibernate.Validator.ValidatorExtensions.ToValidationException(NHibernate.Validator.Exceptions.InvalidStateException)">
+            <summary>
+            Constructs a ValidationException based on a NHibernate.Validator InvalidStateException
+            </summary>
+            <param name="exception">The exception received from NHibernate.Validator</param>
+            <returns>A ValidationException object</returns>
+        </member>
+        <member name="M:Triggerfish.NHibernate.Validator.ValidatorExtensions.ToValidationException(NHibernate.Validator.Engine.InvalidValue[])">
+            <summary>
+            Constructs a ValidationException based on NHibernate.Validator InvalidValue objects.
+            </summary>
+            <param name="errors">The errors received from NHibernate.Validator</param>
+            <returns>A ValidationException or null if there are no errors</returns>
+        </member>
         <member name="T:Triggerfish.NHibernate.SessionExtensions">
             <summary>
             Session extension methods
@@ -15,6 +34,95 @@
             </summary>
             <param name="session">The NHibernate session</param>
             <param name="del">The action delegate instance</param>
+        </member>
+        <member name="T:Triggerfish.NHibernate.SqlServerModule">
+            <summary>
+            SQL Server database configuration
+            </summary>
+        </member>
+        <member name="T:Triggerfish.NHibernate.IDatabaseConfiguration">
+            <summary>
+            Interface for an NHibernate database configuration
+            </summary>
+        </member>
+        <member name="M:Triggerfish.NHibernate.IDatabaseConfiguration.Create(System.Reflection.Assembly)">
+            <summary>
+            Returns the FluentNHibernate database configuration data
+            </summary>
+            <param name="assembly">The assembly containing the mappings</param>
+            <returns>Database configuration</returns>
+        </member>
+        <member name="M:Triggerfish.NHibernate.SqlServerModule.#ctor(System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="server">The path to the server</param>
+            <param name="database">The name of the database</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.SqlServerModule.Triggerfish#NHibernate#IDatabaseConfiguration#Create(System.Reflection.Assembly)">
+            <summary>
+            Returns the FluentNHibernate SQL Server configuration data
+            </summary>
+            <param name="assembly">The assembly containing the mappings</param>
+            <returns>SQL Server configuration</returns>
+        </member>
+        <member name="T:Triggerfish.NHibernate.Repository">
+            <summary>
+            Represents an NHibernate repository
+            </summary>
+        </member>
+        <member name="M:Triggerfish.NHibernate.Repository.#ctor(NHibernate.ISession)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="session">A NHibernate session</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.Repository.#ctor(Triggerfish.FluentNHibernate.IDbSession)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="session">A NHibernate session</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.Repository.Get``1(System.Int32)">
+            <summary>
+            Get an object from the objects ID
+            </summary>
+            <typeparam name="T">Object type</typeparam>
+            <param name="id">Object ID</param>
+            <returns>The object</returns>
+        </member>
+        <member name="M:Triggerfish.NHibernate.Repository.GetAll``1">
+            <summary>
+            Get a queryable list of objects
+            </summary>
+            <typeparam name="T">Object type</typeparam>
+            <returns>The objects</returns>
+        </member>
+        <member name="M:Triggerfish.NHibernate.Repository.Delete``1(``0)">
+            <summary>
+            Deletes an object from the repository
+            </summary>
+            <typeparam name="T">Object type</typeparam>
+            <param name="target">the object</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.Repository.Save``1(``0)">
+            <summary>
+            Saves or updates an object to the repository
+            </summary>
+            <typeparam name="T">Object type</typeparam>
+            <param name="target">The object to save or update</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.Repository.Save``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Saves or updates a list of objects to the repository
+            </summary>
+            <typeparam name="T">Object type</typeparam>
+            <param name="targets">The list of objects to save or update</param>
+        </member>
+        <member name="P:Triggerfish.NHibernate.Repository.Session">
+            <summary>
+            The NHibernate session
+            </summary>
         </member>
         <member name="T:Triggerfish.NHibernate.SQLlogger">
             <summary>
@@ -32,50 +140,60 @@
             Setter method for the stream to write the SQL commands to
             </summary>
         </member>
-        <member name="T:Triggerfish.NHibernate.Ninject.SqliteModule`1">
+        <member name="T:Triggerfish.NHibernate.Configuration`1">
             <summary>
-            Sqlite Ninject dependency module
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="T:Triggerfish.NHibernate.Ninject.DatabaseModule`1">
-            <summary>
-            NHibernate Ninject dependency module
+            NHibernate configuration
             </summary>
             <typeparam name="T">A type from the assembly containing FluentNHibernate mappings</typeparam>
         </member>
-        <member name="M:Triggerfish.NHibernate.Ninject.DatabaseModule`1.Load">
+        <member name="M:Triggerfish.NHibernate.Configuration`1.#ctor(Triggerfish.NHibernate.IDatabaseConfiguration)">
             <summary>
-            Module Load handler
+            Constructor
+            </summary>
+            <param name="database">The database configuration object</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.Configuration`1.Create">
+            <summary>
+            Create the configuration
             </summary>
         </member>
-        <member name="M:Triggerfish.NHibernate.Ninject.DatabaseModule`1.CreateDatabase">
+        <member name="M:Triggerfish.NHibernate.Configuration`1.CreateValidator">
             <summary>
-            Derived classes must implement to provide the specific
-            database configuration data
-            </summary>
-            <returns>Database configuration data</returns>
-        </member>
-        <member name="M:Triggerfish.NHibernate.Ninject.DatabaseModule`1.SetupBindings">
-            <summary>
-            Derived classes must implement to perform custom Ninject bindings
+            Create the NHibernate ValidatorEngine
             </summary>
         </member>
-        <member name="M:Triggerfish.NHibernate.Ninject.SqliteModule`1.#ctor(System.String)">
+        <member name="M:Triggerfish.NHibernate.Configuration`1.SetValidatorEngineProperties(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Sets the properties of the NHibernate validator engine
+            </summary>
+            <param name="properties">Dictionary of properties</param>
+        </member>
+        <member name="P:Triggerfish.NHibernate.Configuration`1.Config">
+            <summary>
+            The FluentNHibernate configuration
+            </summary>
+        </member>
+        <member name="P:Triggerfish.NHibernate.Configuration`1.Validator">
+            <summary>
+            The validator engine
+            </summary>
+        </member>
+        <member name="T:Triggerfish.NHibernate.SqliteDatabase">
+            <summary>
+            Sqlite database configuration
+            </summary>
+        </member>
+        <member name="M:Triggerfish.NHibernate.SqliteDatabase.#ctor(System.String)">
             <summary>
             Constructor
             </summary>
             <param name="filename">The name of the SQLite database file</param>
         </member>
-        <member name="M:Triggerfish.NHibernate.Ninject.SqliteModule`1.Load">
+        <member name="M:Triggerfish.NHibernate.SqliteDatabase.Triggerfish#NHibernate#IDatabaseConfiguration#Create(System.Reflection.Assembly)">
             <summary>
-            Ninject dependency loader
+            Returns the FluentNHibernate Sqlite configuration data
             </summary>
-        </member>
-        <member name="M:Triggerfish.NHibernate.Ninject.SqliteModule`1.CreateDatabase">
-            <summary>
-            Returns the FluentNHibernate SQLite configuration data
-            </summary>
+            <param name="assembly">The assembly containing the mappings</param>
             <returns>SQLite configuration</returns>
         </member>
         <member name="T:Triggerfish.FluentNHibernate.IDbSession">
@@ -122,25 +240,6 @@
             <summary>
             Close the session
             </summary>
-        </member>
-        <member name="T:Triggerfish.NHibernate.Ninject.SqlServerModule`1">
-            <summary>
-            Provides a connection to a SQL Server database
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
-        <member name="M:Triggerfish.NHibernate.Ninject.SqlServerModule`1.#ctor(System.String,System.String)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="server">The path to the server</param>
-            <param name="database">The name of the database</param>
-        </member>
-        <member name="M:Triggerfish.NHibernate.Ninject.SqlServerModule`1.CreateDatabase">
-            <summary>
-            Returns the FluentNHibernate SQL Server configuration data
-            </summary>
-            <returns>SQL Server configuration</returns>
         </member>
         <member name="T:Triggerfish.NHibernate.Validator.Validator">
             <summary>

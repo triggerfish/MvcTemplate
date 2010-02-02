@@ -707,6 +707,40 @@
             <param name="values">The route values</param>
             <returns>Url data</returns>
         </member>
+        <member name="T:Triggerfish.Web.Mvc.ModelBinder`1">
+            <summary>
+            Abstract base class for a custom module binder
+            </summary>
+            <typeparam name="T">The type of data to bind</typeparam>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ModelBinder`1.BindModel(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext)">
+            <summary>
+            Bind the incoming data to the model object. IModelBinder implementation
+            </summary>
+            <param name="controllerContext">The controller context</param>
+            <param name="bindingContext">The binding context</param>
+            <returns>The object</returns>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ModelBinder`1.Bind">
+            <summary>
+            Perform specific input data parsing and object constructin
+            </summary>
+            <returns>The model object</returns>
+        </member>
+        <member name="M:Triggerfish.Web.Mvc.ModelBinder`1.GetValue(System.String,System.Boolean)">
+            <summary>
+            Helper method to retrieve from the binding context a data value
+            Handles both prefixed and non-prefixed model names
+            </summary>
+            <param name="key">The data value key (name)</param>
+            <param name="mustHaveValue">True if the value must be present (a ValidationException is thrown if the value is not present), false otherwise</param>
+            <returns>The data value as a string</returns>
+        </member>
+        <member name="P:Triggerfish.Web.Mvc.ModelBinder`1.ModelName">
+            <summary>
+            The name of the data model
+            </summary>
+        </member>
         <member name="T:Triggerfish.Web.Diagnostics.DiagnosticsModule">
             <summary>
             An abstract HTTP module for tracking diagnostic data
@@ -765,46 +799,6 @@
         <member name="P:Triggerfish.Web.Diagnostics.IDiagnostics.Key">
             <summary>
             A unique key to identify this specific diagnostic object
-            </summary>
-        </member>
-        <member name="T:Triggerfish.Web.Mvc.ModelBinder`1">
-            <summary>
-            Abstract base class for a custom module binder
-            </summary>
-            <typeparam name="T">The type of data to bind</typeparam>
-        </member>
-        <member name="M:Triggerfish.Web.Mvc.ModelBinder`1.BindModel(System.Web.Mvc.ControllerContext,System.Web.Mvc.ModelBindingContext)">
-            <summary>
-            Bind the incoming data to the model object. IModelBinder implementation
-            </summary>
-            <param name="controllerContext">The controller context</param>
-            <param name="bindingContext">The binding context</param>
-            <returns>The object</returns>
-        </member>
-        <member name="M:Triggerfish.Web.Mvc.ModelBinder`1.Bind">
-            <summary>
-            Perform specific input data parsing and object constructin
-            </summary>
-            <returns>The model object</returns>
-        </member>
-        <member name="M:Triggerfish.Web.Mvc.ModelBinder`1.Validate(System.Object)">
-            <summary>
-            Validate the object against the project validation strategy
-            </summary>
-            <param name="obj"></param>
-        </member>
-        <member name="M:Triggerfish.Web.Mvc.ModelBinder`1.GetValue(System.String,System.Boolean)">
-            <summary>
-            Helper method to retrieve from the binding context a data value
-            Handles both prefixed and non-prefixed model names
-            </summary>
-            <param name="key">The data value key (name)</param>
-            <param name="mustHaveValue">True if the value must be present (a ValidationException is thrown if the value is not present), false otherwise</param>
-            <returns>The data value as a string</returns>
-        </member>
-        <member name="P:Triggerfish.Web.Mvc.ModelBinder`1.ModelName">
-            <summary>
-            The name of the data model
             </summary>
         </member>
     </members>
