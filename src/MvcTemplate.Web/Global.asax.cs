@@ -29,7 +29,7 @@ namespace MvcTemplate.Web
 
 		protected override void OnApplicationStarted()
 		{
-			ObjectFactory.Load(new MvcTemplate.Database.SqliteModule(WebConfigurationManager.AppSettings["SQLiteDatabaseFilename"]));
+			ObjectFactory.Load(new MvcTemplate.Database.DatabaseModule(WebConfigurationManager.AppSettings["SQLiteDatabaseFilename"]));
 			ObjectFactory.Load(new WebDependencies());
 
 			RegisterAllControllersIn("MvcTemplate.Web");
