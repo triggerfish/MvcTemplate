@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NHibernate.Validator.Constraints;
 
 namespace MvcTemplate.Model
 {
@@ -10,10 +9,8 @@ namespace MvcTemplate.Model
 	{
 		int Id { get; }
 
-		[NotNullNotEmpty(Message = "This field is required")]
 		string Name { get; set; }
 
-		[Past]
 		DateTime Formed { get; }
 
 		int NumberOnes { get; set; }

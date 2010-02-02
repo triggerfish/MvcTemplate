@@ -27,5 +27,5 @@
         <div class="align-inputs"><span>Already registered? </span><%= Html.RouteLink("Login", RouteHelpers.LoginRoute(Model.ReturnUrl)) %></div>
     </fieldset>
     <% } %>
-    <%--<%= Html.ClientSideValidation<MvcTemplate.Model.IUser>(null) %>--%>
+    <%= Html.xValClientSideValidation<MvcTemplate.Model.IUser>(null)%>
 </asp:Content>
