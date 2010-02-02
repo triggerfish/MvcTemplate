@@ -5,6 +5,8 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 using MvcTemplate.Model;
+using Moq;
+using Triggerfish.Validator;
 
 namespace MvcTemplate.Database.Tests
 {
@@ -74,7 +76,8 @@ namespace MvcTemplate.Database.Tests
 
 		protected override void SetupContext(ISession session)
 		{
-			m_repository = new ArtistsRepository(session);
+			Mock<IValidator> v = new Mock<IValidator>();
+			m_repository = new ArtistsRepository(session, v.Object);
 
 			SortedDictionary<int, Artist> artists = new SortedDictionary<int, Artist>();
 			for (int i = 1; i <= 4; i++)

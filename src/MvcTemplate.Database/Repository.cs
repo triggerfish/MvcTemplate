@@ -4,52 +4,39 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using NHibernate;
-using NHibernate.Linq;
-using Triggerfish.NHibernate;
 using Triggerfish.FluentNHibernate;
+using Triggerfish.Validator;
+using Triggerfish.Ninject;
 using Triggerfish.Linq;
-using MvcTemplate.Model;
 
 namespace MvcTemplate.Database
 {
-	public abstract class Repository
+	public class Repository : Triggerfish.NHibernate.Repository
 	{
-		protected ISession Session { get; private set; }
+		private IValidator m_validator;
 
-		protected Repository(ISession session)
+		public Repository(ISession session, IValidator validator)
+			: base(session)
 		{
-			Session = session;
+			m_validator = validator;
 		}
 
-		protected Repository(IDbSession session)
-			: this(session.CreateSession())
+		public Repository(IDbSession session, IValidator validator)
+			: base(session)
 		{
+			m_validator = validator;
 		}
 
-		public T Get<T>(int id)
+		public override void Save<T>(T target)
 		{
-			return Session.Get<T>(id);
+			m_validator.Validate(target);
+			base.Save(target);
 		}
 
-		public IOrderedQueryable<T> GetAll<T>()
+		public override void Save<T>(IEnumerable<T> targets)
 		{
-			return Session.Linq<T>();
-		}
-
-		public void Delete<T>(T target)
-		{
-			Session.WithinTransaction(s => s.Delete(target));
-		}
-
-		public void Save<T>(T target)
-		{
-			Session.WithinTransaction(s => s.SaveOrUpdate(target));
-		}
-
-		public void Save<T>(IEnumerable<T> targets)
-		{
-			IEnumerable<object> objs = targets.Cast<object>();
-			Session.WithinTransaction(s => objs.ForEach(s.SaveOrUpdate));
+			targets.ForEach(t => m_validator.Validate(t));
+			base.Save(targets);
 		}
 	}
 }

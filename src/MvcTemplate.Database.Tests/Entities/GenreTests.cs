@@ -8,6 +8,8 @@ using FluentNHibernate.Testing;
 using NHibernate;
 using MvcTemplate.Model;
 using Triggerfish.NHibernate;
+using Triggerfish.Validator;
+using Moq;
 
 namespace MvcTemplate.Database.Tests
 {
@@ -89,7 +91,8 @@ namespace MvcTemplate.Database.Tests
 			Session.WithinTransaction(s => s.Delete(savedGenre));
 			Session.Clear();
 
-			ArtistsRepository r = new ArtistsRepository(Session);
+			Mock<IValidator> v = new Mock<IValidator>();
+			ArtistsRepository r = new ArtistsRepository(Session, v.Object);
 			IEnumerable<Genre> retrievedGenres = r.Genres;
 			Assert.AreEqual(0, retrievedGenres.Count());
 			IEnumerable<Artist> retrievedArtists = r.Artists;
@@ -108,7 +111,8 @@ namespace MvcTemplate.Database.Tests
 			Session.WithinTransaction(s => s.Delete(savedArtist));
 			Session.Clear();
 
-			ArtistsRepository r = new ArtistsRepository(Session);
+			Mock<IValidator> v = new Mock<IValidator>();
+			ArtistsRepository r = new ArtistsRepository(Session, v.Object);
 			IEnumerable<Genre> retrievedGenres = r.Genres;
 			Assert.AreEqual(1, retrievedGenres.Count());
 			Assert.AreEqual("Pop", retrievedGenres.First().Name);

@@ -13,13 +13,13 @@ namespace MvcTemplate.Database
 {
 	public class UserRepository : Repository, IUserRepository
 	{
-		public UserRepository(ISession session)
-			: base(session)
+		public UserRepository(ISession session, IValidator validator)
+			: base(session, validator)
 		{
 		}
 
-		public UserRepository(IDbSession session)
-			: base(session)
+		public UserRepository(IDbSession session, IValidator validator)
+			: base(session, validator)
 		{
 		}
 

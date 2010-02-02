@@ -105,10 +105,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="xValClientSideValidation.cs" />
     <Compile Include="Entities\UserCredentials.cs" />
-    <Compile Include="Repository.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Mappings\UserMap.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="UserRepository.cs" />
     <Compile Include="Entities\Artist.cs" />
     <Compile Include="IoC\DatabaseModule.cs" />

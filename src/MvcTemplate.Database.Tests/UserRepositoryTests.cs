@@ -5,6 +5,7 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate;
 using Triggerfish.Validator;
+using Moq;
 using MvcTemplate.Model;
 
 namespace MvcTemplate.Database.Tests
@@ -93,7 +94,8 @@ namespace MvcTemplate.Database.Tests
 
 		protected override void SetupContext(ISession session)
 		{
-			m_repository = new UserRepository(session);
+			Mock<IValidator> v = new Mock<IValidator>();
+			m_repository = new UserRepository(session, v.Object);
 
 			for (int i = 1; i <= 4; i++)
 			{
