@@ -12,8 +12,7 @@ namespace MvcTemplate.Web
 	{
 		private IUserRepository m_repository;
 
-		public UserCredentialsBinder(IUserRepository repository, IValidator validator)
-			: base(validator)
+		public UserCredentialsBinder(IUserRepository repository)
 		{
 			m_repository = repository;
 		}

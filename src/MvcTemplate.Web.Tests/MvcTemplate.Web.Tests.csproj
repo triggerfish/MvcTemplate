@@ -76,7 +76,6 @@
     <Compile Include="Code\Binders\ArtistBinderTests.cs" />
     <Compile Include="Code\Binders\BinderHelpers.cs" />
     <Compile Include="Code\Binders\BinderResolverTests.cs" />
-    <Compile Include="Code\Binders\ModelBinderTests.cs" />
     <Compile Include="Code\Binders\UserCredentialsBinderTests.cs" />
     <Compile Include="Code\Binders\UserBinderTests.cs" />
     <Compile Include="Code\Binders\GenreBinderTests.cs" />

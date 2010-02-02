@@ -24,7 +24,7 @@ namespace MvcTemplate.Web.Tests
 			Mock<IUserRepository> repository = new Mock<IUserRepository>();
 			repository.Setup(r => r.CreateUserCredentials(It.IsAny<string>(), It.IsAny<string>())).Returns(creds);
 
-			UserCredentialsBinder binder = new UserCredentialsBinder(repository.Object, null);
+			UserCredentialsBinder binder = new UserCredentialsBinder(repository.Object);
 
 			ModelBindingContext ctx = BinderHelpers.CreateModelBindingContext("credentials", new Dictionary<string, string> {
 				{ "Email", email },

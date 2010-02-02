@@ -14,8 +14,7 @@ namespace MvcTemplate.Web
 		private IUserRepository m_repository;
 		private IEncryptor m_encryptor;
 
-		public UserBinder(IUserRepository repository, IEncryptor encryptor, IValidator validator)
-			: base(validator)
+		public UserBinder(IUserRepository repository, IEncryptor encryptor)
 		{
 			m_repository = repository;
 			m_encryptor = encryptor;

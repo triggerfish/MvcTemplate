@@ -19,7 +19,7 @@ namespace MvcTemplate.Web.Tests
 		{
 			// Arrange
 			IArtistsRepository repos = MockArtistsRepository.CreateMockRepository("Pop", null);
-			GenreBinder binder = new GenreBinder(repos, null);
+			GenreBinder binder = new GenreBinder(repos);
 
 			ModelBindingContext ctx = BinderHelpers.CreateModelBindingContext("genre", "pop");
 			
@@ -38,7 +38,7 @@ namespace MvcTemplate.Web.Tests
 		{
 			// Arrange
 			IArtistsRepository repos = MockArtistsRepository.CreateMockRepository("Pop", null);
-			GenreBinder binder = new GenreBinder(repos, null);
+			GenreBinder binder = new GenreBinder(repos);
 
 			ModelBindingContext ctx = BinderHelpers.CreateModelBindingContext("genre", "plibble");
 

@@ -11,19 +11,5 @@ namespace MvcTemplate.Web
 {
 	public abstract class ModelBinder<T> : Triggerfish.Web.Mvc.ModelBinder<T> where T : class
 	{
-		private IValidator m_validator;
-
-		protected ModelBinder(IValidator validator)
-		{
-			m_validator = validator;
-		}
-
-		protected override void Validate(object obj)
-		{
-			if (null != m_validator)
-			{
-				m_validator.Validate(obj);
-			}
-		}
 	}
 }

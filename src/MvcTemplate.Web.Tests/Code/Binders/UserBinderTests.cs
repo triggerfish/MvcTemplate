@@ -29,7 +29,7 @@ namespace MvcTemplate.Web.Tests
 			Mock<IUserRepository> repository = new Mock<IUserRepository>();
 			repository.Setup(r => r.CreateUser(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<IUserCredentials>())).Returns(user);
 
-			UserBinder binder = new UserBinder(repository.Object, encryptor.Object, null);
+			UserBinder binder = new UserBinder(repository.Object, encryptor.Object);
 
 			ModelBindingContext ctx = BinderHelpers.CreateModelBindingContext("user", new Dictionary<string, string> {
 				{ "Email", email },
