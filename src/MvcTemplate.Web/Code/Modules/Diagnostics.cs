@@ -14,11 +14,6 @@ namespace MvcTemplate.Web
 		private Stopwatch m_timer = new Stopwatch();
 		private StringWriter m_sqlLog = new StringWriter();
 
-		public string Key
-		{
-			get { return "MvcTemplate.Web.Diagnostics"; }
-		}
-
 		public Diagnostics(IRepositorySettings settings)
 		{
 			m_settings = settings;
