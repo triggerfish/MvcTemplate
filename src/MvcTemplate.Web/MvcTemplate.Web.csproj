@@ -31,10 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq, Version=3.1.416.3, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\tools\Moq\Moq.dll</HintPath>
-    </Reference>
     <Reference Include="Ninject, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Ninject\Ninject.dll</HintPath>
@@ -60,10 +56,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Triggerfish\Triggerfish.dll</HintPath>
     </Reference>
-    <Reference Include="Triggerfish.NHibernate, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\tools\Triggerfish\Triggerfish.NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="Triggerfish.Ninject, Version=0.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\Triggerfish\Triggerfish.Ninject.dll</HintPath>
@@ -87,8 +79,9 @@
     <Compile Include="Code\Binders\UserBinder.cs" />
     <Compile Include="Code\Binders\GenreBinder.cs" />
     <Compile Include="Code\Binders\ModelBinder.cs" />
-    <Compile Include="Code\Diagnostics\Diagnostics.cs" />
-    <Compile Include="Code\Diagnostics\DiagnosticsModule.cs" />
+    <Compile Include="Code\Filters\TransactionAttribute.cs" />
+    <Compile Include="Code\Modules\Diagnostics.cs" />
+    <Compile Include="Code\Modules\DiagnosticsModule.cs" />
     <Compile Include="Code\Filters\IsAuthenticatedAttribute.cs" />
     <Compile Include="Code\Filters\HandleErrorAttribute.cs" />
     <Compile Include="Code\Filters\NavBarLinkGeneratorAttribute.cs" />

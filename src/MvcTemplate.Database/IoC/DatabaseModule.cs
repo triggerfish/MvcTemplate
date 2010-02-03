@@ -1,9 +1,10 @@
 ﻿using System.Reflection;
 using Ninject.Modules;
 using NHibernate.Validator.Engine;
-using Triggerfish.FluentNHibernate;
 using Triggerfish.NHibernate;
 using MvcTemplate.Model;
+using Triggerfish.Database;
+using NHibernate;
 
 namespace MvcTemplate.Database
 {
@@ -18,20 +19,23 @@ namespace MvcTemplate.Database
 
 		public override void Load()
 		{
-			Configuration<Artist> config = new Configuration<Artist>(new SqliteDatabase(m_sqliteFilename));
+			Configuration config = new Configuration(new SqliteDatabase(m_sqliteFilename));
 
-			config.Create();
+			config.Create<Artist>();
 			config.CreateValidator();
 
-			Bind<IDbSession>()
-				.To<Session>()
-				.InRequestScope()
-				.WithConstructorArgument("config", config.Config);
+			UnitOfWorkFactory.Initialise(config.Config);
 
 			Bind<Triggerfish.Validator.IValidator>()
 				.To<Triggerfish.NHibernate.Validator.Validator>()
 				.InRequestScope()
 				.WithConstructorArgument("engine", config.Validator);
+
+			Bind<ISession>()
+				.ToMethod(x => UnitOfWorkFactory.GetCurrentSession());
+			Bind<IUnitOfWorkFactory>()
+				.To<UnitOfWorkFactory>()
+				.InTransientScope();
 
 			Bind<IUser>()
 				.To<User>();

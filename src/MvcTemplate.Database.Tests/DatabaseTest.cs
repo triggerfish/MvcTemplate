@@ -33,7 +33,11 @@ namespace MvcTemplate.Database.Tests
 			Session = SessionSource.CreateSession();
 			SessionSource.BuildSchema(Session);
 
-			Session.WithinTransaction(SetupContext);
+			using (ITransaction tx = Session.BeginTransaction())
+			{
+				SetupContext(Session);
+				tx.Commit();
+			}
 
 			Session.Flush();
 			Session.Clear();

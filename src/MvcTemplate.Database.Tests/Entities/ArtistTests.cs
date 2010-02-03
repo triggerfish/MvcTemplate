@@ -24,54 +24,5 @@ namespace MvcTemplate.Database.Tests
 				.CheckReference(x => x.Genre, new Genre { Name = "Pop" })
 				.VerifyTheMappings();
 		}
-
-		[TestMethod]
-		public void ShouldChangeArtistData()
-		{
-			Genre popGenre = new Genre { Name = "Pop" };
-			Artist popArtist = new Artist { Name = "1", Formed = DateTime.Today, NumberOnes = 4 };
-			popGenre.AddArtist(popArtist);
-			Session.WithinTransaction(s =>
-			{
-				s.Save(popGenre);
-			});
-			Session.Clear();
-
-			Artist a = Session.Get<Artist>(1);
-			a.Name = "2";
-			a.NumberOnes = 12;
-			Session.WithinTransaction(s => s.Update(a));
-			Session.Clear();
-
-			a = Session.Get<Artist>(1);
-			Assert.AreNotEqual(null, a);
-			Assert.AreEqual(a.Name, "2");
-			Assert.AreEqual(a.NumberOnes, 12);
-		}
-
-		[TestMethod]
-		public void ShouldChangeGenreOfArtist()
-		{
-			Genre popGenre = new Genre { Name = "Pop" };
-			Genre rockGenre = new Genre { Name = "Rock" };
-			Artist popArtist = new Artist {	Name = "1" };
-			popGenre.AddArtist(popArtist);
-			Session.WithinTransaction(s => {
-				s.Save(popGenre);
-				s.Save(rockGenre);
-			});
-			Session.Clear();
-
-			Artist a = Session.Get<Artist>(1);
-			Assert.AreEqual(a.Genre.Name, "Pop");
-			a.Genre = rockGenre;
-			Session.WithinTransaction(s => s.Update(a));
-			Session.Clear();
-
-			a = Session.Get<Artist>(1);
-			Assert.AreNotEqual(null, a);
-			Assert.AreEqual(a.Name, "1");
-			Assert.AreEqual(a.Genre.Name, "Rock");
-		}
 	}
 }

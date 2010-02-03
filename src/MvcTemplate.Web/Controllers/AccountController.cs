@@ -36,6 +36,7 @@ namespace MvcTemplate.Web.Controllers
 		[AcceptVerbs(HttpVerbs.Post)]
 		[ValidateAntiForgeryToken]
 		[ExportModelState("RegisterErrors")]
+		[Transaction]
 		public ActionResult Register(IUser user, string returnUrl)
 		{
 			// problem with the binding of user

@@ -5,7 +5,6 @@ using System.Text;
 using System.IO;
 using NHibernate;
 using NHibernate.Linq;
-using Triggerfish.FluentNHibernate;
 using Triggerfish.Validator;
 using MvcTemplate.Model;
 
@@ -14,11 +13,6 @@ namespace MvcTemplate.Database
 	public class UserRepository : Repository, IUserRepository
 	{
 		public UserRepository(ISession session, IValidator validator)
-			: base(session, validator)
-		{
-		}
-
-		public UserRepository(IDbSession session, IValidator validator)
 			: base(session, validator)
 		{
 		}

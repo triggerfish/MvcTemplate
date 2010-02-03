@@ -287,5 +287,70 @@
             <param name="encryptedText">The encrypted text</param>
             <returns>True if the strings match, false otherwise</returns>
         </member>
+        <member name="T:Triggerfish.Database.IUnitOfWork">
+            <summary>
+            Interface for a unit of work, i.e. a transaction
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Database.IUnitOfWork.Begin">
+            <summary>
+            Begins the unit of work (transaction)
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Database.IUnitOfWork.End">
+            <summary>
+            Ends the unit of work (transaction). The default behaviour 
+            should be to rollback and close any sessions. Commits 
+            should only occur by explicit invocation of Commit()
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Database.IUnitOfWork.Commit">
+            <summary>
+            Commits the data changes made in the unit of work (transaction)
+            </summary>
+        </member>
+        <member name="P:Triggerfish.Database.IUnitOfWork.IsActive">
+            <summary>
+            Returns trus if the unit of work is active, false if not
+            </summary>
+        </member>
+        <member name="T:Triggerfish.Database.IUnitOfWorkStorage">
+            <summary>
+            Interface for a unit of work store
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Database.IUnitOfWorkStorage.GetCurrentUnitOfWork">
+            <summary>
+            Gets the current unit of work
+            </summary>
+            <returns>The current IUnitOfWork</returns>
+        </member>
+        <member name="M:Triggerfish.Database.IUnitOfWorkStorage.SetCurrentUnitOfWork(Triggerfish.Database.IUnitOfWork)">
+            <summary>
+            Sets a new unit of work as the current
+            </summary>
+            <param name="uow">A new IUnitOfWork</param>
+        </member>
+        <member name="M:Triggerfish.Database.IUnitOfWorkStorage.DeleteCurrentUnitOfWork">
+            <summary>
+            Deletes the current unit of work
+            </summary>
+        </member>
+        <member name="T:Triggerfish.Database.IUnitOfWorkFactory">
+            <summary>
+            Interface for a unit of work store
+            </summary>
+        </member>
+        <member name="M:Triggerfish.Database.IUnitOfWorkFactory.GetCurrentUnitOfWork">
+            <summary>
+            Gets the current unit of work
+            </summary>
+            <returns>The current IUnitOfWork</returns>
+        </member>
+        <member name="M:Triggerfish.Database.IUnitOfWorkFactory.CloseCurrentUnitOfWork">
+            <summary>
+            Closes the current unit of work
+            </summary>
+        </member>
     </members>
 </doc>

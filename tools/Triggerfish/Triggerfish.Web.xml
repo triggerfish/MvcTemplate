@@ -750,19 +750,7 @@
             <summary>
             Initialised per request
             </summary>
-            <param name="appContext">The application context</param>
-        </member>
-        <member name="M:Triggerfish.Web.Diagnostics.DiagnosticsModule.StartDiagnostics(System.Web.HttpContext)">
-            <summary>
-            Start the diagnostics running
-            </summary>
-            <param name="context">HttpContext object</param>
-        </member>
-        <member name="M:Triggerfish.Web.Diagnostics.DiagnosticsModule.StopDiagnostics(System.Web.HttpContext)">
-            <summary>
-            Stop the diagnostics running and write data to HTML page
-            </summary>
-            <param name="context">HttpContext object</param>
+            <param name="application">The application context</param>
         </member>
         <member name="M:Triggerfish.Web.Diagnostics.DiagnosticsModule.Dispose">
             <summary>
@@ -774,6 +762,18 @@
             Implement to return the specific diagnostics object to run
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:Triggerfish.Web.Diagnostics.DiagnosticsModule.Start(System.Web.HttpContext)">
+            <summary>
+            Starts the diagnostics
+            </summary>
+            <param name="context">HttpContext</param>
+        </member>
+        <member name="M:Triggerfish.Web.Diagnostics.DiagnosticsModule.Stop(System.Web.HttpContext)">
+            <summary>
+            Stops the diagnostics
+            </summary>
+            <param name="context">HttpContext</param>
         </member>
         <member name="T:Triggerfish.Web.Diagnostics.IDiagnostics">
             <summary>
@@ -795,11 +795,6 @@
             Render the diagnostic data as an HTML string
             </summary>
             <returns>An HTML string</returns>
-        </member>
-        <member name="P:Triggerfish.Web.Diagnostics.IDiagnostics.Key">
-            <summary>
-            A unique key to identify this specific diagnostic object
-            </summary>
         </member>
     </members>
 </doc>

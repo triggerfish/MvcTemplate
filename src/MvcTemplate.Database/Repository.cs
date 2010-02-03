@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using NHibernate;
-using Triggerfish.FluentNHibernate;
 using Triggerfish.Validator;
 using Triggerfish.Ninject;
 using Triggerfish.Linq;
@@ -16,12 +15,6 @@ namespace MvcTemplate.Database
 		private IValidator m_validator;
 
 		public Repository(ISession session, IValidator validator)
-			: base(session)
-		{
-			m_validator = validator;
-		}
-
-		public Repository(IDbSession session, IValidator validator)
 			: base(session)
 		{
 			m_validator = validator;

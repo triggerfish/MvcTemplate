@@ -9,6 +9,7 @@ using Ninject;
 using Ninject.Web.Mvc;
 using Triggerfish.Web.Mvc;
 using Triggerfish.Ninject;
+using Triggerfish.Database;
 
 namespace MvcTemplate.Web
 {
@@ -27,6 +28,13 @@ namespace MvcTemplate.Web
 			//);
 		}
 
+		public override void Init()
+		{
+			base.Init();
+
+			this.EndRequest += AppEndRequest;
+		}
+
 		protected override void OnApplicationStarted()
 		{
 			ObjectFactory.Load(new MvcTemplate.Database.DatabaseModule(WebConfigurationManager.AppSettings["SQLiteDatabaseFilename"]));
@@ -41,6 +49,11 @@ namespace MvcTemplate.Web
 		protected override IKernel CreateKernel()
 		{
 			return ObjectFactory.Kernel;
+		}
+
+		private void AppEndRequest(object sender, EventArgs args)
+		{
+			ObjectFactory.Get<IUnitOfWorkFactory>().CloseCurrentUnitOfWork();
 		}
 	}
 }
