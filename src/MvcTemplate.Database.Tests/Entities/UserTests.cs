@@ -15,7 +15,7 @@ namespace MvcTemplate.Database.Tests
 		[TestMethod]
 		public void ShouldHaveCorrectMappings()
 		{
-			new PersistenceSpecification<User>(SessionSource)
+			new PersistenceSpecification<User>(Session)
 				.CheckProperty(x => x.Id, 1) //identity starts at 1 - can't reset to zero
 				.CheckProperty(x => x.Forename, "User")
 				.CheckProperty(x => x.Surname, "One")

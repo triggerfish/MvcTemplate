@@ -25,11 +25,8 @@ namespace MvcTemplate.Database.Tests
 					new Artist { Name = "2" } 
 				};
 			savedGenre.AddArtists(artists);
-			using (ITransaction tx = Session.BeginTransaction())
-			{
-				Session.Save(savedGenre);
-				tx.Commit();
-			}
+			Session.SaveOrUpdate(savedGenre);
+			m_uow.Commit();
 			Session.Clear();
 
 			Genre retrievedGenre = Session.Get<Genre>(1);

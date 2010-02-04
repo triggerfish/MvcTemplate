@@ -9,19 +9,21 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Testing;
 using Triggerfish.NHibernate;
+using Triggerfish.Database;
+using NHibernate.Tool.hbm2ddl;
 
 namespace MvcTemplate.Database.Tests
 {
 	public abstract class DatabaseTest
 	{
-		protected SessionSource SessionSource { get; private set; }
+		protected UnitOfWork m_uow;
 		protected ISession Session { get; private set; }
 
 		[TestInitialize]
 		public void Setup() 
 		{
-            FluentConfiguration configuration = Fluently.Configure()
-                .Database(SQLiteConfiguration.Standard
+			FluentConfiguration configuration = Fluently.Configure()
+				.Database(SQLiteConfiguration.Standard
 					.InMemory()
 					.ProxyFactoryFactory("NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu")
 					.ShowSql());
@@ -29,25 +31,22 @@ namespace MvcTemplate.Database.Tests
 			PersistenceModel pm = new PersistenceModel();
 			pm.AddMappingsFromAssembly(typeof(Artist).Assembly);
 
-			SessionSource = new SingleConnectionSessionSourceForSQLiteInMemoryTesting(configuration.BuildConfiguration().Properties, pm);
-			Session = SessionSource.CreateSession();
-			SessionSource.BuildSchema(Session);
+			SingleConnectionSessionSourceForSQLiteInMemoryTesting ss = new SingleConnectionSessionSourceForSQLiteInMemoryTesting(configuration.BuildConfiguration().Properties, pm);
+			ss.BuildSchema();
 
-			using (ITransaction tx = Session.BeginTransaction())
-			{
-				SetupContext(Session);
-				tx.Commit();
-			}
+			Session = ss.CreateSession();
+			m_uow = new UnitOfWork(Session);
+			
+			SetupContext(Session);
+			m_uow.Commit();
 
-			Session.Flush();
 			Session.Clear();
 		}
 
 		[TestCleanup]
 		public void TearDown()
 		{
-			Session.Close();
-			Session.Dispose();
+			m_uow.End();
 		}
 
 		protected virtual void SetupContext(ISession session)
