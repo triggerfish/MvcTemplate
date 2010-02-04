@@ -38,16 +38,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Artists\Artist.cs" />
-    <Compile Include="Artists\Genre.cs" />
-    <Compile Include="Validation\ClientSideValidation.cs" />
+    <Compile Include="Artists\IArtist.cs" />
+    <Compile Include="Artists\IGenre.cs" />
+    <Compile Include="Validation\IClientSideValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Artists\ArtistsRepository.cs" />
-    <Compile Include="RepositorySettings.cs" />
-    <Compile Include="SearchResults.cs" />
-    <Compile Include="Users\User.cs" />
-    <Compile Include="Users\UserCredentials.cs" />
-    <Compile Include="Users\UserRepository.cs" />
+    <Compile Include="Artists\IArtistsRepository.cs" />
+    <Compile Include="IRepositorySettings.cs" />
+    <Compile Include="ISearchResults.cs" />
+    <Compile Include="Users\IUser.cs" />
+    <Compile Include="Users\IUserCredentials.cs" />
+    <Compile Include="Users\IUserRepository.cs" />
     <Compile Include="Validation\xValClientSideValidationArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

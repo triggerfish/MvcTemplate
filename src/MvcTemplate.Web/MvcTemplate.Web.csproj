@@ -72,7 +72,7 @@
   <ItemGroup>
     <Compile Include="Code\Authentication\AuthenticationException.cs" />
     <Compile Include="Code\Authentication\DefaultMembershipProvider.cs" />
-    <Compile Include="Code\Authentication\MembershipProvider.cs" />
+    <Compile Include="Code\Authentication\IMembershipProvider.cs" />
     <Compile Include="Code\Binders\ArtistBinder.cs" />
     <Compile Include="Code\Binders\BinderResolver.cs" />
     <Compile Include="Code\Binders\UserCredentialsBinder.cs" />
@@ -93,7 +93,7 @@
     <Compile Include="Code\Helpers\UrlHelpers.cs" />
     <Compile Include="Code\IoC\WebDependencies.cs" />
     <Compile Include="Code\Navigation\NavBarWidget.cs" />
-    <Compile Include="Code\Navigation\HyperlinkGenerator.cs" />
+    <Compile Include="Code\Navigation\IHyperlinkGenerator.cs" />
     <Compile Include="Code\Navigation\GenresNavBarHyperlinkGenerator.cs" />
     <Compile Include="Code\Navigation\Hyperlink.cs" />
     <Compile Include="Code\ViewData\ArtistsViewData.cs" />
