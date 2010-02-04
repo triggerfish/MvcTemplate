@@ -23,6 +23,44 @@
             <param name="errors">The errors received from NHibernate.Validator</param>
             <returns>A ValidationException or null if there are no errors</returns>
         </member>
+        <member name="T:Triggerfish.NHibernate.UnitOfWork">
+            <summary>
+            Encapsulates an NHibernate session and transaction
+            </summary>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWork.#ctor(NHibernate.ISession)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="session">A NHibernate session</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWork.Begin">
+            <summary>
+            Begins the unit of work (transaction)
+            </summary>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWork.End">
+            <summary>
+            Ends the unit of work (transaction). The default behaviour 
+            should be to rollback and close any sessions. Commits 
+            should only occur by explicit invocation of Commit()
+            </summary>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWork.Commit">
+            <summary>
+            Commits the data changes made in the unit of work (transaction)
+            </summary>
+        </member>
+        <member name="P:Triggerfish.NHibernate.UnitOfWork.Session">
+            <summary>
+            The underlying NHibernate session
+            </summary>
+        </member>
+        <member name="P:Triggerfish.NHibernate.UnitOfWork.IsActive">
+            <summary>
+            Returns trus if the unit of work is active, false if not
+            </summary>
+        </member>
         <member name="T:Triggerfish.NHibernate.Repository">
             <summary>
             Represents an NHibernate repository
@@ -121,6 +159,72 @@
             Setter method for the stream to write the SQL commands to
             </summary>
         </member>
+        <member name="T:Triggerfish.NHibernate.UnitOfWorkFactory">
+            <summary>
+            Factory class to manage UnitOfWork objects and NHibernate sessions
+            </summary>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.Initialise(FluentNHibernate.Cfg.FluentConfiguration,Triggerfish.Database.UnitOfWorkStorageType)">
+            <summary>
+            Initialiser method
+            </summary>
+            <param name="config">The fluent NHibernate configuration from which to build a session factory</param>
+            <param name="storageType">The storage mechanism to use</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.Initialise(FluentNHibernate.Cfg.FluentConfiguration,Triggerfish.Database.IUnitOfWorkStorage)">
+            <summary>
+            Initialiser method
+            </summary>
+            <param name="config">The fluent NHibernate configuration from which to build a session factory</param>
+            <param name="storage">The storage mechanism to use</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.Initialise(NHibernate.ISessionFactory,Triggerfish.Database.UnitOfWorkStorageType)">
+            <summary>
+            Initialiser method
+            </summary>
+            <param name="factory">The NHibernate session factory</param>
+            <param name="storageType">The storage mechanism to use</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.Initialise(NHibernate.ISessionFactory,Triggerfish.Database.IUnitOfWorkStorage)">
+            <summary>
+            Initialiser method
+            </summary>
+            <param name="factory">The NHibernate session factory</param>
+            <param name="storage">The storage mechanism to use</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.GetCurrentSession">
+            <summary>
+            Gets the current open session
+            </summary>
+            <returns>An ISession</returns>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.GetCurrentUnitOfWork">
+            <summary>
+            Gets the current unit of work
+            </summary>
+            <returns>The current unit of work object</returns>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.CloseCurrentUnitOfWork">
+            <summary>
+            Closes the unit of work currently open
+            </summary>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.Triggerfish#Database#IUnitOfWorkFactory#GetCurrentUnitOfWork">
+            <summary>
+            Gets the current unit of work
+            </summary>
+            <returns>The current unit of work object</returns>
+        </member>
+        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.Triggerfish#Database#IUnitOfWorkFactory#CloseCurrentUnitOfWork">
+            <summary>
+            Closes the unit of work currently open
+            </summary>
+        </member>
+        <member name="P:Triggerfish.NHibernate.UnitOfWorkFactory.Storage">
+            <summary>
+            Property for the UoW storage mechanism
+            </summary>
+        </member>
         <member name="T:Triggerfish.NHibernate.SqlServerModule">
             <summary>
             SQL Server database configuration
@@ -177,62 +281,6 @@
             The validator engine
             </summary>
         </member>
-        <member name="T:Triggerfish.NHibernate.Validator.Validator">
-            <summary>
-            Invokes the NHibernate.Validator validation runner
-            </summary>
-        </member>
-        <member name="M:Triggerfish.NHibernate.Validator.Validator.#ctor(NHibernate.Validator.Engine.ValidatorEngine)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="engine">The NHibernate.Validator validation engine</param>
-        </member>
-        <member name="M:Triggerfish.NHibernate.Validator.Validator.Validate(System.Object)">
-            <summary>
-            Validate the specified object. Should throw a ValidationException if the 
-            object is invalid
-            </summary>
-            <param name="obj">The object to validate</param>
-        </member>
-        <member name="T:Triggerfish.NHibernate.UnitOfWork">
-            <summary>
-            Encapsulates an NHibernate session and transaction
-            </summary>
-        </member>
-        <member name="M:Triggerfish.NHibernate.UnitOfWork.#ctor(NHibernate.ISession)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="session">A NHibernate session</param>
-        </member>
-        <member name="M:Triggerfish.NHibernate.UnitOfWork.Begin">
-            <summary>
-            Begins the unit of work (transaction)
-            </summary>
-        </member>
-        <member name="M:Triggerfish.NHibernate.UnitOfWork.End">
-            <summary>
-            Ends the unit of work (transaction). The default behaviour 
-            should be to rollback and close any sessions. Commits 
-            should only occur by explicit invocation of Commit()
-            </summary>
-        </member>
-        <member name="M:Triggerfish.NHibernate.UnitOfWork.Commit">
-            <summary>
-            Commits the data changes made in the unit of work (transaction)
-            </summary>
-        </member>
-        <member name="P:Triggerfish.NHibernate.UnitOfWork.Session">
-            <summary>
-            The underlying NHibernate session
-            </summary>
-        </member>
-        <member name="P:Triggerfish.NHibernate.UnitOfWork.IsActive">
-            <summary>
-            Returns trus if the unit of work is active, false if not
-            </summary>
-        </member>
         <member name="T:Triggerfish.NHibernate.WebSessionStorage">
             <summary>
             Stores UnitOfWork objects in the current HttpContext
@@ -255,46 +303,44 @@
             Deletes the current unit of work
             </summary>
         </member>
-        <member name="T:Triggerfish.NHibernate.UnitOfWorkFactory">
+        <member name="T:Triggerfish.NHibernate.Validator.Validator">
             <summary>
-            Factory class to manage UnitOfWork objects and NHibernate sessions
+            Invokes the NHibernate.Validator validation runner
             </summary>
         </member>
-        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.Initialise(FluentNHibernate.Cfg.FluentConfiguration)">
+        <member name="M:Triggerfish.NHibernate.Validator.Validator.#ctor(NHibernate.Validator.Engine.ValidatorEngine)">
             <summary>
-            Initialiser method
+            Constructor
             </summary>
-            <param name="config">The fluent NHibernate configuration from which to build a session factory</param>
+            <param name="engine">The NHibernate.Validator validation engine</param>
         </member>
-        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.Initialise(FluentNHibernate.Cfg.FluentConfiguration,Triggerfish.Database.IUnitOfWorkStorage)">
+        <member name="M:Triggerfish.NHibernate.Validator.Validator.Validate(System.Object)">
             <summary>
-            Initialiser method
+            Validate the specified object. Should throw a ValidationException if the 
+            object is invalid
             </summary>
-            <param name="config">The fluent NHibernate configuration from which to build a session factory</param>
-            <param name="storage">The storage mechanism to use</param>
+            <param name="obj">The object to validate</param>
         </member>
-        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.Initialise(NHibernate.ISessionFactory,Triggerfish.Database.IUnitOfWorkStorage)">
+        <member name="T:Triggerfish.NHibernate.SimpleSessionStorage">
             <summary>
-            Initialiser method
+            Stores the current UnitOfWork object
             </summary>
-            <param name="factory">ISessionFactory interface instance</param>
-            <param name="storage">IUnitOfWorkStorage interface instance</param>
         </member>
-        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.GetCurrentSession">
-            <summary>
-            Gets the current open session
-            </summary>
-            <returns>An ISession</returns>
-        </member>
-        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.GetCurrentUnitOfWork">
+        <member name="M:Triggerfish.NHibernate.SimpleSessionStorage.GetCurrentUnitOfWork">
             <summary>
             Gets the current unit of work
             </summary>
-            <returns>The current unit of work object</returns>
+            <returns>The current IUnitOfWork</returns>
         </member>
-        <member name="M:Triggerfish.NHibernate.UnitOfWorkFactory.CloseCurrentUnitOfWork">
+        <member name="M:Triggerfish.NHibernate.SimpleSessionStorage.SetCurrentUnitOfWork(Triggerfish.Database.IUnitOfWork)">
             <summary>
-            Closes the unit of work currently open
+            Sets a new unit of work as the current
+            </summary>
+            <param name="uow">A new IUnitOfWork</param>
+        </member>
+        <member name="M:Triggerfish.NHibernate.SimpleSessionStorage.DeleteCurrentUnitOfWork">
+            <summary>
+            Deletes the current unit of work
             </summary>
         </member>
     </members>

@@ -11,10 +11,12 @@ namespace MvcTemplate.Database
 	public class DatabaseModule : NinjectModule
 	{
 		private string m_sqliteFilename;
+		private UnitOfWorkStorageType m_storage;
 
-		public DatabaseModule(string filename)
+		public DatabaseModule(string filename, UnitOfWorkStorageType storage)
 		{
 			m_sqliteFilename = filename;
+			m_storage = storage;
 		}
 
 		public override void Load()
@@ -24,7 +26,7 @@ namespace MvcTemplate.Database
 			config.Create<Artist>();
 			config.CreateValidator();
 
-			UnitOfWorkFactory.Initialise(config.Config);
+			UnitOfWorkFactory.Initialise(config.Config, m_storage);
 
 			Bind<Triggerfish.Validator.IValidator>()
 				.To<Triggerfish.NHibernate.Validator.Validator>()
